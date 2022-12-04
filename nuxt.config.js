@@ -3,7 +3,7 @@ export default {
   target: 'static',
 
   router: {
-    base: '/ngulia/'
+    base: '/ngulia/',
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
