@@ -1,0 +1,185 @@
+dataset:
+  title: "Ngulia data workspace"
+  data_title: "Long-term Bird Migration Monitoring at Ngulia, Kenya: Ringing, Counts, Moult and Recoveries"
+  description: >-
+    Research data and reproducible processing workflows for the Ngulia ringing project.
+  data_description: >-
+    Curated ringing events, moult records, daily counts, daily coverage, and recovery records
+    from the Ngulia ringing project in Kenya.
+  language: "eng"
+  license: "CC-BY-4.0"
+  rights_holder: ""
+  contact_email: "raphael.nussbaumer@arocha.org"
+  keywords:
+    - "bird ringing"
+    - "bird migration"
+    - "Kenya"
+    - "Ngulia"
+  geographic_coverage:
+    description: "Ngulia, Tsavo West National Park, Kenya"
+    country: "Kenya"
+    country_code: "KE"
+    latitude: -3.0136108277390288
+    longitude: 38.210975578819976
+    coordinate_uncertainty_m: 20
+  temporal_coverage:
+    start: "1969-10-20"
+    end: "2024-01-12"
+  methods_summary: >-
+    Heterogeneous annual workbooks are imported, corrected through explicit configuration,
+    harmonized into consistent event and species-day tables, quality checked, and exported
+    without modifying the raw source files. The recovery table was consolidated once from
+    all identifiable project evidence, manually deduplicated and curated, and is not regenerated
+    by the processing workflow.
+  limitations_summary: >-
+    Ngulia catch totals reflect migration intensity together with weather, attraction to lights,
+    ringing effort, protocol changes, and processing capacity. Dates without documented ringing
+    are treated as unknown coverage rather than known zero-catch days.
+
+documents:
+  dataset_documentation: "config/publication/dataset_documentation.md"
+  data_limitations: "config/publication/data_limitations.md"
+  contributor_acknowledgements: "config/publication/contributor_acknowledgements.md"
+  bibliography: "data/02_reference/publications/references.bib"
+
+# The full bibliography is copied to Zenodo and GBIF. These core publications are
+# additionally exposed as machine-readable related identifiers where possible.
+related_references:
+  - citekey: "Yohannes2007"
+    relation: "isSourceOf"
+    purpose: "Study of stopover habitat selection and site fidelity using feather stable isotopes."
+  - citekey: "Yohannes2005"
+    relation: "isSourceOf"
+    purpose: "Study identifying autumn stopover sites using feather stable isotopes."
+  - citekey: "Yohannes2009"
+    relation: "isSourceOf"
+    purpose: "Study of passerine migration strategies and body-mass variation across migration sectors."
+  - citekey: "Prochzka2014"
+    relation: "isSourceOf"
+    purpose: "Study of Marsh Warbler moulting and wintering grounds using stable isotopes and recoveries."
+  - citekey: "Pearson2012"
+    relation: "isSourceOf"
+    purpose: "Account of a presumed Blyth's Reed Warbler × Marsh Warbler hybrid trapped at Ngulia."
+  - citekey: "LINDSTRM1993"
+    relation: "isSourceOf"
+    purpose: "Study of the split wing-moult pattern of Barred Warblers in Kenya."
+  - citekey: "Pearson1976"
+    relation: "isSourceOf"
+    purpose: "Foundational description of southward migration at Ngulia."
+  - citekey: "Pearson1983"
+    relation: "isSourceOf"
+    purpose: "Study of River Warbler moult."
+  - citekey: "PEIRCE1977"
+    relation: "isSourceOf"
+    purpose: "Study of blood parasites in birds observed at Ngulia."
+  - citekey: "Jackson2000"
+    relation: "isSourceOf"
+    purpose: "Account of training Kenyan bird ringers."
+  - citekey: "Pearson2014"
+    relation: "isSourceOf"
+    purpose: "Historical overview of ringing at Ngulia, 1969–2012."
+  - citekey: "Pearson2016"
+    relation: "isSourceOf"
+    purpose: "Recent ringing and observation account, 2013–2015."
+  - citekey: "Watson2017"
+    relation: "isSourceOf"
+    purpose: "Accessible account of the Ngulia ringing project."
+  - citekey: "Stark2019"
+    relation: "isSourceOf"
+    purpose: "Study relating radar and ringing data from Tsavo West."
+
+authors:
+  - given_name: "Colin"
+    family_name: "Jackson"
+    orcid: "0000-0003-2280-1397"
+    roles:
+      - "Project leadership"
+      - "Historical data stewardship"
+      - "Field data collection"
+      - "Data validation"
+  - given_name: "Raphaël"
+    family_name: "Nussbaumer"
+    orcid: "0000-0002-8185-1020"
+    roles:
+      - "Data curation"
+      - "Software"
+      - "Methodology"
+      - "Validation"
+      - "Documentation"
+  - given_name: "Martin"
+    family_name: "Cade"
+    affiliation: "Portland Bird Observatory and Field Centre"
+    roles:
+      - "Project coordination"
+      - "Field data collection"
+      - "Data validation"
+  - given_name: "Graeme C."
+    family_name: "Backhurst"
+    roles:
+      - "Founding project leadership"
+      - "Historical data collection"
+      - "Methodology"
+  - given_name: "David J."
+    family_name: "Pearson"
+    roles:
+      - "Founding project leadership"
+      - "Historical data collection"
+      - "Methodology"
+# Add one block per person, for example:
+#   - given_name: "Jane"
+#     family_name: "Doe"
+#     orcid: "0000-0000-0000-0000"
+#     affiliation: "Example institution"
+#     roles: ["Data curation", "Validation"]
+
+publisher:
+  name: "A Rocha Kenya"
+  url: "https://www.gbif.org/publisher/d8d6c888-92e7-4036-9808-fb3812be61e1"
+
+funding:
+  - funder: "The Wetland Trust"
+    support: "Long-term financial support, including rings, equipment, and Kenyan participation."
+  - funder: "Bird Committee of Nature Kenya"
+    support: "Support for Kenyan ringer participation and session costs."
+
+acknowledgements:
+  - "Richard Charles — recurring financial contributions."
+  - "Kenya Wildlife Service — permission and facilitation."
+  - "Ngulia Safari Lodge — hosting and operational support."
+  - "Swedish Ringing Centre — rings and recovery reporting."
+
+repository:
+  url: "https://github.com/A-Rocha-Kenya/Ngulia"
+  website_url: ""
+  code_license: ""
+  website_note: "The project website is maintained in a separate repository."
+  citation_message: >-
+    Please cite the corresponding GitHub release and curated Zenodo data record.
+
+zenodo:
+  resource_type: "dataset"
+  access_right: "open"
+  concept_doi: "10.5281/zenodo.21395879"
+  notes: >-
+    Ring-event, daily-count, coverage, and moult CSV files are curated outputs of the reproducible
+    workflow in the associated GitHub repository. recoveries.csv is a manually curated one-off
+    consolidation with a separate intermediate audit and no regeneration script.
+
+gbif:
+  dataset_type: "sampling-event"
+  basis_of_record: "HumanObservation"
+  publishing_organization: "A Rocha Kenya"
+  publishing_organization_key: "d8d6c888-92e7-4036-9808-fb3812be61e1"
+  sampling_protocol: "Bird ringing"
+
+files:
+  - name: "ring_events.csv"
+    description: "One cleaned ringing event per row."
+  - name: "ring_event_moult.csv"
+    description: "Decoded moult records linked to ringing events by ring_event_id."
+  - name: "daily_counts.csv"
+    description: "Positive species-day counts from the selected source."
+  - name: "daily_coverage.csv"
+    description: "Daily calendar, coverage, moon, project metadata, and ERA5 weather."
+  - name: "recoveries.csv"
+    description: "Comprehensive curated recovery and control movements involving Ngulia, with event-level provenance."

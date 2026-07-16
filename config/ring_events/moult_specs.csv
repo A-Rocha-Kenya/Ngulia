@@ -1,0 +1,33 @@
+source_file,source_sheet,primary_status_col,n_old_primaries_remaining_col,primary_scores_col,primary_scores_n,secondary_scores_col,tertial_scores_col,tail_scores_col,body_scores_col,note_cols,notes,primary_status_scheme,feather_score_scheme
+1991_A.xls,Sheet1,15,,16:25,10,26,,,,27:30,"Early primary block plus dedicated SEC column and trailing tail/note fields",ngulia_oasn,ngulia_legacy
+1991_B.xls,Sheet1,15,,16:25,10,26,,,,27:28,"Early primary block plus dedicated SEC column and trailing tail/note fields",ngulia_oasn,ngulia_legacy
+1991_C.xls,Sheet1,15,,16:25,10,26,,,,27,"Early primary block plus dedicated SEC column and trailing tail/note fields",ngulia_oasn,ngulia_legacy
+1992_A.xls,Sheet1,15,,16:25,10,26,,,,,"Early primary block plus dedicated SEC column",ngulia_oasn,ngulia_legacy
+1992_B.xls,Sheet1,15,,16:25,10,26,,,,27:32,"Early primary block plus dedicated SEC column and trailing other moult fields",ngulia_oasn,ngulia_legacy
+1992_C.xls,Sheet1,15,,16:25,10,26,,,,27,"Early primary block plus dedicated SEC column and trailing tail/note fields",ngulia_oasn,ngulia_legacy
+1993.xls,1993 All,15,,16:25,10,,,,,26:37,"Early primary block plus secondary/tertial note fields",ngulia_oasn,ngulia_legacy
+1994.xls,94 combined,16,,17:26,10,,,,,27:38,"Early primary block plus secondary/tertial note fields",ngulia_oasn,ngulia_legacy
+1995.xls,Sheet1,18,,"19:23,25:29",10,,,,,30:36,"Early primary block plus sec/tail note fields",ngulia_oasn,ngulia_legacy
+1998.xls,Sheet1,17,,18:27,10,28:33,,,,,"Offset header row: primaries in R:AA and secondaries in AB:AG",ngulia_oasn,ngulia_legacy
+1999.xls,Sheet1,17,,18:26,9,,,,,27:31,"Legacy adjacent primary block plus secondary/tail note fields",ngulia_oasn,ngulia_legacy
+2000.xls,Sheet1,16,,17:26,10,27:32,,33,,,"Early primary block plus six secondary columns and a dedicated tail field",ngulia_oasn,ngulia_legacy
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,12,13,14:23,10,25:30,,31:36,,,"Processed primary moult status, old primaries, P1-P10, secondary block in Y:AD, and tail block in AE:AJ",ngulia_oasn,ngulia_legacy
+2006-2007_Processed.xls,Sheet1,19,20,21:30,10,,,,,"18,31","Documented African moult status and adjacent primary scores",ngulia_oasn,ngulia_legacy
+2008_Processed.xlsx,Sheet1,,45,12,10,13,39,Tail Moult,Body Moult,,"Primary string plus secondary, tertial, tail, and body-moult strings",,ngulia_legacy
+2009.xls,Sheet1,,12,10,10,,,,,,"Primary string in pp_mlt plus old primaries count",,ngulia_legacy
+2010.xls,Sheet1,,12,10,10,,,,,,"Primary string in pp_mlt plus old primaries count",,ngulia_legacy
+2011.xls,Sheet1,,12,10,10,,,,,,"Primary string in pp_mlt plus old primaries count",,ngulia_legacy
+2012.xls,Sheet1,,12,10,10,,,,,,"Primary string in pp_mlt plus old primaries count",,ngulia_legacy
+2013.xls,Sheet1,,12,10,10,,,,,,"Primary string in pp_mlt plus old primaries count",,ngulia_legacy
+2014.xls,Sheet1,,12,10,10,,,,,,"Primary string in pp_mlt plus old primaries count",,ngulia_legacy
+2015.xls,Sheet1,,12,10,10,,,,,,"Primary string in pp_mlt plus old primaries count",,ngulia_legacy
+2016.xlsx,Sheet1,,,11,"9,10",12,37,Tail Moult,Body Moult,,"Primary string plus separate secondary, tertial, tail, and body-moult strings",,ngulia_legacy
+2017.xlsx,Ringing Data,,,17,10,18,19,Tail Moult,Body Moult,,"Primary string plus separate secondary, tertial, tail, and body-moult strings",,ngulia_legacy
+2018.xlsx,Ringing Data,,,17,10,18,19,Tail Moult,Body Moult,,"Primary string plus separate secondary, tertial, tail, and body-moult strings",,ngulia_legacy
+2019.xlsx,Ringing Data,,,17,"9,10",18,19,Tail Moult,Body Moult,,"Primary string plus separate secondary, tertial, tail, and body-moult strings",,ngulia_legacy
+2020.xlsx,Ring Data,,,11,"9,10",12,Tertials,Tail Moult,Body Moult,,"Primary string plus secondary/tertial strings, including combined secondary/tertial notation",,safring
+2021.xlsx,Ringing data,,,10,"9,10",11,Tertials,Tail Moult,Body Moult,,"Primary string plus secondary/tertial strings, including combined secondary/tertial notation",,safring
+2022.xlsx,2022 All Pal Data,,,11,"9,10",12,Tertials,Tail Moult,Body Moult,,"Primary string plus secondary/tertial strings, including combined secondary/tertial notation",,safring
+2023.xlsx,2023 Ringing Data ALL books,,,11,"9,10",12,Tertials,Tail Moult,Body Moult,,"Primary string plus secondary/tertial strings, including combined secondary/tertial notation",,safring
+1996.xls,Sheet1,15,,16:25,10,26:31,,,,32,"Early primary block plus secondary block in Z:AE and trailing tail/note field",ngulia_oasn,ngulia_legacy
+1997.xls,Sheet1,16,,17:26,10,27:32,,,,33,"Early primary block plus secondary block in AA:AF and trailing tail/note field",ngulia_oasn,ngulia_legacy

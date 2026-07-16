@@ -1,0 +1,33 @@
+source_file,source_sheet,note_sheet,overwrite_year,raw_date_is_ringing_date,note_year,header_row,year_min,year_max,keep_year_min,keep_year_max,use_retrap_code,swap_age_sex,max_row,time_col_override,fill_time_down_within_day,notes,fat_scale
+1991_A.xls,Sheet1,all empty,FALSE,TRUE,,1,1991,1991,,,,,,,,Early format with DAY/MON/YEAR/SPECIES/RING columns,ngulia
+1991_B.xls,Sheet1,all empty,FALSE,TRUE,,1,1991,1991,,,,,,,,Early format with DAY/MON/YEAR/SPECIES/RING columns,ngulia
+1991_C.xls,Sheet1,all empty,FALSE,TRUE,,1,1991,1991,,,,,,,,Early format with DAY/MONTH/YEAR/SPECIES/RING columns,ngulia
+1992_A.xls,Sheet1,all empty,FALSE,TRUE,,1,1992,1992,,,,,,,,Early format with DAY/MON/YEAR/SPECIES/RING columns,ngulia
+1992_B.xls,Sheet1,all empty,FALSE,TRUE,,1,1992,1992,,,,,,,,Early format with DAY/MONTH/YEAR/SPECIES/RING columns,ngulia
+1992_C.xls,Sheet1,all empty,FALSE,TRUE,,1,1992,1992,,,,,,,,Early format with DAY/MON/YEAR/SPECIES/RING columns,ngulia
+1993.xls,1993 All,"the other sheet is called ""subsect of all""",FALSE,TRUE,,1,1993,1993,,,,,,5,,Early combined format,ngulia
+1994.xls,94 combined,,FALSE,TRUE,,1,1994,1994,,,,,,,,Early combined format,both
+1995.xls,Sheet1,,FALSE,TRUE,Include up to 1996-01-02,1,1995,1996,,,,,,,,Early combined format,ngulia
+1996.xls,Sheet1,,FALSE,TRUE,,1,1996,1996,,,,TRUE,,,,Early combined format,ngulia
+1997.xls,Sheet1,Sheet three contains a subst of the data? (5301 rings),FALSE,TRUE,Include up to 1997-01-04,1,1997,1998,,,,,,,,Early combined format,both
+1998.xls,Sheet1,,FALSE,TRUE,,1,1998,1998,,,,,,,TRUE,Early combined format,both
+1999.xls,Sheet1,,FALSE,TRUE,,1,1999,1999,,,,,,,,Early combined format,both
+2000.xls,Sheet1,,TRUE,FALSE,,1,2000,2000,,,,,,,,"Early combined format. Some were entered at 97 (1997), but I think that's a typo",both
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,,FALSE,TRUE,,1,1993,2005,2001,2005,,,56886,,,Processed multi-year format containing 1993-2005 rows,both
+2006-2007_Processed.xls,Sheet1,all empty,FALSE,TRUE,,6,2006,2007,,,,,,,,Header row is on line 6 in raw file,both
+2008_Processed.xlsx,Sheet1,all empty,TRUE,TRUE,"Display as dd.MM, match yearly total.",1,2008,2008,,,FALSE,,,,,Processed year format,kaiser
+2009.xls,Sheet1,all empty,TRUE,TRUE,"Display as dd.MM, match yearly total.",3,2009,2009,,,,,,,,Header row is on line 3 in raw file,kaiser
+2010.xls,Sheet1,same ring on both Sheet1 and Sheet 2. Seems like the same number of row. So only use first sheet,TRUE,TRUE,"Display as dd.MM, all in 2011, probably by mistake. Total close to yearly total",3,2010,2010,,,,,,,,Header row is on line 3 in raw file,kaiser
+2011.xls,Sheet1,same ring on both Sheet1 and Sheet 2. Seems like the same number of row. So only use first sheet,TRUE,TRUE,"Display as dd.MM, match yearly total.",3,2011,2011,,,,,,,,Header row is on line 3 in raw file,kaiser
+2012.xls,Sheet1,all empty,TRUE,TRUE,"Display as dd.MM, match yearly total.",3,2012,2012,,,,,,,,Header row is on line 3 in raw file,kaiser
+2013.xls,Sheet1,all empty,TRUE,TRUE,"Display as dd.MM, match yearly total.",3,2013,2013,,,,,,,,Header row is on line 3 in raw file,kaiser
+2014.xls,Sheet1,all empty,FALSE,TRUE,,1,2014,2014,,,,,,,,Processed year format,kaiser
+2015.xls,Sheet1,Sheet3 seems a subset?,TRUE,TRUE,"Display as dd.MM, match yearly total.",3,2015,2015,,,,,,,,Header row is on line 3 in raw file,kaiser
+2016.xlsx,Sheet1,only one sheet,TRUE,TRUE,"Display as dd.MM, match yearly total.",1,2016,2016,,,,,,24,,Processed year format,kaiser
+2017.xlsx,Ringing Data,only one sheet,FALSE,FALSE,,1,2017,2017,,,,,,,,SAFRING-style workbook,kaiser
+2018.xlsx,Ringing Data,only one sheet,FALSE,FALSE,,1,2018,2018,,,,,,,,SAFRING-style workbook,kaiser
+2019.xlsx,Ringing Data,"Other metadata sheet, this is the ring and only sheet. Note that many line are empty!",FALSE,FALSE,,1,2019,2019,,,,,9137,,,SAFRING-style workbook,kaiser
+2020.xlsx,Ring Data,one other summary sheet,FALSE,TRUE,,1,2020,2020,,,,,,,,SAFRING-style workbook,kaiser
+2021.xlsx,Ringing data,only one sheet,FALSE,TRUE,,1,2021,2021,,,,,,,,SAFRING-style workbook,kaiser
+2022.xlsx,2022 All Pal Data,Other pivot table. not useful,FALSE,TRUE,,1,2022,2022,,,,,8245,,,SAFRING-style workbook,kaiser
+2023.xlsx,2023 Ringing Data ALL books,Other pivot table. not useful,FALSE,TRUE,,1,2023,2023,,,,,,,,SAFRING-style workbook,kaiser

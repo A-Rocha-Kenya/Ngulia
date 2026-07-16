@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: Please cite the corresponding GitHub release and curated Zenodo data record.
+title: Ngulia data workspace
+type: software
+authors:
+- given-names: Colin
+  family-names: Jackson
+  orcid: https://orcid.org/0000-0003-2280-1397
+- given-names: Raphaël
+  family-names: Nussbaumer
+  orcid: https://orcid.org/0000-0002-8185-1020
+- given-names: Martin
+  family-names: Cade
+  affiliation: Portland Bird Observatory and Field Centre
+- given-names: Graeme C.
+  family-names: Backhurst
+- given-names: David J.
+  family-names: Pearson
+url: https://github.com/A-Rocha-Kenya/Ngulia

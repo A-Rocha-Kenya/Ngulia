@@ -1,0 +1,581 @@
+source_file,source_sheet,source_row,source_row_end,field,corrected_value,note
+2009.xls,Sheet1,7035,,species_label_raw,Cecropis rufula,Source race/form "rufula" identifies this individual as European Red-rumped Swallow under the post-split taxonomy.
+2009.xls,Sheet1,7035,,note_raw,rufula,Standardize the row-specific post-split taxon marker before species processing.
+2022.xlsx,2022 All Pal Data,4457,,species_label_raw,Cecropis rufula,Source note "European" identifies this individual as European Red-rumped Swallow under the post-split taxonomy.
+2022.xlsx,2022 All Pal Data,4457,,note_raw,rufula,Standardize the row-specific post-split taxon marker before species processing.
+1991_B.xls,Sheet1,149,,day_raw,12,
+1994.xls,94 combined,8568,,day_raw,6,
+1996.xls,Sheet1,80,,month_raw,11,
+1996.xls,Sheet1,1312,,sex_raw,,Sex field contains a misplaced age value; treat sex as missing.
+1996.xls,Sheet1,5687,,sex_raw,,Sex field contains a misplaced age value; treat sex as missing.
+1997.xls,Sheet1,13436,,sex_raw,M,Remove the duplicated sex letter.
+1997.xls,Sheet1,15295,,sex_raw,M,Remove the duplicated sex letter.
+1997.xls,Sheet1,16519,,sex_raw,F,Remove the duplicated sex letter.
+1997.xls,Sheet1,17111,,sex_raw,,Invalid sex code; treat sex as missing.
+1998.xls,Sheet1,16219,,sex_raw,M,Keep the first character of the sex value and remove the stray punctuation.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,37214,,sex_raw,M,Keep the first character of the sex value.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,42884,,sex_raw,M,Keep the first character of the sex value.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,44622,,sex_raw,M,Keep the first character of the sex value and remove the stray punctuation.
+2009.xls,Sheet1,11100,,sex_raw,M,Keep the first character of the sex value.
+2012.xls,Sheet1,12572,,sex_raw,N,Keep the first character of the sex value.
+2013.xls,Sheet1,3184,,sex_raw,F,Keep the first character of the sex value.
+1996.xls,Sheet1,12401,12594,day_raw,10,"Continuous 1EH block on 11 Dec 1996 appears to be a dragged/copied day entry; shifting this run to 10 Dec removes the 10/11 Dec species swap."
+1999.xls,Sheet1,12879,,year_raw,99,
+1999.xls,Sheet1,1580,1693,day_raw,21,"Continuous BN block appears to have kept a copied day value of 20; shifting this run to 21 removes the 20/21 Nov 1999 species swap."
+2016.xlsx,Sheet1,717,,date_raw,43070,
+2019.xlsx,Ringing Data,1247,,date_raw,20.11.2019,
+2019.xlsx,Ringing Data,2085,,date_raw,22.11.2019,
+2019.xlsx,Ringing Data,3832,,date_raw,02.12.2019,
+2019.xlsx,Ringing Data,3934,,date_raw,03.12.2019,
+2019.xlsx,Ringing Data,5394,,date_raw,21.11.2019,
+2019.xlsx,Ringing Data,5554,,date_raw,22.11.2019,
+2019.xlsx,Ringing Data,5633,,date_raw,22.11.2019,
+2019.xlsx,Ringing Data,7400,,date_raw,26.11.2019,
+2019.xlsx,Ringing Data,7411,,date_raw,26.11.2019,
+2019.xlsx,Ringing Data,9068,,date_raw,03.12.2019,
+2017.xlsx,Ringing Data,181,,date_raw,14.11.2017,
+2014.xls,Sheet1,5198,,species_ngulia_raw,3,
+2017.xlsx,Ringing Data,243,,species_label_raw,Irinia,Text species should be Irinia; sex=2 indicates the number is correct and the original text label is wrong.
+2018.xlsx,Ringing Data,1123,,species_no_raw,607,Species number should be 607; no Little Rush Warbler were ringed that year.
+2018.xlsx,Ringing Data,8113,,species_no_raw,603,"Species number should be 603; these are Great Reed Warbler, not Brown Scrub Robin."
+2018.xlsx,Ringing Data,9284,,species_no_raw,603,"Species number should be 603; these are Great Reed Warbler, not Brown Scrub Robin."
+2018.xlsx,Ringing Data,10776,,species_no_raw,603,"Species number should be 603; these are Great Reed Warbler, not Brown Scrub Robin."
+2018.xlsx,Ringing Data,8298,,species_label_raw,Common Whitethroat,Text species should be Common Whitethroat; the presence of molt score strongly supports species number 594.
+2018.xlsx,Ringing Data,8013,,species_label_raw,Thrush Nightingale,Species label should match the species number; the numeric code is assumed correct and the text label was likely not updated.
+2018.xlsx,Ringing Data,8014,,species_label_raw,Thrush Nightingale,Species label should match the species number; the numeric code is assumed correct and the text label was likely not updated.
+2018.xlsx,Ringing Data,9334,,species_no_raw,608,"Species number should be 608; no White-starred Robin were caught, so use the label-backed code 608."
+2021.xlsx,Ringing data,3649,,species_no_raw,594,"Species number should be 594; no Stripe-cheeked Greenbul were ringed, so the numeric code is incorrect."
+2021.xlsx,Ringing data,3687,,species_no_raw,594,"Species number should be 594; no Stripe-cheeked Greenbul were ringed, so the numeric code is incorrect."
+2021.xlsx,Ringing data,3809,,species_no_raw,594,"Species number should be 594; no Stripe-cheeked Greenbul were ringed, so the numeric code is incorrect."
+2021.xlsx,Ringing data,4180,,species_no_raw,594,"Species number should be 594; no Stripe-cheeked Greenbul were ringed, so the numeric code is incorrect."
+2021.xlsx,Ringing data,3849,,species_no_raw,607,"Species number should be 607; the surrounding entries suggest Excel drag/extrapolation, and neither Sedge Warbler surplus nor Little Rush Warbler is plausible here."
+2021.xlsx,Ringing data,3850,,species_no_raw,607,"Species number should be 607; the surrounding entries suggest Excel drag/extrapolation, and neither Sedge Warbler surplus nor Little Rush Warbler is plausible here."
+2018.xlsx,Ringing Data,6177,,species_no_raw,0,"Original label Burchell's Courser; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,6177,,species_label_raw,Unknown,"Original label Burchell's Courser; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,8581,,species_no_raw,0,"Original label African Darter; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,8581,,species_label_raw,Unknown,"Original label African Darter; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,10150,,species_no_raw,0,"Original label African Pygmy Goose; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,10150,,species_label_raw,Unknown,"Original label African Pygmy Goose; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,842,,species_no_raw,0,"Original label Grey Heron; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,842,,species_label_raw,Unknown,"Original label Grey Heron; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,9673,,species_no_raw,0,"Original label Grey Heron; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,9673,,species_label_raw,Unknown,"Original label Grey Heron; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,4491,,species_no_raw,0,"Original label Little Egret; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,4491,,species_label_raw,Unknown,"Original label Little Egret; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,5750,,species_no_raw,0,"Original label Little Egret; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,5750,,species_label_raw,Unknown,"Original label Little Egret; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,769,,species_no_raw,0,"Original label Wandering Albatross; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,769,,species_label_raw,Unknown,"Original label Wandering Albatross; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,10351,,species_no_raw,0,"Original label Wandering Albatross; not recorded ever, typo of species code number."
+2018.xlsx,Ringing Data,10351,,species_label_raw,Unknown,"Original label Wandering Albatross; not recorded ever, typo of species code number."
+2019.xlsx,Ringing Data,3864,,species_no_raw,0,"Original label Bank Cormorant; not recorded ever, typo of species code number."
+2019.xlsx,Ringing Data,3864,,species_label_raw,Unknown,"Original label Bank Cormorant; not recorded ever, typo of species code number."
+2019.xlsx,Ringing Data,1387,,species_no_raw,0,"Original label Yellow-billed Egret; not recorded ever, typo of species code number."
+2019.xlsx,Ringing Data,1387,,species_label_raw,Unknown,"Original label Yellow-billed Egret; not recorded ever, typo of species code number."
+2023.xlsx,2023 Ringing Data ALL books,4537,,species_no_raw,0,"Original label Pearl-breasted Swallow; not recorded ever, typo of species code number."
+2023.xlsx,2023 Ringing Data ALL books,4537,,species_label_raw,Unknown,"Original label Pearl-breasted Swallow; not recorded ever, typo of species code number."
+1994.xls,94 combined,9463,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9464,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9465,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9466,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9467,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9468,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9469,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9470,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9471,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9472,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9473,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9474,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9475,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9476,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9477,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9478,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9479,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9480,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9481,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9482,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9483,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9484,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9485,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9486,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9487,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9488,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9489,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9490,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9491,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9492,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9493,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9494,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9495,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9496,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9497,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9498,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9499,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9500,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9501,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9502,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9503,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9504,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1994.xls,94 combined,9505,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1995.xls,Sheet1,2204,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1995.xls,Sheet1,26142,,sex_raw,F,Remove the stray slash from the female sex code.
+1995.xls,Sheet1,28973,,sex_raw,F,Remove the stray slash from the female sex code.
+1995.xls,Sheet1,2562,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1995.xls,Sheet1,25948,,sex_raw,,Sex field contains a misplaced book value; treat sex as missing.
+1995.xls,Sheet1,2880,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+1995.xls,Sheet1,3282,,species_label_raw,Unknown,"Daily totals imply 24 Marsh, 3 River, 3 Willow, and 14 Whitethroat, but these blank rows cannot be assigned individually."
+2009.xls,Sheet1,2636,,species_no_raw,9999,No species information available; treat as lost or destroyed ring.
+2009.xls,Sheet1,2846,,species_no_raw,9999,No species information available; treat as lost or destroyed ring.
+2009.xls,Sheet1,2882,,species_no_raw,9999,Comment indicates ring unrecorded; no species information available.
+2009.xls,Sheet1,3176,,species_no_raw,9999,Comment indicates ring destroyed; no species information available.
+2010.xls,Sheet1,15389,,species_ngulia_raw,11,Species number should be Basra Reed Warbler based on biometrics and total count; replace Ngulia code 3 with 11.
+2011.xls,Sheet1,10596,,date_raw,41242,Date cell appears truncated as 8; surrounding rows use Excel serial 41242.
+2012.xls,Sheet1,1747,,species_ngulia_raw,61,Use Ortolan Bunting; biometrics match the label better than Red-throated Pipit.
+2012.xls,Sheet1,1751,,species_ngulia_raw,1,Use Marsh Warbler; biometrics are too small for River Warbler.
+2013.xls,Sheet1,5062,,species_ngulia_raw,6,Use White-throated Robin; wing and weight fit the label better than the competing Ngulia code.
+2013.xls,Sheet1,13474,,species_ngulia_raw,2,Use Common Whitethroat; biometrics are too small for Marsh Warbler.
+2013.xls,Sheet1,17431,,species_ngulia_raw,15,Use Olive-tree Warbler; wing and weight fit the label better than Common Rock Thrush.
+1993.xls,1993 All,2650,,wing_raw,,A period in the source wing field is a typo; treat the wing measurement as missing.
+1993.xls,1993 All,2852,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,2908,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,2931,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,2964,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,2965,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,2976,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,2984,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,2986,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,4329,,note_raw,6.17 hrs,Time note in AB column; restore to note field.
+1993.xls,1993 All,4510,,note_raw,07.23 hrs,Time note in AB column; restore to note field.
+1993.xls,1993 All,4557,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,4557,,moult_note_raw,1.1=555005,Remove taxon text from moult note and keep secondary scores only.
+1993.xls,1993 All,4766,,note_raw,"nets closed 10,00 hrs",Text note in AB column; restore to note field.
+1993.xls,1993 All,4868,,note_raw,Mus. Praha,Text note in AB column; restore to note field.
+1993.xls,1993 All,4899,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,4899,,moult_note_raw,1.1=55555,Remove taxon text from moult note and keep secondary scores only.
+1993.xls,1993 All,6385,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,6385,,moult_note_raw,1.1=000000,Remove taxon text from moult note and keep secondary scores only.
+1993.xls,1993 All,7071,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,7071,,moult_note_raw,,Remove taxon text from moult note.
+1993.xls,1993 All,7295,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,7295,,moult_note_raw,1.1=505005,Remove taxon text from moult note and keep secondary scores only.
+1993.xls,1993 All,7299,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,7299,,moult_note_raw,,Remove taxon text from moult note.
+1993.xls,1993 All,7463,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,7463,,moult_note_raw,,Remove taxon text from moult note.
+1993.xls,1993 All,7695,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,7695,,moult_note_raw,1.1=000000,Remove taxon text from moult note and keep secondary scores only.
+1993.xls,1993 All,8297,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,8297,,moult_note_raw,1.1=550005,Remove taxon text from moult note and keep secondary scores only.
+1993.xls,1993 All,8392,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,8392,,moult_note_raw,1.1=550005,Remove taxon text from moult note and keep secondary scores only.
+1993.xls,1993 All,8998,,note_raw,yakutensis,Text note in moult column; restore to note field.
+1993.xls,1993 All,8998,,moult_note_raw,,Remove taxon text from moult note.
+1993.xls,1993 All,9182,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,9897,,note_raw,yakutensis,Text note in AB column; restore to note field.
+1993.xls,1993 All,12269,,note_raw,07.23 hrs,Time note in AB column; restore to note field.
+1993.xls,1993 All,12588,,note_raw,2KG98799?,Text note in AB column; restore to note field.
+1993.xls,1993 All,14310,,primary_moult_status_raw,,Taxon/form text shifted into primary moult status column; clear moult field.
+1993.xls,1993 All,14310,,race_form_raw,phoen.,"Taxon/form text shifted into primary moult status column; restore to race/form."
+1993.xls,1993 All,14455,,primary_moult_status_raw,,Taxon/form text shifted into primary moult status column; clear moult field.
+1993.xls,1993 All,14455,,race_form_raw,nom/unwini,"Taxon/form text shifted into primary moult status column; restore to race/form."
+1993.xls,1993 All,14460,,primary_moult_status_raw,,Taxon/form text shifted into primary moult status column; clear moult field.
+1993.xls,1993 All,14460,,race_form_raw,unwini,"Taxon/form text shifted into primary moult status column; restore to race/form."
+2015.xls,Sheet1,6843,,species_ngulia_raw,6,Use White-throated Robin; wing and weight fit the label better than the competing Ngulia code.
+2015.xls,Sheet1,7212,,species_ngulia_raw,12,Use Barred Warbler; biometrics fit the label better than Common Nightingale.
+2015.xls,Sheet1,7283,,species_ngulia_raw,26,Use Isabelline Wheatear; biometrics clearly fit the label.
+2017.xlsx,Ringing Data,15987,,wing_raw,120,OCR combined wing with extra decimal text; restored wing.
+2017.xlsx,Ringing Data,15987,,weight_raw,13.8,OCR combined wing and weight text; restored weight.
+2017.xlsx,Ringing Data,16216,,wing_raw,120,OCR combined wing with extra decimal text; restored wing.
+2017.xlsx,Ringing Data,17733,,wing_raw,120,OCR combined wing with extra decimal text; restored wing.
+2017.xlsx,Ringing Data,17783,,wing_raw,120,OCR combined wing with extra decimal text; restored wing.
+2017.xlsx,Ringing Data,17893,,wing_raw,120,OCR combined wing with extra decimal text; restored wing.
+2017.xlsx,Ringing Data,17913,,wing_raw,120,OCR combined wing with extra decimal text; restored wing.
+2017.xlsx,Ringing Data,17923,,wing_raw,120,OCR combined wing with extra decimal text; restored wing.
+2021.xlsx,Ringing data,5494,,weight_raw,13.2,Removed stray leading backtick from weight value.
+1995.xls,Sheet1,6435,,wing_raw,,Sex code landed in wing column; no recoverable wing measurement.
+1995.xls,Sheet1,25117,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25118,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25119,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25120,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25121,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25122,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25123,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25124,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25125,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25126,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25127,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25128,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25129,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25130,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25131,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25132,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25133,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25134,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25135,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25136,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25137,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25138,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25139,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25140,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25141,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25142,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25143,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25144,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25145,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25146,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25147,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25148,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25149,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25150,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25151,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25152,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25153,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25154,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25155,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25156,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25157,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25158,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25159,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25160,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25161,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25162,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25163,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25164,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25165,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25166,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25167,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25168,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25169,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25170,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25171,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25172,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25173,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25174,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25175,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25176,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25177,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25178,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25543,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25544,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25545,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25546,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25547,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25548,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25549,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25550,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25551,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25552,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25553,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25554,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25555,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25556,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25557,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25558,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25559,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25560,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,25561,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26571,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26572,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26573,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26574,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26575,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26576,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26577,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26578,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26579,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26580,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26581,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26582,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26583,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26584,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26585,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26586,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26587,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26588,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26589,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26590,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26591,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26592,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26593,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26594,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26595,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26987,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26988,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26989,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26990,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26991,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26992,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26993,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26994,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26995,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26996,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26997,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26998,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,26999,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27000,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27001,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27002,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27003,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27004,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27005,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27006,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27007,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27008,,day_raw,19,"Late 23:00 block appears to belong to 19 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,27475,,primary_scores_raw,,Bogus decimal series in primary moult field; clear invalid moult value.
+1995.xls,Sheet1,27476,,primary_scores_raw,,Bogus decimal series in primary moult field; clear invalid moult value.
+1995.xls,Sheet1,27477,,primary_scores_raw,,Bogus decimal series in primary moult field; clear invalid moult value.
+1995.xls,Sheet1,27478,,primary_scores_raw,,Bogus decimal series in primary moult field; clear invalid moult value.
+1995.xls,Sheet1,27479,,primary_scores_raw,,Bogus decimal series in primary moult field; clear invalid moult value.
+1995.xls,Sheet1,27480,,primary_scores_raw,,Bogus decimal series in primary moult field; clear invalid moult value.
+1995.xls,Sheet1,29448,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,29449,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1995.xls,Sheet1,29810,,day_raw,17,"Late 23:00 block appears to belong to 17 Dec based on adjacent daily species imbalances."
+1996.xls,Sheet1,10519,,wing_raw,,Sex code landed in wing column; no recoverable wing measurement.
+1997.xls,Sheet1,13452,,wing_raw,,Sex code landed in wing column; no recoverable wing measurement.
+2016.xlsx,Sheet1,597,,weight_raw,,Sex code landed in weight column; no recoverable weight measurement.
+2023.xlsx,2023 Ringing Data ALL books,6166,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6168,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6170,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6172,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6174,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6176,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6178,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6180,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6182,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6184,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6186,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6188,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6190,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6192,,row_action,ignore,Values differ; kept first row arbitrarily.
+2018.xlsx,Ringing Data,7010,,row_action,ignore,Exact duplicate; kept first row.
+2018.xlsx,Ringing Data,7011,,row_action,ignore,Exact duplicate; kept first row.
+2018.xlsx,Ringing Data,7012,,row_action,ignore,Exact duplicate; kept first row.
+2018.xlsx,Ringing Data,7013,,row_action,ignore,Exact duplicate; kept first row.
+2018.xlsx,Ringing Data,7014,,row_action,ignore,Exact duplicate; kept first row.
+2018.xlsx,Ringing Data,7015,,row_action,ignore,Exact duplicate; kept first row.
+2018.xlsx,Ringing Data,7016,,row_action,ignore,Exact duplicate; kept first row.
+2018.xlsx,Ringing Data,7017,,row_action,ignore,Exact duplicate; kept first row.
+2018.xlsx,Ringing Data,7018,,row_action,ignore,Exact duplicate; kept first row.
+2018.xlsx,Ringing Data,7019,,row_action,ignore,Exact duplicate; kept first row.
+2016.xlsx,Sheet1,718,,row_action,ignore,Exact duplicate; kept first row.
+2008_Processed.xlsx,Sheet1,12730,,row_action,ignore,Exact duplicate; kept first row.
+2008_Processed.xlsx,Sheet1,12732,,row_action,ignore,Exact duplicate; kept first row.
+2008_Processed.xlsx,Sheet1,17392,,row_action,ignore,Only date_raw differs; kept row with 2008 date.
+2008_Processed.xlsx,Sheet1,17393,,row_action,ignore,Only date_raw differs; kept row with 2008 date.
+2008_Processed.xlsx,Sheet1,17394,,row_action,ignore,Only date_raw differs; kept row with 2008 date.
+2008_Processed.xlsx,Sheet1,17395,,row_action,ignore,Only date_raw differs; kept row with 2008 date.
+2008_Processed.xlsx,Sheet1,17396,,row_action,ignore,Only date_raw differs; kept row with 2008 date.
+2008_Processed.xlsx,Sheet1,18688,,row_action,ignore,Exact duplicate; kept first row.
+1997.xls,Sheet1,3434,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3435,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3436,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3437,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3438,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3439,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3440,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3441,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3442,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3443,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3444,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3445,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3446,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3447,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3448,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3449,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3450,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3451,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3452,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3453,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3454,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3455,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3456,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3457,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3458,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3459,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3460,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3461,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3462,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3463,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3464,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3465,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3466,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3467,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3468,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3469,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3470,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3471,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3472,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3473,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3474,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3475,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3476,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3477,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3478,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3479,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3480,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3481,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3482,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3483,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3484,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3485,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3486,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3487,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3488,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3489,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3490,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3491,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3492,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3493,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3494,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3495,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3496,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3497,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3498,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3499,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3500,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3501,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3502,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3503,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3504,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3505,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3506,,row_action,ignore,Values differ; kept first row arbitrarily.
+1997.xls,Sheet1,3507,,row_action,ignore,Values differ; kept first row arbitrarily.
+2023.xlsx,2023 Ringing Data ALL books,6826,,row_action,ignore,External recovery; exclude from Ngulia ringing data.
+1999.xls,Sheet1,11062,,wing_raw,68,Biometric values shifted two cells to the right; restored wing.
+1999.xls,Sheet1,11062,,weight_raw,14.4,Biometric values shifted two cells to the right; restored weight.
+1999.xls,Sheet1,11062,,fat_kaiser_raw,5,Biometric values shifted two cells to the right; restored Kaiser fat score.
+1999.xls,Sheet1,11062,,retrap_code_raw,,Biometric values shifted two cells to the right; cleared incorrect retrap code.
+1999.xls,Sheet1,11062,,note_raw,,Biometric values shifted two cells to the right; cleared incorrect remarks value.
+2009.xls,Sheet1,2553,,sex_raw,,Biometric values shifted to the right; cleared incorrect sex value.
+2009.xls,Sheet1,2553,,wing_raw,119,Biometric values shifted to the right; restored wing.
+2009.xls,Sheet1,2553,,weight_raw,17.9,Biometric values shifted to the right; restored weight.
+2009.xls,Sheet1,2563,,sex_raw,,Biometric values shifted to the right; cleared incorrect sex value.
+2009.xls,Sheet1,2563,,wing_raw,124,Biometric values shifted to the right; restored wing.
+2009.xls,Sheet1,2563,,weight_raw,18.8,Biometric values shifted to the right; restored weight.
+2009.xls,Sheet1,2566,,sex_raw,,Biometric values shifted to the right; cleared incorrect sex value.
+2009.xls,Sheet1,2566,,wing_raw,110,Biometric values shifted to the right; restored wing.
+2009.xls,Sheet1,2566,,weight_raw,16.7,Biometric values shifted to the right; restored weight.
+1998.xls,Sheet1,14625,,weight_raw,21.4,Biometric values shifted to the right; restored weight.
+1998.xls,Sheet1,14625,,fat_ngulia_raw,,Biometric values shifted to the right; cleared the displaced weight value from the Ngulia fat field.
+1998.xls,Sheet1,14625,,fat_kaiser_raw,2,Biometric values shifted to the right; restored Kaiser fat score from the following source field.
+1998.xls,Sheet1,14625,,retrap_code_raw,,Biometric values shifted to the right; cleared incorrect retrap code.
+1998.xls,Sheet1,14625,,note_raw,,Biometric values shifted to the right; cleared incorrect remarks value.
+1993.xls,1993 All,6663,,fat_ngulia_raw,3,Removed accidental trailing characters from Ngulia fat score.
+1995.xls,Sheet1,8223,,fat_ngulia_raw,2,Removed accidental trailing character from Ngulia fat score.
+2011.xls,Sheet1,530,,fat_kaiser_raw,3,Separated Kaiser fat score from trailing ringer initials.
+2016.xlsx,Sheet1,1899,,fat_kaiser_raw,1,Separated Kaiser fat score from trailing ringer initials.
+2016.xlsx,Sheet1,11099,,fat_kaiser_raw,2,Separated Kaiser fat score from trailing ringer initials.
+2020.xlsx,Ring Data,64,,weight_raw,25.3,Weight and fat values were shifted one column to the right; restored weight.
+2020.xlsx,Ring Data,64,,fat_kaiser_raw,1,Weight and fat values were shifted one column to the right; restored Kaiser fat score.
+1993.xls,1993 All,10007,,fat_ngulia_raw,3,Removed a duplicated digit from the Ngulia fat score.
+1995.xls,Sheet1,7218,,fat_ngulia_raw,3,Removed a duplicated digit from the Ngulia fat score.
+1996.xls,Sheet1,53,,fat_ngulia_raw,1,Removed a duplicated digit from the Ngulia fat score.
+1994.xls,94 combined,651,,fat_ngulia_raw,1,Removed an accidental decimal suffix from the Ngulia fat score.
+1994.xls,94 combined,651,,fat_kaiser_raw,0,Removed an accidental decimal suffix from the Kaiser fat score.
+1998.xls,Sheet1,18584,,fat_ngulia_raw,3,Removed an accidental leading digit from the Ngulia fat score.
+1998.xls,Sheet1,18584,,fat_kaiser_raw,4,Removed an accidental leading digit from the Kaiser fat score.
+1998.xls,Sheet1,20170,,fat_ngulia_raw,1,Removed an accidental decimal suffix from the Ngulia fat score.
+1998.xls,Sheet1,20170,,fat_kaiser_raw,0,Removed an accidental decimal suffix from the Kaiser fat score.
+1999.xls,Sheet1,9407,,fat_ngulia_raw,3,Removed an accidental trailing digit from the Ngulia fat score.
+1999.xls,Sheet1,9407,,fat_kaiser_raw,4,Removed an accidental trailing digit from the Kaiser fat score.
+1999.xls,Sheet1,10202,,fat_ngulia_raw,1,Removed an accidental trailing digit from the Ngulia fat score.
+1999.xls,Sheet1,10202,,fat_kaiser_raw,0,Removed an accidental trailing digit from the Kaiser fat score.
+1999.xls,Sheet1,11150,,fat_ngulia_raw,1,Removed an accidental decimal suffix from the Ngulia fat score.
+1999.xls,Sheet1,11150,,fat_kaiser_raw,0,Removed an accidental decimal suffix from the Kaiser fat score.
+2006-2007_Processed.xls,Sheet1,4767,,fat_ngulia_raw,4,Removed an accidental trailing digit from the Ngulia fat score.
+2006-2007_Processed.xls,Sheet1,4767,,fat_kaiser_raw,7,Removed an accidental trailing digit from the Kaiser fat score.
+2009.xls,Sheet1,2940,,fat_kaiser_raw,0,Interpreted the letter O as a zero fat score.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,39784,,fat_ngulia_raw,1,Removed an accidental decimal suffix from the Ngulia fat score.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,39784,,fat_kaiser_raw,0,Removed an accidental decimal suffix from the Kaiser fat score.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,40999,,fat_ngulia_raw,3,Removed an accidental trailing digit from the Ngulia fat score.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,40999,,fat_kaiser_raw,4,Removed an accidental trailing digit from the Kaiser fat score.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,41751,,fat_ngulia_raw,1,Removed an accidental trailing digit from the Ngulia fat score.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,41751,,fat_kaiser_raw,0,Removed an accidental trailing digit from the Kaiser fat score.
+1999.xls,Sheet1,11062,,fat_ngulia_raw,,Biometric values shifted two cells to the right; cleared the displaced value from the Ngulia fat field.
+2017.xlsx,Ringing Data,4699,,wing_raw,95,Wing and weight values were shifted one column to the right; restored wing.
+2017.xlsx,Ringing Data,4699,,weight_raw,20,Wing and weight values were shifted one column to the right; restored weight.
+2017.xlsx,Ringing Data,4699,,fat_kaiser_raw,,Wing and weight values were shifted one column to the right; cleared the displaced weight from the fat field.
+2022.xlsx,2022 All Pal Data,2078,,wing_raw,98,Wing and weight values were shifted one column to the right; restored wing.
+2022.xlsx,2022 All Pal Data,2078,,weight_raw,22.1,Wing and weight values were shifted one column to the right; restored weight.
+2022.xlsx,2022 All Pal Data,2078,,fat_kaiser_raw,,Wing and weight values were shifted one column to the right; cleared the displaced weight from the fat field.
+2020.xlsx,Ring Data,5842,,fat_kaiser_raw,,Cleared a weight value duplicated into the fat field.
+2010.xls,Sheet1,1818,,fat_kaiser_raw,,Cleared ringer initials entered in the fat field.
+2012.xls,Sheet1,3816,,fat_kaiser_raw,,Cleared ringer initials entered in the fat field.
+2012.xls,Sheet1,5621,,fat_kaiser_raw,,Cleared a ringer identifier entered in the fat field.
+2012.xls,Sheet1,7726,,fat_kaiser_raw,,Cleared ringer initials entered in the fat field.
+2013.xls,Sheet1,980,,fat_kaiser_raw,,Cleared ringer initials entered in the fat field.
+2015.xls,Sheet1,1982,,fat_kaiser_raw,,Cleared ringer initials entered in the fat field.
+2015.xls,Sheet1,1983,,fat_kaiser_raw,,Cleared a ringer identifier entered in the fat field.
+2015.xls,Sheet1,1984,,fat_kaiser_raw,,Cleared a ringer identifier entered in the fat field.
+2015.xls,Sheet1,3026,,fat_kaiser_raw,,Cleared ringer initials entered in the fat field.
+2015.xls,Sheet1,3917,,fat_kaiser_raw,,Cleared ringer initials entered in the fat field.
+2015.xls,Sheet1,4766,,fat_kaiser_raw,,Cleared a ringer identifier entered in the fat field.
+1995.xls,Sheet1,27475,,row_action,ignore,Corrupted interpolated duplicate of a clean source row; exclude the false second event.
+1995.xls,Sheet1,27476,,row_action,ignore,Corrupted interpolated duplicate of a clean source row; exclude the false second event.
+1995.xls,Sheet1,27477,,row_action,ignore,Corrupted interpolated duplicate of a clean source row; exclude the false second event.
+1995.xls,Sheet1,27478,,row_action,ignore,Corrupted interpolated duplicate of a clean source row; exclude the false second event.
+1995.xls,Sheet1,27479,,row_action,ignore,Corrupted interpolated duplicate of a clean source row; exclude the false second event.
+1995.xls,Sheet1,27480,,row_action,ignore,Corrupted interpolated duplicate of a clean source row; exclude the false second event.
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,48148,,age_raw,4,Removed a stray opening parenthesis from the age value.
+1991_A.xls,Sheet1,572,,age_raw,3,Removed a duplicated age digit.
+1992_B.xls,Sheet1,2915,,age_raw,3,Removed a duplicated age digit.
+1993.xls,1993 All,2729,,age_raw,3,Removed a duplicated age digit.
+1993.xls,1993 All,9078,,age_raw,3,Removed a duplicated age digit.
+1994.xls,94 combined,2829,,age_raw,3,Removed a duplicated age digit.
+1994.xls,94 combined,5431,,age_raw,3,Removed a duplicated age digit.
+1996.xls,Sheet1,1165,,age_raw,3,Removed a duplicated age digit.
+1998.xls,Sheet1,813,,age_raw,3,Removed a duplicated age digit.
+1998.xls,Sheet1,4446,,age_raw,3,Removed a duplicated age digit.
+1991_B.xls,Sheet1,2052,,age_raw,4,Removed a duplicated age digit.
+1993.xls,1993 All,219,,age_raw,4,Removed a duplicated age digit.
+1994.xls,94 combined,8117,,age_raw,4,Removed a duplicated age digit.
+1996.xls,Sheet1,4544,,age_raw,4,Removed a duplicated age digit.
+2000.xls,Sheet1,5376,,age_raw,4,Removed a duplicated age digit.
+2010.xls,Sheet1,4120,,age_raw,4,Removed a duplicated age digit.
+2010.xls,Sheet1,4997,,age_raw,4,Removed a duplicated age digit.
+2010.xls,Sheet1,6396,,age_raw,4,Removed a duplicated age digit.
+2010.xls,Sheet1,15437,,age_raw,4,Removed a duplicated age digit.
+2011.xls,Sheet1,3192,,age_raw,4,Removed a duplicated age digit.
+2016.xlsx,Sheet1,3646,,age_raw,4,Removed a duplicated age digit.
+2016.xlsx,Sheet1,4114,,age_raw,4,Removed a duplicated age digit.
+2016.xlsx,Sheet1,9485,,age_raw,4,Removed a duplicated age digit.
+2016.xlsx,Sheet1,11470,,age_raw,4,Removed a duplicated age digit.
+1997.xls,Sheet1,15582,,age_raw,4,Separated an age value combined with the sex letter.
+1997.xls,Sheet1,15582,,sex_raw,F,Separated a sex letter combined with the age value.
+1996.xls,Sheet1,3331,,age_raw,0,Age field contains a misplaced sex letter; age is unknown.
+1996.xls,Sheet1,3331,,sex_raw,F,Moved the misplaced sex letter from the age field.
+1997.xls,Sheet1,12249,,age_raw,0,Age field contains a misplaced sex letter; age is unknown.
+1997.xls,Sheet1,12249,,sex_raw,M,Moved the misplaced sex letter from the age field.
+1997.xls,Sheet1,9018,,weight_raw,11.1,Restored a missing decimal point in the weight.
+1998.xls,Sheet1,128,,weight_raw,10.4,Restored a missing decimal point in the weight.
+1998.xls,Sheet1,7860,,weight_raw,10.8,Restored a missing decimal point in the weight.
+2008_Processed.xlsx,Sheet1,3667,,wing_raw,123,Restored wing from the clearer archived processed transcription.
+2008_Processed.xlsx,Sheet1,3667,,weight_raw,19.1,Restored the missing decimal point shown by the archived processed transcription.
+2008_Processed.xlsx,Sheet1,4575,,weight_raw,24.8,Restored weight from the clearer archived processed transcription.
+2008_Processed.xlsx,Sheet1,4668,,wing_raw,95,Restored wing from the clearer archived processed transcription.
+2008_Processed.xlsx,Sheet1,4668,,weight_raw,25.2,Restored weight from the clearer archived processed transcription.
+2008_Processed.xlsx,Sheet1,16983,,weight_raw,17.2,Restored the missing decimal point shown by the archived processed transcription.
+2008_Processed.xlsx,Sheet1,19800,,wing_raw,91,Restored wing from the clearer archived processed transcription.
+2008_Processed.xlsx,Sheet1,19800,,weight_raw,21.6,Restored weight from the clearer archived processed transcription.
+2009.xls,Sheet1,2374,,wing_raw,,A body mass was entered in the wing field; wing is unknown.
+2009.xls,Sheet1,2374,,weight_raw,11.2,Moved the body mass from the wing field to weight.
+2009.xls,Sheet1,2902,,wing_raw,66,Restored wing from the clearer archived processed transcription.
+2011.xls,Sheet1,405,,weight_raw,13.3,Restored a missing decimal point confirmed by the archived workbook.
+2017.xlsx,Ringing Data,1920,,weight_raw,15.4,Restored a missing decimal point in the weight.
+2017.xlsx,Ringing Data,4294,,weight_raw,23.8,Restored a missing decimal point in the weight.
+2017.xlsx,Ringing Data,8527,,weight_raw,20.3,Restored a missing decimal point in the weight.
+2018.xlsx,Ringing Data,2338,,weight_raw,10.3,Restored a missing decimal point in the weight.
+2018.xlsx,Ringing Data,3881,,weight_raw,23.2,Restored a missing decimal point in the weight.
+2018.xlsx,Ringing Data,4273,,weight_raw,10.3,Restored a missing decimal point in the weight.
+2018.xlsx,Ringing Data,4979,,weight_raw,10.6,Restored a missing decimal point in the weight.
+2019.xlsx,Ringing Data,1856,,weight_raw,16.1,Restored a missing decimal point in the weight.
+2020.xlsx,Ring Data,8900,,weight_raw,17.5,Restored a missing decimal point in the weight.
+2021.xlsx,Ringing data,118,,wing_raw,,A body mass was entered in the wing field; wing is unknown.
+2021.xlsx,Ringing data,118,,weight_raw,30.2,Moved the body mass from the wing field to weight.
+2022.xlsx,2022 All Pal Data,134,,wing_raw,,A body mass was entered in the wing field; wing is unknown.
+2022.xlsx,2022 All Pal Data,134,,weight_raw,20,Moved the body mass from the wing field to weight.
+2022.xlsx,2022 All Pal Data,1772,,wing_raw,,A body mass was entered in the wing field; wing is unknown.
+2022.xlsx,2022 All Pal Data,1772,,weight_raw,15.1,Moved the body mass from the wing field to weight.
+2008_Processed.xlsx,Sheet1,2568,,species_label_raw,Unresolved source conflict: current Rufous Bush Chat; archive Coracias garrulus,Current and archived workbooks disagree on species; leave species unresolved for manual review.
+2008_Processed.xlsx,Sheet1,2569,,species_label_raw,Unresolved source conflict: current Rufous Bush Chat; archive Coracias garrulus,Current and archived workbooks disagree on species; leave species unresolved for manual review.
+2008_Processed.xlsx,Sheet1,20077,,species_label_raw,Unresolved source conflict: current Thrush Nightingale; archive Marsh Warbler,Current and archived workbooks disagree on species; leave species unresolved for manual review.

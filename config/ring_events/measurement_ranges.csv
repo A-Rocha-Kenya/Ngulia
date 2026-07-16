@@ -1,0 +1,23 @@
+afring_number,wing_min,wing_max,weight_min,weight_max,note
+all,30,450,3,500,Conservative fallback limits for all species
+607,55,85,6,30,Marsh Warbler
+592,70,110,12,40,Thrush Nightingale
+594,60,100,8,35,Greater Whitethroat
+493,100,145,8,35,Barn Swallow
+598,60,90,8,30,River Warbler
+2592,75,115,12,55,White-throated Robin
+708,75,110,15,45,Red-backed Shrike
+599,50,85,4,20,Willow Warbler
+654,70,105,8,30,Spotted Flycatcher
+2596,70,110,12,40,Common Nightingale
+2288,75,115,15,45,Isabelline Shrike
+597,65,105,10,35,Olive-tree Warbler
+605,70,110,12,45,Barred Warbler
+949,65,100,10,30,Basra Reed Warbler
+595,65,100,10,35,Garden Warbler
+507,90,140,10,30,Western House-Martin
+3278,50,85,4,25,Eastern Olivaceous Warbler
+567,70,105,10,35,Rufous-tailed Scrub-Robin
+3276,60,95,7,25,Upcher's Warbler
+371,120,230,30,110,Eurasian Nightjar
+2618,100,150,25,90,Rufous-tailed Rock-Thrush
