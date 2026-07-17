@@ -231,7 +231,6 @@ occurrences <- ring_events |>
     eventID,
     occurrenceID,
     organismID,
-    recordNumber = ringNumber,
     basisOfRecord = metadata$gbif$basis_of_record,
     occurrenceStatus = "present",
     individualCount = 1L,
@@ -248,6 +247,21 @@ occurrences <- ring_events |>
     family,
     vernacularName,
     sex = case_when(sex == "M" ~ "male", sex == "F" ~ "female"),
+    lifeStage = case_when(
+      age == 1L ~ "pullus",
+      age == 2L ~ "full-grown, age unknown",
+      age == 3L ~ "first calendar year",
+      age == 4L ~ "after first calendar year",
+      age == 5L ~ "second calendar year",
+      age == 6L ~ "after second calendar year",
+      age == 7L ~ "third calendar year",
+      age == 8L ~ "after third calendar year",
+      age == 9L ~ "fourth calendar year"
+    ),
+    dynamicProperties = case_when(
+      retrap ~ '{"retrap":true}',
+      !retrap ~ '{"retrap":false}'
+    ),
     occurrenceRemarks = ring_note,
     identificationRemarks,
     datasetName = metadata$dataset$data_title,
@@ -259,22 +273,20 @@ occurrences <- ring_events |>
 measurement_keys <- ring_events |>
   select(ring_event_id, eventID, occurrenceID)
 
-# Use identifiers only for exact concepts in published, resolvable vocabularies.
+# Define the exported measurement labels, units, and methods.
 capture_measurement_specs <- tribble(
-  ~source_field, ~measurementType, ~measurementTypeID, ~measurementValueID, ~measurementUnit, ~measurementUnitID, ~measurementMethod,
-  "age", "EURING age code", NA, NA, NA, NA, "EURING Exchange Code 2020 v202; the value is the standardized source age code, not an age inferred from capture history: https://euring.org/files/documents/E2020ExchangeCodeV202.pdf",
-  "wing", "wing length", NA, NA, "mm", "http://vocab.nerc.ac.uk/collection/P06/current/UXMM/", "Wing length recorded by the source ringing workflow.",
-  "weight", "body mass (wet weight)", "http://vocab.nerc.ac.uk/collection/P01/current/SPWGXX01/", NA, "g", "http://vocab.nerc.ac.uk/collection/P06/current/UGRM/", "Body mass recorded by the source ringing workflow.",
-  "fat_ngulia", "fat score", NA, NA, "dimensionless", "http://vocab.nerc.ac.uk/collection/P06/current/UUUU/", "Ngulia fat scale (0-4).",
-  "fat_kaiser", "fat score", NA, NA, "dimensionless", "http://vocab.nerc.ac.uk/collection/P06/current/UUUU/", "Kaiser fat scale (0-8).",
-  "uncertain_sex", "reported sex", NA, NA, NA, NA, "Uncertain sex retained from the curated ringing record."
+  ~source_field, ~measurementType, ~measurementUnit, ~measurementMethod,
+  "wing", "wing length", "mm", "Wing length recorded by the source ringing workflow.",
+  "weight", "body mass", "g", "Body mass recorded by the source ringing workflow.",
+  "fat_ngulia", "fat score", "dimensionless", "Ngulia fat scale (0-4).",
+  "fat_kaiser", "fat score", "dimensionless", "Kaiser fat scale (0-8).",
+  "uncertain_sex", "reported sex", NA, "Uncertain sex retained from the curated ringing record."
 )
 
 capture_measurements <- ring_events |>
   transmute(
     eventID,
     occurrenceID,
-    age = as.character(age),
     wing = as.character(wing),
     weight = as.character(weight),
     fat_ngulia = as.character(fat_ngulia),
@@ -303,17 +315,10 @@ moult_measurement_specs <- tibble(source_field = names(moult)[-1]) |>
       str_detect(source_field, "^T[0-9]+$") ~ paste0("tertial feather ", source_field, " moult score"),
       str_detect(source_field, "^Tail[0-9]+$") ~ paste0("tail feather ", str_remove(source_field, "Tail"), " moult score")
     ),
-    measurementTypeID = NA_character_,
-    measurementValueID = NA_character_,
     measurementUnit = case_when(
       source_field == "n_old_primaries_remaining" ~ "dimensionless",
       str_starts(source_field, "body_moult_") ~ "dimensionless",
       str_detect(source_field, "^(P|S|T|Tail)[0-9]+$") ~ "dimensionless"
-    ),
-    measurementUnitID = case_when(
-      source_field == "n_old_primaries_remaining" ~ "http://vocab.nerc.ac.uk/collection/P06/current/UUUU/",
-      str_starts(source_field, "body_moult_") ~ "http://vocab.nerc.ac.uk/collection/P06/current/UUUU/",
-      str_detect(source_field, "^(P|S|T|Tail)[0-9]+$") ~ "http://vocab.nerc.ac.uk/collection/P06/current/UUUU/"
     ),
     measurementMethod = case_when(
       source_field == "moult_note" ~ "Source notation or processing note retained during conservative moult decoding.",
@@ -339,20 +344,17 @@ measurements <- bind_rows(capture_measurements, moult_measurements) |>
     measurementID = paste0(occurrenceID, ":measurement:", source_field),
     measurementRemarks = NA_character_
   ) |>
+  arrange(eventID, occurrenceID, measurementID) |>
   select(
     eventID,
     occurrenceID,
     measurementID,
     measurementType,
-    measurementTypeID,
     measurementValue,
-    measurementValueID,
     measurementUnit,
-    measurementUnitID,
     measurementMethod,
     measurementRemarks
-  ) |>
-  arrange(eventID, occurrenceID, measurementID)
+  )
 
 # Write Darwin Core tables -------------------------------------------------
 
@@ -390,27 +392,28 @@ meta_xml <- paste0(
   "    <coreid index=\"0\"/>\n",
   "    <field index=\"1\" term=\"http://rs.tdwg.org/dwc/terms/occurrenceID\"/>\n",
   "    <field index=\"2\" term=\"http://rs.tdwg.org/dwc/terms/organismID\"/>\n",
-  "    <field index=\"3\" term=\"http://rs.tdwg.org/dwc/terms/recordNumber\"/>\n",
-  "    <field index=\"4\" term=\"http://rs.tdwg.org/dwc/terms/basisOfRecord\"/>\n",
-  "    <field index=\"5\" term=\"http://rs.tdwg.org/dwc/terms/occurrenceStatus\"/>\n",
-  "    <field index=\"6\" term=\"http://rs.tdwg.org/dwc/terms/individualCount\"/>\n",
-  "    <field index=\"7\" term=\"http://rs.tdwg.org/dwc/terms/organismQuantity\"/>\n",
-  "    <field index=\"8\" term=\"http://rs.tdwg.org/dwc/terms/organismQuantityType\"/>\n",
-  "    <field index=\"9\" term=\"http://rs.tdwg.org/dwc/terms/eventDate\"/>\n",
-  "    <field index=\"10\" term=\"http://rs.tdwg.org/dwc/terms/taxonID\"/>\n",
-  "    <field index=\"11\" term=\"http://rs.tdwg.org/dwc/terms/scientificName\"/>\n",
-  "    <field index=\"12\" term=\"http://rs.tdwg.org/dwc/terms/taxonRank\"/>\n",
-  "    <field index=\"13\" term=\"http://rs.tdwg.org/dwc/terms/kingdom\"/>\n",
-  "    <field index=\"14\" term=\"http://rs.tdwg.org/dwc/terms/phylum\"/>\n",
-  "    <field index=\"15\" term=\"http://rs.tdwg.org/dwc/terms/class\"/>\n",
-  "    <field index=\"16\" term=\"http://rs.tdwg.org/dwc/terms/order\"/>\n",
-  "    <field index=\"17\" term=\"http://rs.tdwg.org/dwc/terms/family\"/>\n",
-  "    <field index=\"18\" term=\"http://rs.tdwg.org/dwc/terms/vernacularName\"/>\n",
-  "    <field index=\"19\" term=\"http://rs.tdwg.org/dwc/terms/sex\"/>\n",
-  "    <field index=\"20\" term=\"http://rs.tdwg.org/dwc/terms/occurrenceRemarks\"/>\n",
-  "    <field index=\"21\" term=\"http://rs.tdwg.org/dwc/terms/identificationRemarks\"/>\n",
-  "    <field index=\"22\" term=\"http://rs.tdwg.org/dwc/terms/datasetName\"/>\n",
-  "    <field index=\"23\" term=\"http://purl.org/dc/terms/license\"/>\n",
+  "    <field index=\"3\" term=\"http://rs.tdwg.org/dwc/terms/basisOfRecord\"/>\n",
+  "    <field index=\"4\" term=\"http://rs.tdwg.org/dwc/terms/occurrenceStatus\"/>\n",
+  "    <field index=\"5\" term=\"http://rs.tdwg.org/dwc/terms/individualCount\"/>\n",
+  "    <field index=\"6\" term=\"http://rs.tdwg.org/dwc/terms/organismQuantity\"/>\n",
+  "    <field index=\"7\" term=\"http://rs.tdwg.org/dwc/terms/organismQuantityType\"/>\n",
+  "    <field index=\"8\" term=\"http://rs.tdwg.org/dwc/terms/eventDate\"/>\n",
+  "    <field index=\"9\" term=\"http://rs.tdwg.org/dwc/terms/taxonID\"/>\n",
+  "    <field index=\"10\" term=\"http://rs.tdwg.org/dwc/terms/scientificName\"/>\n",
+  "    <field index=\"11\" term=\"http://rs.tdwg.org/dwc/terms/taxonRank\"/>\n",
+  "    <field index=\"12\" term=\"http://rs.tdwg.org/dwc/terms/kingdom\"/>\n",
+  "    <field index=\"13\" term=\"http://rs.tdwg.org/dwc/terms/phylum\"/>\n",
+  "    <field index=\"14\" term=\"http://rs.tdwg.org/dwc/terms/class\"/>\n",
+  "    <field index=\"15\" term=\"http://rs.tdwg.org/dwc/terms/order\"/>\n",
+  "    <field index=\"16\" term=\"http://rs.tdwg.org/dwc/terms/family\"/>\n",
+  "    <field index=\"17\" term=\"http://rs.tdwg.org/dwc/terms/vernacularName\"/>\n",
+  "    <field index=\"18\" term=\"http://rs.tdwg.org/dwc/terms/sex\"/>\n",
+  "    <field index=\"19\" term=\"http://rs.tdwg.org/dwc/terms/lifeStage\"/>\n",
+  "    <field index=\"20\" term=\"http://rs.tdwg.org/dwc/terms/dynamicProperties\"/>\n",
+  "    <field index=\"21\" term=\"http://rs.tdwg.org/dwc/terms/occurrenceRemarks\"/>\n",
+  "    <field index=\"22\" term=\"http://rs.tdwg.org/dwc/terms/identificationRemarks\"/>\n",
+  "    <field index=\"23\" term=\"http://rs.tdwg.org/dwc/terms/datasetName\"/>\n",
+  "    <field index=\"24\" term=\"http://purl.org/dc/terms/license\"/>\n",
   "  </extension>\n",
   "  <extension encoding=\"UTF-8\" linesTerminatedBy=\"\\n\" fieldsTerminatedBy=\",\" fieldsEnclosedBy=\"&quot;\" ignoreHeaderLines=\"1\" rowType=\"http://rs.iobis.org/obis/terms/ExtendedMeasurementOrFact\">\n",
   "    <files><location>extended_measurement_or_fact.csv</location></files>\n",
@@ -418,13 +421,10 @@ meta_xml <- paste0(
   "    <field index=\"1\" term=\"http://rs.tdwg.org/dwc/terms/occurrenceID\"/>\n",
   "    <field index=\"2\" term=\"http://rs.tdwg.org/dwc/terms/measurementID\"/>\n",
   "    <field index=\"3\" term=\"http://rs.tdwg.org/dwc/terms/measurementType\"/>\n",
-  "    <field index=\"4\" term=\"http://rs.tdwg.org/dwc/terms/measurementTypeID\"/>\n",
-  "    <field index=\"5\" term=\"http://rs.tdwg.org/dwc/terms/measurementValue\"/>\n",
-  "    <field index=\"6\" term=\"http://rs.tdwg.org/dwc/terms/measurementValueID\"/>\n",
-  "    <field index=\"7\" term=\"http://rs.tdwg.org/dwc/terms/measurementUnit\"/>\n",
-  "    <field index=\"8\" term=\"http://rs.tdwg.org/dwc/terms/measurementUnitID\"/>\n",
-  "    <field index=\"9\" term=\"http://rs.tdwg.org/dwc/terms/measurementMethod\"/>\n",
-  "    <field index=\"10\" term=\"http://rs.tdwg.org/dwc/terms/measurementRemarks\"/>\n",
+  "    <field index=\"4\" term=\"http://rs.tdwg.org/dwc/terms/measurementValue\"/>\n",
+  "    <field index=\"5\" term=\"http://rs.tdwg.org/dwc/terms/measurementUnit\"/>\n",
+  "    <field index=\"6\" term=\"http://rs.tdwg.org/dwc/terms/measurementMethod\"/>\n",
+  "    <field index=\"7\" term=\"http://rs.tdwg.org/dwc/terms/measurementRemarks\"/>\n",
   "  </extension>\n",
   "</archive>\n"
 )

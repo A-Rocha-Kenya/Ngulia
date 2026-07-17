@@ -41,7 +41,7 @@ Empty CSV fields represent unavailable, unresolved, or inapplicable values; fiel
 - `data/07_gbif/`: generated Darwin Core and GBIF metadata exports.
 - `config/ring_events/`: source specifications, corrections, species mappings, measurement ranges, and moult rules.
 - `config/website/`: taxonomy mappings used by the website pipeline.
-- `config/publication/`: shared publication metadata, README prose, and GBIF field mappings.
+- `config/publication/`: shared publication metadata and README prose.
 
 All curated datasets are in `data/04_curated/`.
 
