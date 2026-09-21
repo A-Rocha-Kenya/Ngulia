@@ -1,0 +1,115 @@
+name: Report a bird recovery
+description: Submit a ring recovery or control involving Ngulia
+title: "Recovery: [ring number]"
+labels: [recovery]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a recovery. Please enter information exactly as it appears in the notification or source document. Leave a field blank if it is not known.
+
+  - type: input
+    id: species
+    attributes:
+      label: Species
+      description: Common name, scientific name, or both as shown in the record.
+      placeholder: e.g. Marsh Warbler / Acrocephalus palustris
+    validations:
+      required: true
+
+  - type: input
+    id: ring_scheme
+    attributes:
+      label: Ring scheme or ringing centre
+      description: The organisation or country printed on the ring or notification.
+      placeholder: e.g. Kenya, Stockholm, BTO
+    validations:
+      required: true
+
+  - type: input
+    id: ring_number
+    attributes:
+      label: Ring number
+      description: Copy exactly, including letters, spaces, and leading zeroes.
+      placeholder: e.g. 0123456
+    validations:
+      required: true
+
+  - type: dropdown
+    id: direction
+    attributes:
+      label: Where was the bird ringed?
+      options:
+        - Ringed at Ngulia; encountered elsewhere
+        - Ringed elsewhere; encountered at Ngulia
+    validations:
+      required: true
+
+  - type: input
+    id: encounter_date
+    attributes:
+      label: Encounter date
+      description: Date the bird was found, seen, controlled, or recaptured. Use YYYY-MM-DD if known; otherwise enter the date exactly as reported.
+      placeholder: e.g. 2026-03-14, March 2026, or unknown
+
+  - type: input
+    id: report_date
+    attributes:
+      label: Report date, if encounter date is unknown
+      description: Date the recovery notification or letter was issued.
+      placeholder: e.g. 2026-04-02
+
+  - type: input
+    id: locality
+    attributes:
+      label: Location outside Ngulia
+      description: Locality, town, site, or best available place name.
+    validations:
+      required: true
+
+  - type: input
+    id: country
+    attributes:
+      label: Country outside Ngulia
+    validations:
+      required: true
+
+  - type: input
+    id: coordinates
+    attributes:
+      label: Coordinates, if available
+      description: Latitude and longitude in decimal degrees, if supplied by the source.
+      placeholder: e.g. -1.2864, 36.8172
+
+  - type: dropdown
+    id: condition
+    attributes:
+      label: Bird's condition at encounter
+      options:
+        - Alive
+        - Dead
+        - Unknown
+    validations:
+      required: true
+
+  - type: textarea
+    id: circumstances
+    attributes:
+      label: Circumstances, if reported
+      description: For example, controlled, found dead, hit a building, caught by cat. Please use the source wording.
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Evidence or source
+      description: Attach the notification, photo, or PDF below; paste a link; or paste the relevant text.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have copied the ring number and dates from the original source where possible.
+          required: true
