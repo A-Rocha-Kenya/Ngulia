@@ -114,5 +114,5 @@ body:
   - type: textarea
     id: source
     attributes:
-      label: Evidence or source
-      description: Attach the notification, photo, or PDF below; paste a link; or paste the relevant text.
+      label: Additional information, source text, or evidence (optional)
+      description: Paste the full recovery notification or any other useful details, including biometrics, age, sex, measurements, or notes. You may also attach a notification, photo, or PDF, or paste a link.
