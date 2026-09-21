@@ -82,6 +82,19 @@ body:
       placeholder: e.g. -1.2864, 36.8172
 
   - type: dropdown
+    id: encounter_method
+    attributes:
+      label: How was the bird encountered?
+      options:
+        - Controlled or recaptured by a ringer
+        - Found or observed alive
+        - Found dead
+        - Caught by a person
+        - Other or unknown
+    validations:
+      required: true
+
+  - type: dropdown
     id: condition
     attributes:
       label: Bird's condition at encounter
@@ -95,21 +108,11 @@ body:
   - type: textarea
     id: circumstances
     attributes:
-      label: Circumstances, if reported
-      description: For example, controlled, found dead, hit a building, caught by cat. Please use the source wording.
+      label: Further circumstances, if reported
+      description: Copy any useful source wording, such as hit a building, caught by cat, or released after control.
 
   - type: textarea
     id: source
     attributes:
       label: Evidence or source
       description: Attach the notification, photo, or PDF below; paste a link; or paste the relevant text.
-    validations:
-      required: true
-
-  - type: checkboxes
-    id: confirmation
-    attributes:
-      label: Confirmation
-      options:
-        - label: I have copied the ring number and dates from the original source where possible.
-          required: true
