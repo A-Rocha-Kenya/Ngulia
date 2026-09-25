@@ -1,6 +1,6 @@
 # Daily capture model: review and proposed approach
 
-Reviewed 19–21 September 2026 against the source documents, rebuilt daily pipeline, saved model tables, curated daily coverage and `config/daily_covariates/operations_history.csv`. The operational sensitivity was revised to separate historical configuration from daily deployment.
+**Dated analysis review (19–21 September 2026).** This records the reasoning and results available at that review, including the revised distinction between historical configuration and daily deployment. It is not a step in the dataset build or the current source for model results. Current scripts and reports are maintained in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis); reusable data definitions are in the [data README](../../data/README.md).
 
 ## Recommendation
 

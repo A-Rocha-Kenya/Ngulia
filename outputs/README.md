@@ -2,19 +2,34 @@
 
 `exploration/` contains descriptive dataset tables and figures; `qa/` contains human-facing curation diagnostics. Local presentation outputs may also be stored here. The generated tree is excluded from Git except for this README.
 
-Recreate these results with the exploration and diagnostic scripts described in [`scripts/`](../scripts/README.md). A reviewed figure intended for the repository README is copied to `assets/generated/`.
+Recreate these results with the exploration and diagnostic scripts described in [`scripts/`](../scripts/README.md). A reviewed figure intended for the repository README is copied to `assets/generated/`. Generated files are local and may be absent from a fresh Git clone.
+
+## Review order
+
+After rebuilding the dataset, inspect source import and count reconciliation first, then daily evidence and model diagnostics. The most useful starting points are:
+
+| Stage | Review file | Question |
+| --- | --- | --- |
+| Ring-event import | `data/03_intermediate/ring_events/qa/source_file_audit.csv` and `ring_events_issues.csv` | Which sheets or rows were excluded, corrected, or left unresolved? |
+| Count selection | `data/03_intermediate/daily_counts/qa/daily_count_source_comparison_by_day.csv` | Where do DJP and ring-event daily totals disagree? |
+| Daily evidence | `qa/daily_covariate_reconciliation/source_decisions.csv` and `qa/daily_effort/tables/effort_evidence_conflicts.csv` | Which observations were reconciled, and where does operation evidence conflict? |
+| Mist calibration | `qa/mist_model/mist_model_report.html` and its validation tables | How well does the ERA5-based model reproduce observed mist states? |
+| Dataset overview | `exploration/dataset_overview/tables/` and `figures/` | Are season, species, and date patterns plausible before export? |
+
+Use the source paths and row locators in the audits to review a decision. Change the relevant [`config/`](../config/README.md) file and rebuild its downstream tables; do not edit generated audit files.
 
 ## Data quality and validation
 
 ### Ring-event QA
 
-`01_build_ring_events.R` runs QA while cleaning the source workbooks and writes five complementary outputs to `data/03_intermediate/ring_events/qa/`:
+`01_build_ring_events.R` runs QA while cleaning the source workbooks and writes six complementary outputs to `data/03_intermediate/ring_events/qa/`:
 
 - `ring_events_issues.csv`: machine-readable issues with the source file, sheet, row, affected value, explanation, and action taken.
 - `ring_events_issues.md`: the same issues grouped by type for review, including the original spreadsheet-row context.
 - `source_file_audit.csv`: one summary row per source sheet, including imported and exported rows, missing dates/times, ringer lookup coverage, same-day merges, invalid fields, and moult decoding results.
 - `ringer_lookup_audit.csv`: every distinct nonblank source ringer value, its resolved full name, confidence and evidence basis, with total and exportable-row counts.
 - `ringer_lookup_unmatched.csv`: every distinct nonblank ringer value that did not resolve, grouped by source file and sheet with total and exportable-row counts. This is the review queue for extending `ringer_lookup.csv`.
+- `ring_history_audit.csv`: repeated ring numbers, assignment decisions, and source evidence used to distinguish retraps from ring reuse.
 
 The `action` column in the issue log records what the pipeline did:
 
@@ -45,3 +60,7 @@ Checks and consequences are:
 The separate `assess_ring_event_date_modes.R` diagnostic compares alternative source-date interpretations with DJP daily counts. It supports review of `raw_date_is_ringing_date` settings but does not change curated data automatically.
 
 Dataset exploration scripts write descriptive outputs under `outputs/exploration/`. QA scripts write human-facing diagnostics to `outputs/qa/`; machine-readable curation audits remain beside their staging data in `data/03_intermediate/`.
+
+## Other QA products
+
+The daily-count comparison also writes an overlap-difference matrix under `data/03_intermediate/daily_counts/qa/`. Coverage, team-size, net-site, playback, and covariate-availability summaries are under `qa/` by topic. `qa/daily_coverage/figures/season_matrices/` shows where source metadata and rings occur in each season. These are descriptive checks; they do not add another curated data layer.

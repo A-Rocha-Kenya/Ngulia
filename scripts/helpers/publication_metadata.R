@@ -15,6 +15,7 @@ publication_dataset_documentation <- function(path, audience = c("github", "zeno
       documentation,
       stringr::regex("<!-- github-only:start -->.*?<!-- github-only:end -->\\s*", dotall = TRUE)
     )
+    documentation <- publication_strip_local_links(documentation)
   } else {
     documentation <- stringr::str_remove_all(
       documentation,
@@ -23,6 +24,10 @@ publication_dataset_documentation <- function(path, audience = c("github", "zeno
   }
 
   stringr::str_trim(documentation)
+}
+
+publication_strip_local_links <- function(text) {
+  stringr::str_replace_all(text, "\\[([^]]+)\\]\\((?!https?://|mailto:|#)[^)]+\\)", "\\1")
 }
 
 xml_escape <- function(x) {

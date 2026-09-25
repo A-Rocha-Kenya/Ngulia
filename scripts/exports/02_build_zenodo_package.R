@@ -34,7 +34,8 @@ dataset_documentation <- publication_dataset_documentation(
   audience = "zenodo"
 )
 data_limitations <- read_publication_text(metadata$documents$data_limitations) |>
-  stringr::str_remove("^# [^\n]+\n+")
+  stringr::str_remove("^# [^\n]+\n+") |>
+  publication_strip_local_links()
 
 creator_lines <- purrr::map_chr(metadata$authors, \(author) {
   affiliation <- if (!is.null(author$affiliation) && nzchar(author$affiliation)) {

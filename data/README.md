@@ -11,6 +11,27 @@ The local pipeline runs from source material to four curated CSV tables. Raw, re
 | `04_curated/` | Canonical `ring_events.csv`, `daily_counts.csv`, `daily_coverage.csv`, and `recoveries.csv`. |
 
 The [scripts README](../scripts/README.md) gives the build order and processing workflow. The [outputs README](../outputs/README.md) explains QA results. Interpretation limits are in [data limitations](../docs/data_limitations.md); publication status is in the [exports README](../exports/README.md).
+
+## Local sources and staging files
+
+The Git repository does not contain the source archive or generated CSVs. Keep the original inputs under the paths below, without editing them in place. `02_reference/` also holds publications, reports, photographs, and range material that support review or website work; those collections are not all required to build the four curated tables.
+
+| Path | Role |
+| --- | --- |
+| `01_raw/ring_events/` | Annual ringing workbooks selected by `config/ring_events/file_specs.csv`. |
+| `01_raw/daily_counts/djp_daily_and_annual_summaries_1969_2012.xlsx` | DJP species-day summaries and daily metadata. |
+| `01_raw/weather/era5_hourly_single_levels_timeseries/` | Cached ERA5 hourly CSV or ZIP; the weather script requests the required period if its cache is absent. |
+| `02_reference/taxonomy/ebird_clements_2025_integrated_checklist.csv` | Optional name fallback when building daily counts. |
+| `02_reference/publications/references.bib` | Bibliography used to prepare Zenodo and GBIF metadata. |
+| `03_intermediate/daily_counts/` | Extracted DJP counts, metadata, and source-comparison audits. |
+| `03_intermediate/weather/era5_daily_weather.csv` | ERA5 weather summarized for each date. |
+| `03_intermediate/daily_context/daily_context.csv` | Joined daily observations and reviewed operations evidence before mist modeling. |
+| `03_intermediate/mist_model/` | Fitted mist model, validation, and per-day state probabilities. |
+| `03_intermediate/ring_events/qa/` | Source-row issues, file audits, and review queues from ring-event import. |
+| `03_intermediate/recoveries/recoveries_audit.md` | One-off consolidation and validation record for the manually curated recoveries. |
+| `04_curated/recoveries.csv` | Manually curated input to the recovery-classification script; preserve it when rebuilding. |
+
+`03_intermediate/geolocator_paths/` and some external reference collections support optional website or exploration exports. They are not inputs to the four curated tables.
 <!-- github-only:end -->
 
 ## Dataset files
@@ -33,7 +54,7 @@ Empty CSV fields represent unavailable, unresolved, or inapplicable values; fiel
 - `season` is the year in which the October-January ringing season starts. Dates from June through December use their calendar year; January-May use the previous year. This June 1 administrative boundary keeps the whole ringing season under one label even if its October start shifts slightly between years.
 - `fat_ngulia` is the original Ngulia 0-4 fat score, based on the appearance of the furcular pit. `fat_kaiser` is the Kaiser 0-8 score, based on both the furcular pit and abdomen. The scales are retained separately and are not converted or assumed to be numerically equivalent.
 - `daily_counts.csv` contains positive counts only. Missing species rows can be reconstructed as zero only for a documented date; a missing date is not automatically a zero-count day.
-- `daily_coverage.csv` is a calendar scaffold, not evidence that ringing occurred. `ringing_happened` identifies dates with birds in the selected count source. Its default window starts on October 20 and extends beyond January 12 when source data do.
+- `daily_coverage.csv` is a calendar scaffold, not evidence that ringing occurred. `ringing_happened` identifies dates with a positive selected count after targeted swallow and martin catches are excluded. Its default window starts on October 20 and extends beyond January 12 when source data do.
 
 <!-- github-only:start -->
 Detailed interpretation limits and analysis assumptions are in [data limitations](../docs/data_limitations.md).
@@ -100,7 +121,7 @@ This is the one public daily analysis table. It is assembled from source-specifi
 | `swallow_birds_ringed`                                                            | integer count                | Daily swallow and martin catch retained for audit but excluded from the total-catch model because it comes from a separate targeted process.                                                                                                                                                                              |
 | `total_birds_ringed`                                                              | integer count                | `all_birds_ringed - swallow_birds_ringed`, or a source-recorded zero from the DJP workbook daily-total cell. Blank daily-total cells remain empty.                                                                                                                                                                        |
 | `ringing_happened`                                                                | boolean                      | `TRUE` when the non-swallow `total_birds_ringed > 0`; this is not a complete effort or documented-coverage indicator.                                                                                                                                                                                                     |
-| `daily_count_status`, `daily_count_source`                                        | controlled text and text     | Distinguishes `positive_count_recorded`, `zero_in_daily_summary`, and `missing`, with the source of a positive or zero count.                                                                                                                                                                                             |
+| `daily_count_status`, `daily_count_source`                                        | controlled text and text     | Distinguishes `positive_count_recorded`, `zero_after_swallow_exclusion`, `zero_in_daily_summary`, and `missing`. `daily_count_source` names curated daily counts or a source-recorded DJP zero, not the upstream season source.                                                                                                                                                                                             |
 | `djp_reported_total`                                                              | integer count                | Daily total recorded in workbook column `BS`; an explicit numeric zero is retained and a blank cell remains empty.                                                                                                                                                                                                        |
 | `djp_source_row`                                                                  | integer row number           | Row in the source workbook `Sheet1` from which the DJP daily metadata and reported total were extracted.                                                                                                                                                                                                                  |
 | `moon_days_from_new_moon`                                                         | integer days                 | Astronomically derived signed days from new moon; values after full moon are negative.                                                                                                                                                                                                                                    |
@@ -278,11 +299,6 @@ The feather columns must be imported as text because they contain numeric-lookin
 8. Unsupported codes are not guessed. If sequence positions are clear, valid positions are retained and only unsupported positions are missing. If positions cannot be established, the whole affected component remains missing. The original notation and the action taken are retained in `moult_note` and the component-specific QA issue.
 
 The pipeline does not apply an assumed EURING crosswalk: `V`, `X`, and other unsupported letters remain unresolved unless a source-specific meaning is documented later. The implemented mappings are based on the coding notes embedded in the 2006-2007 Ngulia workbook, the primary-moult states described in the 2014 main report, and the documented SAFRING feather-score definitions.
-
-## Other processing decisions
-
-- The unified mist distribution combines observed three-state classifications with ERA5 cloud, humidity, cloud-base, and wind information.
-- Recovery taxonomy and locations are standardized with files in `config/website/`.
 
 ## Data quality
 

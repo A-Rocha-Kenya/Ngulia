@@ -1,6 +1,6 @@
 # Scripts
 
-Run scripts from the repository root so `here::here()` resolves this project. The R workflow is linear and exposes intermediate objects for interactive inspection. Install packages with `Rscript scripts/setup/01_install_dependencies.R`; the full run order is below.
+Run scripts from the repository root so `here::here()` resolves this project. The R workflow is linear and exposes intermediate objects for interactive inspection.
 
 | Folder | Role |
 | --- | --- |
@@ -14,15 +14,17 @@ Run scripts from the repository root so `here::here()` resolves this project. Th
 
 Question-specific modeling is maintained in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis). Generated results are described in [`outputs/`](../outputs/README.md) and [`exports/`](../exports/README.md).
 
-## Software setup
+## Before running
 
-Install the required R packages from the project root:
+The repository does not include raw or curated data. Obtain the source archive from the project custodian and place it under the paths in the [data README](../data/README.md#local-sources-and-staging-files). In particular, the annual ringing workbooks and DJP daily-summary workbook must be present. Preserve the manually curated `data/04_curated/recoveries.csv`: the recovery script updates its classifications in place and cannot recreate it from raw documents.
+
+The DJP metadata extractor also needs Python 3 with only standard-library modules. Install the required R packages from the project root:
 
 ```r
 source("scripts/setup/01_install_dependencies.R")
 ```
 
-The DJP metadata extractor uses Python 3 and only Python standard-library modules.
+The ERA5 weather script reuses a matching cached hourly CSV or ZIP under `data/01_raw/weather/`. Otherwise it requests the needed time series through `ecmwfr`, which requires working Climate Data Store access. The request range is derived from the count and metadata dates.
 
 ## Run the pipeline
 
@@ -69,6 +71,8 @@ source("scripts/exports/03_build_gbif_export.R")
 | `02_build_zenodo_package.R`                           | Builds a worksheet for completing the online Zenodo form.                                                                                                                                                                                                            | `exports/zenodo/zenodo_form.md`                                             |
 | `03_build_gbif_export.R`                              | Builds the sampling-event Darwin Core Archive with daily events, individual captures, and bird-level measurements.                                                                                                                                                   | `exports/gbif/`                                                             |
 
+The export commands prepare local files; they do not publish a Zenodo or GBIF record. Review the [QA outputs](../outputs/README.md) before building them, then follow the [exports README](../exports/README.md) for publication. `scripts/intermediate/03_extract_geolocator_paths.R` is optional website support and is not required for the four curated tables.
+
 ## Processing and standardization
 
 ### How ring events are built
@@ -109,10 +113,15 @@ source("scripts/diagnostics/audit_djp_team_size.R")
 source("scripts/diagnostics/validate_mist_model.R")
 ```
 
-Legacy paper-update figures have been reassigned to their scientific analysis folders.
-
 ## Rebuilding after changes
 
-- Change ringing source specifications or corrections: rebuild ring events, then daily counts, daily coverage, dataset exploration, diagnostics, and exports.
-- Change the preferred source, `ringing_date`, or season definition: rebuild all curated data and downstream products in this repository; record the new dataset version in downstream analyses.
-- Change taxonomy or the manually curated `recoveries.csv`: rebuild website exports.
+| Changed input | Rebuild from |
+| --- | --- |
+| Ringing workbooks, import rules, corrections, or species reference | Ring events, then daily counts and all dependent daily tables, QA, exploration, and exports. |
+| Preferred count source, date convention, or season rule | Daily counts and every downstream table and export; if ring-event dates changed, start with ring events. |
+| Reviewed operations history | Daily context, mist model, daily coverage, related QA, and exports. |
+| Manually curated `recoveries.csv` | Recovery classifications, then Zenodo and website exports. Preserve the source audit. |
+| Website taxonomy crosswalk | Website export and optional geolocator-path extraction. |
+| Publication metadata | Citation, Zenodo package, and GBIF export; curated CSVs need no rebuild. |
+
+Record the dataset version or Git commit and curated-file checksums used by downstream analyses.

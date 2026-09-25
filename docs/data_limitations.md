@@ -1,116 +1,46 @@
-# Ngulia Data Limitations And Assumptions
+# Interpretation limits
 
-This note records the main interpretation limits for analyses based on the curated Ngulia daily counts and daily metadata. It is intentionally practical: it describes what the current pipeline does and what that means for downstream trend analyses.
+The curated tables describe birds recorded at Ngulia and the evidence available for each ringing date. They do not constitute a complete census of migration or a full historical effort log. This note states the limits that apply to any downstream use of the dataset; [data/README.md](../data/README.md) defines the fields.
 
-## Current Data Products
+## Counts and missing dates
 
-The main files used for daily analyses are:
+`daily_counts.csv` contains positive species-day counts. For each season, the pipeline uses DJP daily summaries if that source has rows for the season; otherwise it summarizes curated ring events. It does not choose the better-looking source separately for each day. In `daily_coverage.csv`, `daily_count_source` identifies a positive total from curated `daily_counts.csv` or a source-recorded DJP zero; it does not identify which source was selected upstream for the season. Use the count-source comparison audit for that distinction.
 
-- `data/04_curated/daily_counts.csv`: one row per species, date, and season with a positive count.
-- `data/04_curated/daily_coverage.csv`: one canonical row per calendar day, with daily totals, coverage/effort evidence, moon, DJP metadata, unified mist-state probabilities, reviewed daily modeling fields, and ERA5 weather.
-- `config/daily_covariates/operations_history.csv`: internal source-linked configuration used to review selected daily fields; it is not a curated dataset or a second daily table. Broad historical states remain there as qualitative evidence.
+A species absent from a recorded date can be treated as zero only if that date meets the coverage rule of the analysis. A date absent from `daily_counts.csv` is not a zero-catch day. The DJP daily-total cell provides a separate distinction: a numeric zero is retained as `daily_count_status = zero_in_daily_summary`; a blank remains `missing`. A source-recorded zero does not by itself prove that nets were open.
 
-The season definition is analytical, not calendar-year based. Seasons turn over on October 20. The daily coverage table uses an October 20 to January 12 default window for each season, and extends the season end when source data continue later into January.
+## Calendar and operation evidence
 
-## Daily Count Construction
+`season` labels the year in which an October–January season starts; the assignment uses a June 1 administrative boundary. `daily_coverage.csv` starts each season window on October 20, normally runs through January 12, and extends into later January dates when the sources do. A row in this table means the date is in the calendar scaffold, not that ringing took place.
 
-`daily_counts.csv` is built from two possible sources:
+`ringing_happened` is `TRUE` when the selected count source has a positive **non-swallow/martin** total. Targeted swallow and martin catches remain in `all_birds_ringed` and `swallow_birds_ringed` but are excluded from `total_birds_ringed`. A date with only those targeted catches can therefore have recorded birds while `ringing_happened` is `FALSE`.
 
-- daily summaries extracted from the DJP workbook
-- daily summaries reconstructed from curated `ring_events.csv`
+`effort_status` distinguishes documented operation, operation inferred from positive catch, documented non-operation, conflicts, and unknown dates. The underlying evidence comes from daily metadata and the source-linked [`operations_history.csv`](../config/daily_covariates/operations_history.csv). It is not a measure of net-hours, net length, or processing capacity. Broad historical periods in the operations register are context; they are not filled into every day.
 
-The source choice is made at the season level. If DJP daily-summary rows exist for a season, the DJP source is used for the whole season. Otherwise, the ring-event-derived source is used.
+## Catch is an observation process
 
-Important consequences:
+Recorded catch depends on migration aloft, grounding weather, light attraction, net placement and opening, playback, staffing, and the capacity to process birds. A high catch need not mean high regional abundance; a low catch can reflect weak passage, poor grounding conditions, limited effort, or an unobserved date. Protocol changes across decades, including the introduction and relocation of night and dawn nets, lighting changes, and targeted daytime catching, make raw annual totals difficult to compare as abundance.
 
-- `daily_counts.csv` contains positive species-day counts only.
-- Missing species rows are not explicit zeros.
-- Missing dates in `daily_counts.csv` are not automatically zero-count days.
-- The preferred count source is not chosen day by day, so a season with DJP daily summaries uses DJP consistently even if ring-event rows also exist.
+The selected daily count source may also differ from the individual ring-event table. Do not assume that summing `ring_events.csv` will reproduce every published daily count. The [count-source comparison](../outputs/README.md#other-qa-products) and source provenance fields are available for review.
 
-## Coverage Construction
+## Weather and historical covariates
 
-`daily_coverage.csv` is a calendar and metadata scaffold. Row existence means that a date is inside the analysis season window, not necessarily that ringing happened.
+ERA5 supplies regional weather summaries for 00:00–08:00 East Africa Time; it does not directly observe mist at the lodge. The three `mist_probability_*` fields combine direct classifications where available with an ERA5-calibrated model elsewhere. Probabilities are estimates, not three independent observations.
 
-The current table includes:
+DJP metadata, annual reports, diaries, and the operations register differ in precision. Reviewed daily corrections are applied to canonical fields, while raw `djp_*` fields remain available. Absence of a report entry does not mean normal operation, no playback, or no rain. Details of the evidence hierarchy and unresolved historical conflicts are in [daily covariate evidence](daily_covariates.md).
 
-- `all_birds_ringed`: total from the selected `daily_counts.csv` source
-- `swallow_birds_ringed`: swallow and martin captures from the separate targeted daytime process
-- `total_birds_ringed`: modeled total after subtracting `swallow_birds_ringed`
-- `ringing_happened`: `TRUE` when `total_birds_ringed > 0`
-- DJP metadata fields such as moon, weather, rain, site, tape, and pax
-- derived moon variables
-- unified observed/ERA5 mist-state probabilities and weather summaries
+## Recoveries and source coverage
 
-This table does not establish complete quantitative ringing effort. It recovers documented operating status for some dates, including a small number of operated zero-catch dates, but it does not supply net-hours. In the species-composition pipeline, zero filling is therefore restricted to dates where `ringing_happened == TRUE`.
+`recoveries.csv` is a manually consolidated set of identifiable movements involving Ngulia, not a complete detection history of every ringed bird. Encounter location and date precision vary by source; `primary_source`, `supporting_sources`, and `curation_notes` retain that context. `06_standardize_recovery_encounters.R` updates classifications in the curated file but does not reconstruct it from the original documents.
 
-## Zero-Filling Assumption
+Some raw workbooks, annual reports, and reference material are available only in the local ignored data tree. The prepared Zenodo package includes the curated tables and operations history, not the source archive. Readers should use the exported provenance fields and contact the project for source verification where needed.
 
-For the current composition analyses:
+## Practical use
 
-- reconstruct species zeros only within dates where `ringing_happened == TRUE`
-- treat a missing species row on such a date as a zero for that species
-- do not treat calendar rows with `ringing_happened == FALSE` as known zero-count ringing days
-- do not fill across undocumented calendar gaps just because dates fall inside the seasonal window
+- State which count source and date-coverage rule an analysis uses.
+- Keep unknown dates distinct from documented zero-catch dates and documented non-operation.
+- Separate targeted swallow and martin catching when the question concerns the main nocturnal capture process.
+- Report the historical period and protocol differences relevant to a comparison.
+- Describe results as catch, composition, or condition unless effort and detection are independently addressed.
+- Preserve source and curation uncertainty when interpreting ring events and recoveries.
 
-This is conservative. It avoids turning the seasonal calendar scaffold or a metadata entry into effort data. Zero filling can be broadened only when an independent source establishes that ringing operated on the date.
-
-## Observation Process Limits
-
-Ngulia catch totals are not direct counts of all migrants passing through the region. Catch depends on migration intensity, weather, mist, moon, attraction to lights, net setup, playback, staffing, and processing capacity.
-
-This means:
-
-- high counts can reflect strong passage, strong grounding conditions, high catchability, high effort, or a combination of these
-- low counts can reflect weak passage, poor grounding conditions, low effort, or missing coverage
-- large fall events can dominate annual totals
-- annual totals are difficult to interpret as absolute abundance without stronger effort correction
-
-The current annual model is therefore labelled an adjusted positive-catch intensity index. It standardizes positive-catch dates for timing, moon, and ERA5-derived weather, but it is not an effort-corrected abundance index. The limited documented zero-catch sample is retained for restricted operating-day sensitivity work, not extrapolated across unknown dates.
-
-## Effort And Protocol Limits
-
-Important effort variables are incomplete or inconsistent over the full time series:
-
-- total net length
-- number of nets open
-- time nets were open
-- temporary closures during heavy catches
-- number of ringers and extractors
-- playback use
-- processing bottlenecks
-
-The local literature also describes protocol changes over time, including early hand collection and dawn netting, introduction of night netting, outdoor night-netting from 1976 onward, changes in dawn operations, larger recent teams, and playback use in some periods.
-
-These changes can affect both total catch and species composition.
-
-The primary species-composition analysis excludes seasons 1969–1976. Catches through 1975 came mainly from southern dawn nets; 1976 introduced intensive night netting but retained mixed dawn-only dates and is treated as a transition season. This removes the clearest early capture-regime break but does not remove later changes in lighting, net location, staffing, or playback.
-
-Swallow and martin catches are excluded from the total-catch model because targeted daytime playback and swallow-net operation form a separate capture process. Their species-day records remain in `daily_counts.csv`, and their daily sum remains in `daily_coverage.csv` for audit and separate analysis.
-
-The DJP PAX field is labelled “Team size — Ringers and others.” Plain numeric values and explicit additions such as `18+4EW` yield exact totals; values such as `18+EW` yield only a minimum-known team size. Team size is not equivalent to net-hours or processing effort.
-
-## Weather, Moon, And Timing
-
-Mist, rain, cloud base, wind, and moon conditions affect whether migrants are grounded and available to catch. Coverage is also structured around suitable moon periods rather than uniform full-season operation. One three-state mist model now retains direct DJP classifications where available and uses ERA5-calibrated probabilities elsewhere; missing-state uncertainty is propagated through the count analysis.
-
-Species differ in seasonal timing. Missing early or late blocks can therefore bias species differently, even when total seasonal coverage looks similar.
-
-## Practical Guardrails
-
-Until better effort reconstruction is available:
-
-- analyse common species separately from rare species
-- fill species zeros only within the analysis-defined covered dates
-- treat dates without ringing as unknown coverage, not known zero catch
-- prefer relative composition or standardized catch over absolute abundance
-- include date within season, weather, moon, and available operation metadata where possible
-- treat protocol changes as real sources of heterogeneity
-
-## Open Questions
-
-- Can reports, diaries, or notebooks recover exact start and end dates for ringing blocks?
-- Can effort variables such as nets, hours, staff, and playback be reconstructed by date or season?
-- Can some no-catch calendar dates be confidently classified as covered days?
-- Which species are common enough for stable trend estimation?
-- Should fragmented or protocol-shifted seasons be excluded from the main trend analysis?
+Better dated records of nets, hours, staff, lighting, and closures would improve future analyses. A proposed collection protocol is in [field protocol planning](reviews/field_protocol.md).

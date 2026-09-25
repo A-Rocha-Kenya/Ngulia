@@ -2,11 +2,35 @@
 
 Research data and reproducible processing workflows for the Ngulia ringing project.
 
-The project website is maintained in a separate repository.
+## Build from local sources
 
-## Authors and contributor roles
+1. Obtain the local source archive and check the inputs listed in [data/README.md](data/README.md#local-sources-and-staging-files). Raw and generated data are not tracked in Git.
+2. Install dependencies and run the ordered scripts in [scripts/README.md](scripts/README.md). Review the [QA outputs](outputs/README.md) and [interpretation limits](docs/data_limitations.md).
+3. Prepare delivery files using [exports/README.md](exports/README.md). The Zenodo and GBIF records are still in preparation.
 
-Roles describe contributions to this curated dataset and are a project-maintained attribution record.
+## Repository map
+
+| Folder | What to find |
+| --- | --- |
+| [data](data/README.md) | Local inputs, four curated tables, field dictionary, and staging products. |
+| [config](config/README.md) | Reviewed source rules, historical evidence, and publication metadata. |
+| [scripts](scripts/README.md) | Build order, processing scripts, and diagnostics. |
+| [outputs](outputs/README.md) | Local QA and descriptive exploration. |
+| [exports](exports/README.md) | Website files and Zenodo/GBIF publication steps. |
+| [assets](assets/README.md) | Reviewed figures shown in this repository. |
+| [docs](docs/README.md) | Evidence, limitations, credits, and future field proposals. |
+
+## Dataset overview
+
+The figure shows recorded daily ringing totals by season. Blank dates are not assumed to be zero-catch days; use the coverage table before interpreting gaps.
+
+![Daily rings by season](assets/generated/daily_rings_by_season.png)
+
+Regenerate it with `scripts/exploration/dataset_overview/01_plot_daily_rings_by_season.R` and copy the reviewed result from `outputs/exploration/dataset_overview/figures/` to `assets/generated/`.
+
+## Dataset creators
+
+Roles are maintained for this curated dataset; [contributors and acknowledgements](docs/contributors.md) records the wider project community.
 
 | Creator | Roles |
 | --- | --- |
@@ -16,37 +40,4 @@ Roles describe contributions to this curated dataset and are a project-maintaine
 | Graeme C. Backhurst | Founding project leadership; Historical data collection; Methodology |
 | David J. Pearson | Founding project leadership; Historical data collection; Methodology |
 
-## Project guide
-
-- [Documentation index](docs/README.md): interpretation, reviews, and planning.
-- [Data README](data/README.md): curated files, field dictionary, and value standardization.
-- [Scripts README](scripts/README.md): run order and processing workflow.
-- [Outputs README](outputs/README.md): QA checks and diagnostic files.
-- [Exports README](exports/README.md): Zenodo and GBIF preparation and record checks.
-- [Data limitations](docs/data_limitations.md): interpretation limits for catch, effort, and historical covariates.
-- [Daily covariate evidence](docs/daily_covariates.md): operations-history structure and evidence rules.
-- [Field protocol planning](docs/planning/field_protocol.md): future measurements and standardisation.
-
-## Dataset overview
-
-The figure shows recorded daily ringing totals by season. Blank dates are not assumed to be zero-catch days; see the coverage table before interpreting gaps.
-
-![Daily rings by season](assets/generated/daily_rings_by_season.png)
-
-Regenerate this figure with `scripts/exploration/dataset_overview/01_plot_daily_rings_by_season.R` and copy the reviewed result from `outputs/exploration/dataset_overview/figures/` to `assets/generated/`.
-
-## Repository layout
-
-Each top-level folder has a README explaining its files and workflow. Supporting references remain in `docs/`.
-
-| Folder | Start here |
-| --- | --- |
-| Data | [data/README.md](data/README.md) |
-| Curation rules | [config/README.md](config/README.md) |
-| Runnable workflow | [scripts/README.md](scripts/README.md) |
-| Generated deliveries | [exports/README.md](exports/README.md) |
-| Exploration and QA | [outputs/README.md](outputs/README.md) |
-| Figures and illustrations | [assets/README.md](assets/README.md) |
-| Detailed references | [docs/README.md](docs/README.md) |
-
-Question-specific research is maintained in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis). The [Ngulia website](https://a-rocha-kenya.github.io/ngulia-website/) is the public project entry point; the [forecast](https://a-rocha-kenya.github.io/ngulia-forcast/) is a separate tool. Zenodo and GBIF publication records are in preparation. Source collections and regenerated products are not tracked in Git.
+Question-specific research is maintained in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis). The [Ngulia website](https://a-rocha-kenya.github.io/ngulia-website/) is the public project entry point; the [forecast](https://a-rocha-kenya.github.io/ngulia-forcast/) is a separate tool.

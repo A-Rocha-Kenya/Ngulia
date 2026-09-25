@@ -1,5 +1,9 @@
 # Ngulia in the future: research direction and protocol standardization
 
+**Status:** proposal for future seasons, not a description of the current data pipeline. The current curated tables and historical evidence are documented in the [data README](../../data/README.md) and [daily covariate evidence](../daily_covariates.md).
+
+For implementation, start with Section 3 (the minimum recurring field record), Section 11 (the daily checklist), and Section 12 (decisions for the field team). The broader research and equipment sections explain why those records matter and what could be added later. Annual-report links and the local bibliography require the untracked `data/02_reference/` archive; they do not resolve on GitHub.
+
 ## Purpose of this note
 
 Ngulia is both a long-term ringing programme and a natural experiment in how nocturnal migrants respond to light, mist, rain, topography and moonlight. Its greatest future value will come from preserving continuity with the historical series while recording the observation process well enough to separate:
@@ -9,7 +13,7 @@ Ngulia is both a long-term ringing programme and a natural experiment in how noc
 3. how many grounded birds are available to catch;
 4. how net configuration and team capacity determine the final catch.
 
-This distinction is essential. The number ringed is not a direct count of the number migrating. It is the end product of migration intensity, attraction and grounding, bird behaviour, habitat, net effort, playback, staffing and processing capacity. The local radar study provides particularly strong evidence: substantial migration continued on clear, mist-free nights when birds were not caught ([Stark et al. 2019](../../data/02_reference/publications/pdfs/Stark_et_al___2019___Temporal_and_spatial_distribution_and_flight_directions_of_migratory_birds_in_Tsavo_West_National_P.pdf)).
+This distinction is essential. The number ringed is not a direct count of the number migrating. It is the end product of migration intensity, attraction and grounding, bird behaviour, habitat, net effort, playback, staffing and processing capacity. The local radar study provides particularly strong evidence: substantial migration continued on clear, mist-free nights when birds were not caught ([Stark et al. 2019](https://www.ajol.info/index.php/scopus/article/view/182729)).
 
 The proposed strategy is therefore:
 
@@ -28,7 +32,7 @@ Main questions:
 - Are observed changes associated with rainfall, wind, mist, moonlight, habitat condition or dates of seasonal coverage?
 - Can Ngulia provide an index of long-distance migrant populations after explicitly modelling effort and attraction conditions?
 
-Ngulia has exceptional temporal depth and very large samples. The historical review already identified long-term compositional changes, including an increased proportion of Marsh Warblers and reductions in several other species ([Pearson et al. 2014](../../data/02_reference/publications/pdfs/149917_394216_1_SM.pdf)). However, unequal dates, moon-centred coverage, changing lamps, net layouts, habitat and team sizes make absolute abundance trends difficult to infer.
+Ngulia has exceptional temporal depth and very large samples. The historical review already identified long-term compositional changes, including an increased proportion of Marsh Warblers and reductions in several other species ([Pearson et al. 2014](https://www.ajol.info/index.php/scopus/article/view/149917)). However, unequal dates, moon-centred coverage, changing lamps, net layouts, habitat and team sizes make absolute abundance trends difficult to infer.
 
 The appropriate initial monitoring outputs are:
 
@@ -50,7 +54,7 @@ Main questions:
 - At what altitudes and in what directions do birds pass Tsavo?
 - Does the date of a new moon determine what part of the migration season is sampled?
 
-Historical coverage was concentrated around new moons, and the date of that window changes among years ([Pearson 2016](../../data/02_reference/publications/pdfs/ajol_file_journals_523_articles_139731_submission_proof_139731_6157_372749_1_10_20160718.pdf)). This can create an apparent year effect when species differ in seasonal timing. The six-month radar deployment showed strong southward passage in boreal autumn, northward passage in March-April, and migration outside mist events ([Stark et al. 2019](../../data/02_reference/publications/pdfs/Stark_et_al___2019___Temporal_and_spatial_distribution_and_flight_directions_of_migratory_birds_in_Tsavo_West_National_P.pdf)).
+Historical coverage was concentrated around new moons, and the date of that window changes among years ([Pearson 2016](https://www.ajol.info/index.php/scopus/article/view/139731)). This can create an apparent year effect when species differ in seasonal timing. The six-month radar deployment showed strong southward passage in boreal autumn, northward passage in March-April, and migration outside mist events ([Stark et al. 2019](https://www.ajol.info/index.php/scopus/article/view/182729)).
 
 The long-term programme should therefore distinguish the **annual operational window** from a smaller **fixed monitoring window** repeated on the same calendar dates whenever feasible. Even a modest continuous automated sensor deployed from October to January would reveal what occurs outside the staffed ringing session.
 
@@ -72,7 +76,7 @@ This is arguably Ngulia's most distinctive and internationally important researc
 - cloud remaining tens of metres above the lights may reveal migrants overhead without grounding them;
 - lamp type, power and orientation have changed over the history of the project.
 
-These observations appear throughout the early series and the synthesis by [Pearson & Backhurst (1976)](../../data/02_reference/publications/pdfs/Pearson_Backhurst___1976___The_Southward_Migration_of_Palaearctic_Birds_Over_Ngulia_Kenya.pdf) and [Pearson et al. (2014)](../../data/02_reference/publications/pdfs/149917_394216_1_SM.pdf). In 2013-2015, for example, three additional halogen lamps totalling 3.5 kW were placed within 70 m of the north side of the lodge, facing north to northeast ([Pearson 2016](../../data/02_reference/publications/pdfs/ajol_file_journals_523_articles_139731_submission_proof_139731_6157_372749_1_10_20160718.pdf)). Lamp history is therefore part of sampling effort, not merely background information.
+These observations appear throughout the early series and the synthesis by [Pearson & Backhurst (1976)](https://doi.org/10.1111/j.1474-919X.1976.tb02012.x) and [Pearson et al. (2014)](https://www.ajol.info/index.php/scopus/article/view/149917). In 2013-2015, for example, three additional halogen lamps totalling 3.5 kW were placed within 70 m of the north side of the lodge, facing north to northeast ([Pearson 2016](https://www.ajol.info/index.php/scopus/article/view/139731)). Lamp history is therefore part of sampling effort, not merely background information.
 
 Modern studies monitor attraction using combinations of weather or dedicated bird radar, thermal imaging, nocturnal flight-call recording and controlled light-on/light-off periods. At New York's Tribute in Light, radar and acoustic monitoring showed aggregation, slower and circular flight, and increased calling while lights were on; these effects disappeared when lights were extinguished ([Van Doren et al. 2017](https://doi.org/10.1073/pnas.1708574114)). Controlled experiments have also reconstructed three-dimensional flight paths near low-rise lighting ([Lao et al. 2021](https://www.usgs.gov/publications/potential-effect-low-rise-downcast-artificial-lights-nocturnally-migrating-land-birds)) and used thermal cameras to compare colour, intensity and continuous versus blinking light under different cloud conditions ([Rebke et al. 2019](https://doi.org/10.1016/j.biocon.2019.02.029)).
 
@@ -89,10 +93,10 @@ Main questions:
 
 This is already a proven strength. Ngulia material helped describe:
 
-- partial autumn wing moult in River Warblers ([Pearson & Backhurst 1983](../../data/02_reference/publications/pdfs/Moult_in_the_river_Warbler_Locustella_fluviatilis.pdf));
-- split wing-moult in Barred Warblers ([Lindström et al. 1993](../../data/02_reference/publications/pdfs/Ibis___October_1993___LINDSTROM___The_moult_of_Barred_Warblers_Sylvia_nisoria_in_Kenya_evidence_for_a_split_wingmoult.pdf));
-- large interspecific differences in fuel loads and changes in mass through the night and day ([Pearson et al. 2014](../../data/02_reference/publications/pdfs/149917_394216_1_SM.pdf));
-- geographic differences in body-mass strategies across the East African flyway ([Yohannes et al. 2009](../../data/02_reference/publications/pdfs/s10336_008_0357_z.pdf)).
+- partial autumn wing moult in River Warblers ([Pearson & Backhurst 1983](https://doi.org/10.1080/03078698.1983.9673810));
+- split wing-moult in Barred Warblers ([Lindström et al. 1993](https://doi.org/10.1111/j.1474-919X.1993.tb02112.x));
+- large interspecific differences in fuel loads and changes in mass through the night and day ([Pearson et al. 2014](https://www.ajol.info/index.php/scopus/article/view/149917));
+- geographic differences in body-mass strategies across the East African flyway ([Yohannes et al. 2009](https://doi.org/10.1007/s10336-008-0357-z)).
 
 This avenue does not require every bird to receive every measurement. A rigorously selected subsample can be more useful than irregular measurements from a larger number.
 
@@ -105,7 +109,7 @@ Main questions:
 - Do populations differ in timing, condition, moult or response to weather?
 - Which stages of the annual cycle are most strongly associated with population change?
 
-Ringing recoveries established connections spanning Eurasian breeding grounds, Middle Eastern passage sites and southern African non-breeding areas. Feathers collected at Ngulia have also identified probable stopover environments and geographic regions using stable isotopes ([Yohannes et al. 2005](../../data/02_reference/publications/pdfs/Journal_of_Avian_Biology___2005___Yohannes___Stable_isotope_analyses_of_feathers_help_identify_autumn_stopover_sites_of.pdf); [Yohannes et al. 2007](https://doi.org/10.1111/j.2007.0908-8857.03927.x); [Procházka et al. 2014](../../data/02_reference/publications/pdfs/173484714X687073.pdf)).
+Ringing recoveries established connections spanning Eurasian breeding grounds, Middle Eastern passage sites and southern African non-breeding areas. Feathers collected at Ngulia have also identified probable stopover environments and geographic regions using stable isotopes ([Yohannes et al. 2005](https://doi.org/10.1111/j.0908-8857.2005.03403.x); [Yohannes et al. 2007](https://doi.org/10.1111/j.2007.0908-8857.03927.x); [Procházka et al. 2014](https://doi.org/10.3161/173484714X687073)).
 
 Modern connectivity studies combine recoveries, recaptures, tracking, stable isotopes and genetics rather than treating them as competing methods. Recent integrated frameworks can join GPS or other tracking, live re-encounters, dead recoveries, capture-mark-recapture and population counts ([Gregory et al. 2025](https://doi.org/10.1111/2041-210X.14489)).
 
@@ -141,7 +145,7 @@ Useful annual training outputs would include:
 
 ### 1.7 Afrotropical migration, disease and broader biodiversity
 
-Ngulia also catches Afrotropical migrants, nightjars, quails and other taxa attracted during the same weather events. Historical work included blood parasites ([Peirce et al. 1977](https://doi.org/10.1111/j.1365-2028.1977.tb00380.x)), and the local literature reviews Afrotropical movements ([Turner & Backhurst 2020](../../data/02_reference/publications/pdfs/ajol_file_journals_523_articles_198326_submission_proof_198326_6157_499015_1_10_20200805.pdf)).
+Ngulia also catches Afrotropical migrants, nightjars, quails and other taxa attracted during the same weather events. Historical work included blood parasites ([Peirce et al. 1977](https://doi.org/10.1111/j.1365-2028.1977.tb00380.x)), and the local literature reviews Afrotropical movements ([Turner & Backhurst 2020](https://www.biodiversitylibrary.org/part/455684)).
 
 This should be an optional module with a defined question, not an ever-expanding list of measurements. Disease sampling in particular needs explicit permits, biosafety, cold-chain and partner laboratory commitments before fieldwork.
 
@@ -266,7 +270,7 @@ These variables identify saturation. Catch per net-metre-hour ceases to represen
 
 ### 3.5 Habitat record
 
-Habitat affects how long grounded birds remain and how they encounter dawn nets. Elephant-driven changes from dense bush to open grassland were already noted as a major alteration to catch conditions ([Pearson 2016](../../data/02_reference/publications/pdfs/ajol_file_journals_523_articles_139731_submission_proof_139731_6157_372749_1_10_20160718.pdf)).
+Habitat affects how long grounded birds remain and how they encounter dawn nets. Elephant-driven changes from dense bush to open grassland were already noted as a major alteration to catch conditions ([Pearson 2016](https://www.ajol.info/index.php/scopus/article/view/139731)).
 
 Minimum annual record:
 
@@ -748,15 +752,15 @@ The first investment should be in measuring the phenomenon Ngulia is famous for:
 
 ## Key local literature reviewed
 
-- [Pearson & Backhurst 1976. *The Southward Migration of Palearctic Birds over Ngulia, Kenya*](../../data/02_reference/publications/pdfs/Pearson_Backhurst___1976___The_Southward_Migration_of_Palaearctic_Birds_Over_Ngulia_Kenya.pdf)
-- [Pearson et al. 2014. *The study and ringing of Palaearctic birds at Ngulia Lodge, 1969-2012: an overview and update*](../../data/02_reference/publications/pdfs/149917_394216_1_SM.pdf)
-- [Pearson 2016. *Ringing and observation of migrants at Ngulia Lodge, 2013-2015*](../../data/02_reference/publications/pdfs/ajol_file_journals_523_articles_139731_submission_proof_139731_6157_372749_1_10_20160718.pdf)
-- [Stark et al. 2019. *Temporal and spatial distribution, and flight directions of migratory birds in Tsavo West: a comparison of radar and ringing data*](../../data/02_reference/publications/pdfs/Stark_et_al___2019___Temporal_and_spatial_distribution_and_flight_directions_of_migratory_birds_in_Tsavo_West_National_P.pdf)
-- [Pearson & Backhurst 1983. *Moult in the River Warbler*](../../data/02_reference/publications/pdfs/Moult_in_the_river_Warbler_Locustella_fluviatilis.pdf)
-- [Lindström et al. 1993. *The moult of Barred Warblers in Kenya*](../../data/02_reference/publications/pdfs/Ibis___October_1993___LINDSTROM___The_moult_of_Barred_Warblers_Sylvia_nisoria_in_Kenya_evidence_for_a_split_wingmoult.pdf)
-- [Yohannes et al. 2005. *Stable isotope analyses of feathers help identify autumn stopover sites*](../../data/02_reference/publications/pdfs/Journal_of_Avian_Biology___2005___Yohannes___Stable_isotope_analyses_of_feathers_help_identify_autumn_stopover_sites_of.pdf)
-- [Yohannes et al. 2009. *Passerine migration strategies and body mass variation across East Africa and adjacent regions*](../../data/02_reference/publications/pdfs/s10336_008_0357_z.pdf)
-- [Procházka et al. 2014. *Moulting and wintering grounds of Marsh Warblers*](../../data/02_reference/publications/pdfs/173484714X687073.pdf)
-- [Turner & Backhurst 2020. *Notes on Afrotropical migrants in East Africa, with special reference to Ngulia*](../../data/02_reference/publications/pdfs/ajol_file_journals_523_articles_198326_submission_proof_198326_6157_499015_1_10_20200805.pdf)
+- [Pearson & Backhurst 1976. *The Southward Migration of Palearctic Birds over Ngulia, Kenya*](https://doi.org/10.1111/j.1474-919X.1976.tb02012.x)
+- [Pearson et al. 2014. *The study and ringing of Palaearctic birds at Ngulia Lodge, 1969-2012: an overview and update*](https://www.ajol.info/index.php/scopus/article/view/149917)
+- [Pearson 2016. *Ringing and observation of migrants at Ngulia Lodge, 2013-2015*](https://www.ajol.info/index.php/scopus/article/view/139731)
+- [Stark et al. 2019. *Temporal and spatial distribution, and flight directions of migratory birds in Tsavo West: a comparison of radar and ringing data*](https://www.ajol.info/index.php/scopus/article/view/182729)
+- [Pearson & Backhurst 1983. *Moult in the River Warbler*](https://doi.org/10.1080/03078698.1983.9673810)
+- [Lindström et al. 1993. *The moult of Barred Warblers in Kenya*](https://doi.org/10.1111/j.1474-919X.1993.tb02112.x)
+- [Yohannes et al. 2005. *Stable isotope analyses of feathers help identify autumn stopover sites*](https://doi.org/10.1111/j.0908-8857.2005.03403.x)
+- [Yohannes et al. 2009. *Passerine migration strategies and body mass variation across East Africa and adjacent regions*](https://doi.org/10.1007/s10336-008-0357-z)
+- [Procházka et al. 2014. *Moulting and wintering grounds of Marsh Warblers*](https://doi.org/10.3161/173484714X687073)
+- [Turner & Backhurst 2020. *Notes on Afrotropical migrants in East Africa, with special reference to Ngulia*](https://www.biodiversitylibrary.org/part/455684)
 - [Ngulia annual reports, 1998-2024](../../data/02_reference/reports/)
 - [Local bibliography](../../data/02_reference/publications/references.bib)
