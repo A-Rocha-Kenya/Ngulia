@@ -35,7 +35,7 @@ Regenerate this figure with `scripts/exploration/dataset_overview/01_plot_daily_
 
 ## Repository layout
 
-Each folder has a short README explaining its role and pointing to the detailed references in `docs/`.
+Each top-level folder has a short README explaining its role and pointing to the detailed references in `docs/`.
 
 | Folder | Start here |
 | --- | --- |

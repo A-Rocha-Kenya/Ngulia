@@ -1,5 +1,5 @@
 # Visual assets
 
-`figures/` holds manually maintained illustrations used to explain the dataset. `generated/` holds reviewed figures copied from reproducible exploratory outputs for use in the GitHub README or documentation.
+`figures/` contains maintained illustrations. `generated/` contains reviewed figures copied from reproducible exploratory outputs for display in this repository. The season matrix is produced by `scripts/exploration/dataset_overview/01_plot_daily_rings_by_season.R`.
 
-The script that creates the season matrix is in [`scripts/exploration/dataset_overview/`](../scripts/exploration/dataset_overview/README.md). Keep generated analysis results under [`outputs/`](../outputs/README.md) until selected for publication here.
+Working results stay under [`outputs/`](../outputs/README.md). Dataset interpretation and figure context belong in [`docs/`](../docs/README.md).

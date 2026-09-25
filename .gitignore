@@ -27,14 +27,10 @@ README.html
 README_files/
 
 # Local data and regenerated products
-data/01_raw/*
-!data/01_raw/README.md
-data/02_reference/*
-!data/02_reference/README.md
-data/03_intermediate/*
-!data/03_intermediate/README.md
-data/04_curated/*
-!data/04_curated/README.md
+data/01_raw/
+data/02_reference/
+data/03_intermediate/
+data/04_curated/
 data/05_derived/
 data/06_zenodo/
 data/07_gbif/

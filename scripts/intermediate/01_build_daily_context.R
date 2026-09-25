@@ -200,7 +200,7 @@ era5_daily_weather <- read_csv(
 # Compute derived tables --------------------------------------------------
 
 excluded_capture_groups <- read_csv(
-  file.path(project_dir, "config", "analysis", "excluded_capture_groups.csv"),
+  file.path(project_dir, "config", "daily_counts", "targeted_capture_groups.csv"),
   show_col_types = FALSE
 )
 

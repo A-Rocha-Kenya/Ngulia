@@ -28,7 +28,7 @@ readme <- glue(
   "![Daily rings by season](assets/generated/daily_rings_by_season.png)\n\n",
   "Regenerate this figure with `scripts/exploration/dataset_overview/01_plot_daily_rings_by_season.R` and copy the reviewed result from `outputs/exploration/dataset_overview/figures/` to `assets/generated/`.\n\n",
   "## Repository layout\n\n",
-  "Each folder has a short README explaining its role and pointing to the detailed references in `docs/`.\n\n",
+  "Each top-level folder has a short README explaining its role and pointing to the detailed references in `docs/`.\n\n",
   "| Folder | Start here |\n| --- | --- |\n",
   "| Data | [data/README.md](data/README.md) |\n",
   "| Curation rules | [config/README.md](config/README.md) |\n",

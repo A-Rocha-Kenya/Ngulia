@@ -1,14 +1,15 @@
 # Scripts
 
-Run R scripts from the repository root so `here::here()` resolves the project. Scripts are linear and expose intermediate objects for interactive work. Install required packages with [`setup/`](setup/README.md), then use the run order in [the dataset guide](../docs/dataset.md).
+Run scripts from the repository root so `here::here()` resolves this project. The R workflow is linear and exposes intermediate objects for interactive inspection. Install packages with `Rscript scripts/setup/01_install_dependencies.R`; the full run order is in the [dataset guide](../docs/dataset.md).
 
 | Folder | Role |
 | --- | --- |
-| [`curated/`](curated/README.md) | Build canonical CSVs from source material. |
-| [`intermediate/`](intermediate/README.md) | Assemble daily context, model mist, and stage geolocator paths. |
-| [`diagnostics/`](diagnostics/README.md) | Inspect source reconciliation and data quality. |
-| [`exploration/`](exploration/README.md) | Describe the dataset without fitting question-specific models. |
-| [`exports/`](exports/README.md) | Build citation, website, Zenodo, and GBIF deliveries. |
-| [`helpers/`](helpers/README.md) | Shared code sourced by the runnable scripts. |
+| `curated/` | Build the canonical CSV tables from source material. |
+| `intermediate/` | Assemble daily context, model mist, and stage geolocator paths. |
+| `diagnostics/` | Inspect source reconciliation and data quality without altering curated tables. |
+| `exploration/` | Describe the dataset without fitting question-specific models. |
+| `exports/` | Build citation, website, Zenodo, and GBIF deliveries. |
+| `helpers/` | Shared code sourced by runnable scripts. |
+| `setup/` | Install declared R dependencies. |
 
-Question-specific modeling is maintained in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis).
+Question-specific modeling is maintained in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis). Generated results are described in [`outputs/`](../outputs/README.md) and [`exports/`](../exports/README.md).

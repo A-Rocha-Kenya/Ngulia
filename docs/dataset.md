@@ -15,7 +15,7 @@ Empty CSV fields represent unavailable, unresolved, or inapplicable values; fiel
 
 ## Repository navigation
 
-Start with the folder READMEs for [data](../data/README.md), [configuration](../config/README.md), [scripts](../scripts/README.md), [generated exports](../exports/README.md), [local outputs](../outputs/README.md), and [assets](../assets/README.md). The [documentation index](README.md) links the longer method, limitation, and publication references.
+Start with the top-level folder READMEs for [data](../data/README.md), [configuration](../config/README.md), [scripts](../scripts/README.md), [generated exports](../exports/README.md), [local outputs](../outputs/README.md), and [assets](../assets/README.md). The [documentation index](README.md) links the longer method, limitation, and publication references.
 
 Data and regenerated products are not tracked in Git. The curated tables are prepared for Zenodo and the ringing-event subset for GBIF; current record status is in the [publication guide](publication.md).
 

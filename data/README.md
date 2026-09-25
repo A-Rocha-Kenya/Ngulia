@@ -1,12 +1,12 @@
 # Data
 
-The data pipeline runs from source material to four curated CSV tables. Detailed field definitions, source choices, and interpretation limits are in [the dataset guide](../docs/dataset.md).
+The local data pipeline runs from source material to four curated CSV tables:
 
 | Folder | Role |
 | --- | --- |
-| [`01_raw/`](01_raw/README.md) | Original source files; do not edit in place. |
-| [`02_reference/`](02_reference/README.md) | Taxonomy, publications, ranges, and other supporting material. |
-| [`03_intermediate/`](03_intermediate/README.md) | Regenerable staging tables and curation audits. |
-| [`04_curated/`](04_curated/README.md) | Canonical analysis-ready tables and source for publication exports. |
+| `01_raw/` | Original workbooks, count sources, weather archives, and external inputs; do not edit in place. |
+| `02_reference/` | Taxonomy, publications, reports, ranges, and supporting material. |
+| `03_intermediate/` | Regenerable staging tables and machine-readable curation audits. |
+| `04_curated/` | Canonical `ring_events.csv`, `daily_counts.csv`, `daily_coverage.csv`, and `recoveries.csv`. |
 
-Data files are local and excluded from Git. See [publication status](../docs/publication.md) for the Zenodo and GBIF records.
+The data files are local and excluded from Git. Field definitions, processing decisions, and limitations are in the [dataset guide](../docs/dataset.md); publication status is in [the publication guide](../docs/publication.md).
