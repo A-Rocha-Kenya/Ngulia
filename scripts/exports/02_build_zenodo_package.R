@@ -1,4 +1,5 @@
 library(cli)
+library(digest)
 library(glue)
 library(purrr)
 library(stringr)
@@ -143,4 +144,18 @@ unlink(list.files(output_dir, full.names = TRUE, all.files = TRUE, no.. = TRUE))
 writeLines(form, output_path)
 writeLines(zenodo_readme, readme_path)
 
-cli_alert_success("Wrote the Zenodo form worksheet and dataset README to {output_dir}.")
+upload_dir <- file.path(output_dir, "upload")
+dir.create(upload_dir)
+source_files <- vapply(metadata$files, \(file) {
+  here::here(if (!is.null(file$path) && nzchar(file$path)) file$path else file.path("data", "04_curated", file$name))
+}, character(1))
+file.copy(c(source_files, readme_path), upload_dir)
+upload_files <- file.path(upload_dir, c(vapply(metadata$files, `[[`, character(1), "name"), "README.md"))
+manifest <- data.frame(
+  file = basename(upload_files),
+  bytes = file.info(upload_files)$size,
+  sha256 = vapply(upload_files, digest::digest, character(1), algo = "sha256", file = TRUE)
+)
+write.csv(manifest, file.path(output_dir, "upload_manifest.csv"), row.names = FALSE)
+
+cli_alert_success("Wrote six Zenodo upload files, their checksums, and the form worksheet to {output_dir}.")

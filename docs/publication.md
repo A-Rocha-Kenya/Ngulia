@@ -4,7 +4,7 @@ The public [Ngulia website](https://a-rocha-kenya.github.io/ngulia-website/) is 
 
 ## Current status
 
-- **Zenodo:** The six-file upload and form worksheet can be generated, but no resolving concept DOI is recorded yet. The former `10.5281/zenodo.21395879` value did not resolve when checked on 2026-09-25, so it has been removed from publication metadata.
+- **Zenodo:** The six files under `exports/zenodo/upload/`, their SHA-256 checksums in `exports/zenodo/upload_manifest.csv`, and a form worksheet can be generated, but no resolving concept DOI is recorded yet. The former `10.5281/zenodo.21395879` value did not resolve when checked on 2026-09-25, so it has been removed from publication metadata.
 - **GBIF:** The Darwin Core Archive can be generated locally. No Ngulia dataset was returned for the configured A Rocha Kenya publisher in the GBIF API check on 2026-09-25. GBIF registration and ingestion remain pending.
 
 ## Before creating records
@@ -12,7 +12,7 @@ The public [Ngulia website](https://a-rocha-kenya.github.io/ngulia-website/) is 
 1. Rebuild the four curated tables from the current scripts and review the QA outputs, particularly the ring-event corrections, coverage evidence, and recoveries.
 2. Run `scripts/exploration/dataset_overview/` and check the descriptive summaries and figures.
 3. Run `Rscript scripts/exports/00_build_citation.R`, `Rscript scripts/exports/02_build_zenodo_package.R`, and `Rscript scripts/exports/03_build_gbif_export.R`.
-4. Review `exports/zenodo/zenodo_form.md`, the six listed upload files, and `exports/gbif/ngulia_gbif_dwca.zip`. Confirm licenses, attribution, geographic coordinates, record counts, and interpretation limits.
+4. Review `exports/zenodo/zenodo_form.md`, `exports/zenodo/upload/`, its checksum manifest, and `exports/gbif/ngulia_gbif_dwca.zip`. Confirm licenses, attribution, geographic coordinates, record counts, and interpretation limits.
 
 ## Publication order
 
