@@ -7,7 +7,8 @@ This note records the main interpretation limits for analyses based on the curat
 The main files used for daily analyses are:
 
 - `data/04_curated/daily_counts.csv`: one row per species, date, and season with a positive count.
-- `data/04_curated/daily_coverage.csv`: one row per calendar day in each season window, with daily totals, moon variables, DJP metadata fields, and ERA5 weather.
+- `data/04_curated/daily_coverage.csv`: one canonical row per calendar day, with daily totals, coverage/effort evidence, moon, DJP metadata, unified mist-state probabilities, reviewed daily modeling fields, and ERA5 weather.
+- `config/daily_covariates/operations_history.csv`: internal source-linked configuration used to review selected daily fields; it is not a curated dataset or a second daily table. Broad historical states remain there as qualitative evidence.
 
 The season definition is analytical, not calendar-year based. Seasons turn over on October 20. The daily coverage table uses an October 20 to January 12 default window for each season, and extends the season end when source data continue later into January.
 
@@ -33,14 +34,15 @@ Important consequences:
 
 The current table includes:
 
-- `total_birds_ringed`: total from the selected `daily_counts.csv` source
+- `all_birds_ringed`: total from the selected `daily_counts.csv` source
+- `swallow_birds_ringed`: swallow and martin captures from the separate targeted daytime process
+- `total_birds_ringed`: modeled total after subtracting `swallow_birds_ringed`
 - `ringing_happened`: `TRUE` when `total_birds_ringed > 0`
-- `djp_total_birds_ringed`: total from the staged DJP daily counts
 - DJP metadata fields such as moon, weather, rain, site, tape, and pax
 - derived moon variables
-- ERA5 weather summaries and mist score
+- unified observed/ERA5 mist-state probabilities and weather summaries
 
-The current table does not expose a separate `documented_coverage` flag. In the current composition trend script, zero filling is therefore restricted to dates where `ringing_happened == TRUE`.
+This table does not establish complete quantitative ringing effort. It recovers documented operating status for some dates, including a small number of operated zero-catch dates, but it does not supply net-hours. In the species-composition pipeline, zero filling is therefore restricted to dates where `ringing_happened == TRUE`.
 
 ## Zero-Filling Assumption
 
@@ -51,7 +53,7 @@ For the current composition analyses:
 - do not treat calendar rows with `ringing_happened == FALSE` as known zero-count ringing days
 - do not fill across undocumented calendar gaps just because dates fall inside the seasonal window
 
-This is conservative. It avoids turning the seasonal calendar scaffold into effort data. If a future pipeline adds an explicit coverage flag based on DJP metadata, reports, or notebooks, zero filling can be broadened to those documented-coverage dates.
+This is conservative. It avoids turning the seasonal calendar scaffold or a metadata entry into effort data. Zero filling can be broadened only when an independent source establishes that ringing operated on the date.
 
 ## Observation Process Limits
 
@@ -64,7 +66,7 @@ This means:
 - large fall events can dominate annual totals
 - annual totals are difficult to interpret as absolute abundance without stronger effort correction
 
-Analyses should therefore be framed as trends in standardized Ngulia catch or relative composition of the catch unless stronger assumptions are made explicit.
+The current annual model is therefore labelled an adjusted positive-catch intensity index. It standardizes positive-catch dates for timing, moon, and ERA5-derived weather, but it is not an effort-corrected abundance index. The limited documented zero-catch sample is retained for restricted operating-day sensitivity work, not extrapolated across unknown dates.
 
 ## Effort And Protocol Limits
 
@@ -82,9 +84,15 @@ The local literature also describes protocol changes over time, including early 
 
 These changes can affect both total catch and species composition.
 
+The primary species-composition analysis excludes seasons 1969–1976. Catches through 1975 came mainly from southern dawn nets; 1976 introduced intensive night netting but retained mixed dawn-only dates and is treated as a transition season. This removes the clearest early capture-regime break but does not remove later changes in lighting, net location, staffing, or playback.
+
+Swallow and martin catches are excluded from the total-catch model because targeted daytime playback and swallow-net operation form a separate capture process. Their species-day records remain in `daily_counts.csv`, and their daily sum remains in `daily_coverage.csv` for audit and separate analysis.
+
+The DJP PAX field is labelled “Team size — Ringers and others.” Plain numeric values and explicit additions such as `18+4EW` yield exact totals; values such as `18+EW` yield only a minimum-known team size. Team size is not equivalent to net-hours or processing effort.
+
 ## Weather, Moon, And Timing
 
-Mist, rain, cloud base, wind, and moon conditions affect whether migrants are grounded and available to catch. Coverage is also structured around suitable moon periods rather than uniform full-season operation.
+Mist, rain, cloud base, wind, and moon conditions affect whether migrants are grounded and available to catch. Coverage is also structured around suitable moon periods rather than uniform full-season operation. One three-state mist model now retains direct DJP classifications where available and uses ERA5-calibrated probabilities elsewhere; missing-state uncertainty is propagated through the count analysis.
 
 Species differ in seasonal timing. Missing early or late blocks can therefore bias species differently, even when total seasonal coverage looks similar.
 

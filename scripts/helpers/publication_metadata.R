@@ -1,9 +1,9 @@
-read_publication_metadata <- function(path = "config/publication/dataset_metadata.yml") {
+read_publication_metadata <- function(path = here::here("config/publication/dataset_metadata.yml")) {
   yaml::read_yaml(path)
 }
 
 read_publication_text <- function(path) {
-  paste(readLines(path, warn = FALSE), collapse = "\n")
+  paste(readLines(here::here(path), warn = FALSE), collapse = "\n")
 }
 
 publication_dataset_documentation <- function(path, audience = c("github", "zenodo")) {

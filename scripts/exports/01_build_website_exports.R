@@ -456,9 +456,9 @@ avibase_taxonomy_lookup <- split(afring_taxonomy, afring_taxonomy$id)
 
 cli_alert_info("Building website dashboard exports")
 
-unlink(file.path(paths$website_derived_dir, c("dashboard.json", "recoveries.json", "migration-probabilities.json", "species-ranges-index.json")), force = TRUE)
-unlink(file.path(paths$website_derived_dir, c("photos", "species-ranges", "publications.json")), recursive = TRUE, force = TRUE)
-ensure_dir(paths$website_derived_dir)
+unlink(file.path(paths$website_export_dir, c("dashboard.json", "recoveries.json", "migration-probabilities.json", "species-ranges-index.json")), force = TRUE)
+unlink(file.path(paths$website_export_dir, c("photos", "species-ranges", "publications.json")), recursive = TRUE, force = TRUE)
+ensure_dir(paths$website_export_dir)
 
 daily_counts <- read_csv(daily_counts_path, show_col_types = FALSE) |>
   rename(date = ringing_date) |>
@@ -611,7 +611,7 @@ recoveries_table <- read_csv(
 
 recoveries_items <- pmap(
   recoveries_table,
-  function(recovery_id, direction, encounter_type, avibase_id, common_name, ring_scheme, ring_number, ringing_date, ringing_date_precision, encounter_date, encounter_date_precision, report_date, other_site, other_region, other_country, other_latitude, other_longitude, coordinate_source, encounter_method, encounter_condition, duration_days, distance_km, curation_status, curation_notes, ...) {
+  function(recovery_id, direction, encounter_type, avibase_id, common_name, ring_scheme, ring_number, ringing_date, ringing_date_precision, encounter_date, encounter_date_precision, report_date, other_site, other_region, other_country, other_latitude, other_longitude, coordinate_source, encounter_method, encounter_condition, mortality_cause_class, duration_days, distance_km, curation_status, curation_notes, ...) {
     species_meta <- species_by_id_lookup[[avibase_id]] %||% list()
     from_ngulia <- direction == "from_ngulia"
 
@@ -633,6 +633,7 @@ recoveries_items <- pmap(
       ringCountry = if (from_ngulia) "Kenya" else other_country,
       method = encounter_method,
       encounterCondition = encounter_condition,
+      mortalityCauseClass = mortality_cause_class,
       recoverDate = encounter_date,
       recoverDatePrecision = encounter_date_precision,
       reportDate = report_date,
@@ -803,10 +804,10 @@ migration_probabilities <- list(
 
 # Write outputs -------------------------------------------------------------
 
-write_json_file(dashboard, file.path(paths$website_derived_dir, "dashboard.json"))
-write_json_file(recoveries, file.path(paths$website_derived_dir, "recoveries.json"))
-write_json_file(species_ranges, file.path(paths$website_derived_dir, "species-ranges-index.json"))
-write_json_file(migration_probabilities, file.path(paths$website_derived_dir, "migration-probabilities.json"), pretty = FALSE)
+write_json_file(dashboard, file.path(paths$website_export_dir, "dashboard.json"))
+write_json_file(recoveries, file.path(paths$website_export_dir, "recoveries.json"))
+write_json_file(species_ranges, file.path(paths$website_export_dir, "species-ranges-index.json"))
+write_json_file(migration_probabilities, file.path(paths$website_export_dir, "migration-probabilities.json"), pretty = FALSE)
 
-cli_alert_success("Website exports written to {.file {paths$website_derived_dir}}")
+cli_alert_success("Website exports written to {.file {paths$website_export_dir}}")
 cli_alert_info("{length(dashboard$speciesExplorer)} species, {recoveries$summary$totalRecoveries} recoveries")

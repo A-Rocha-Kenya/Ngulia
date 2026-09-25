@@ -1,0 +1,552 @@
+source_file,input_type,input_text,ringer_name,mapping_confidence,mapping_basis
+,ringer_code,101,Graeme Backhurst,verified,Ringers 2001-2016 workbook register
+,ringer_code,102,David Pearson,verified,Ringers 2001-2016 workbook register
+,ringer_code,103,Colin Jackson,verified,Ringers 2001-2016 workbook register
+,ringer_code,104,Janette Troop,verified,Ringers 2001-2016 workbook register
+,ringer_code,105,Norbert Roothaert,verified,Ringers 2001-2016 workbook register
+,ringer_code,106,Titus Imboma,verified,Ringers 2001-2016 workbook register
+,ringer_code,107,David Gitau,verified,Ringers 2001-2016 workbook register
+,ringer_code,108,Bob Medland,verified,Ringers 2001-2016 workbook register
+,ringer_code,109,Ian Kerton,verified,Ringers 2001-2016 workbook register
+,ringer_code,110,Barry Williams,verified,Ringers 2001-2016 workbook register
+,ringer_code,111,Malcolm Wilson,verified,Ringers 2001-2016 workbook register
+,ringer_code,112,Andy Sprenger,verified,Ringers 2001-2016 workbook register
+,ringer_code,113,Bennie van der Brink,verified,Ringers 2001-2016 workbook register
+,ringer_code,114,Brian Manton,verified,Ringers 2001-2016 workbook register
+,ringer_code,115,David Murdoch,verified,Ringers 2001-2016 workbook register
+,ringer_code,116,David Richardson,verified,Ringers 2001-2016 workbook register
+,ringer_code,117,Sheila Richardson,verified,Ringers 2001-2016 workbook register
+,ringer_code,118,Itai Shanni,verified,Ringers 2001-2016 workbook register
+,ringer_code,119,Jerry Lewis,verified,Ringers 2001-2016 workbook register
+,ringer_code,120,Mark Collier,verified,Ringers 2001-2016 workbook register
+,ringer_code,121,John Musina,verified,Ringers 2001-2016 workbook register
+,ringer_code,122,Kariuki Ng'ang'a,verified,Ringers 2001-2016 workbook register
+,ringer_code,123,Nicodemus Nalyanya,verified,Ringers 2001-2016 workbook register
+,ringer_code,124,Anna Forbes-Watson,verified,Ringers 2001-2016 workbook register
+,ringer_code,125,Ros Symonds,verified,Ringers 2001-2016 workbook register
+,ringer_code,126,Bernard Amakobe,verified,Ringers 2001-2016 workbook register
+,ringer_code,127,Francois Lemoine,verified,Ringers 2001-2016 workbook register
+,ringer_code,128,Francis Argyle,verified,Ringers 2001-2016 workbook register
+,ringer_code,129,Herman Bernitz,verified,Ringers 2001-2016 workbook register
+,ringer_code,130,Zephne Bernitz,verified,Ringers 2001-2016 workbook register
+,ringer_code,131,John Cranfield,verified,Ringers 2001-2016 workbook register
+,ringer_code,132,Mick Townsend,verified,Ringers 2001-2016 workbook register
+,ringer_code,133,Raimond Barth,verified,Ringers 2001-2016 workbook register
+,ringer_code,134,Ludo Roothaert,verified,Ringers 2001-2016 workbook register
+,ringer_code,135,Marc Hebbelinck,verified,Ringers 2001-2016 workbook register
+,ringer_code,136,Gerhard Nikolaus,verified,Ringers 2001-2016 workbook register
+,ringer_code,137,Elias Gonzalo,verified,Ringers 2001-2016 workbook register
+,ringer_code,138,Rui Miguel Brito,verified,Ringers 2001-2016 workbook register
+,ringer_code,139,Patrik Wildjang,verified,Ringers 2001-2016 workbook register
+,ringer_code,140,Lucy Williams,verified,Ringers 2001-2016 workbook register
+,ringer_code,141,Ray Knock,verified,Ringers 2001-2016 workbook register
+,ringer_code,142,John Hornbuckle,verified,Ringers 2001-2016 workbook register
+,ringer_code,143,Jaroslav Jelinek,verified,Ringers 2001-2016 workbook register
+,ringer_code,144,Lubor Cerva,verified,Ringers 2001-2016 workbook register
+,ringer_code,145,Ludek Hovorka,verified,Ringers 2001-2016 workbook register
+,ringer_code,146,Jan Rosmus,verified,Ringers 2001-2016 workbook register
+,ringer_code,147,Ron Cleveley,verified,Ringers 2001-2016 workbook register
+,ringer_code,148,Amir Balaban,verified,Ringers 2001-2016 workbook register
+,ringer_code,149,Gidon Perlman,verified,Ringers 2001-2016 workbook register
+,ringer_code,150,Shai Agmon,verified,Ringers 2001-2016 workbook register
+,ringer_code,151,Donall Cross,verified,Ringers 2001-2016 workbook register
+,ringer_code,152,Simon Valle,verified,Ringers 2001-2016 workbook register
+,ringer_code,153,Wanyoike Wamiti,verified,Ringers 2001-2016 workbook register
+,ringer_code,154,Graham Grieve,verified,Ringers 2001-2016 workbook register
+,ringer_code,155,Colin de Kok,verified,Ringers 2001-2016 workbook register
+,ringer_code,156,Leif Sandgren,verified,Ringers 2001-2016 workbook register
+,ringer_code,157,Ingemar Ander,verified,Ringers 2001-2016 workbook register
+,ringer_code,158,Helen Leach,verified,Ringers 2001-2016 workbook register
+,ringer_code,159,Andre Raine,verified,Ringers 2001-2016 workbook register
+,ringer_code,160,Stuart Sharp,verified,Ringers 2001-2016 workbook register
+,ringer_code,161,Nick Ward,verified,Ringers 2001-2016 workbook register
+,ringer_code,162,Kester Wilson,verified,Ringers 2001-2016 workbook register
+,ringer_code,163,Mark Warren,verified,Ringers 2001-2016 workbook register
+,ringer_code,164,Martha Mutiso,verified,Ringers 2001-2016 workbook register
+,ringer_code,165,Phillista Malaki,verified,Ringers 2001-2016 workbook register
+,ringer_code,166,Roni Jackson,verified,Ringers 2001-2016 workbook register
+,ringer_code,167,Jonathan Baya,verified,Ringers 2001-2016 workbook register
+,ringer_code,168,Sylvester Karimi,verified,Ringers 2001-2016 workbook register
+,ringer_code,169,Chris Bowden,verified,Ringers 2001-2016 workbook register
+,ringer_code,170,Carlton Parry,verified,Ringers 2001-2016 workbook register
+,ringer_code,171,Chege Kariuki,verified,Ringers 2001-2016 workbook register
+,ringer_code,172,Henry Ndithia,verified,Ringers 2001-2016 workbook register
+,ringer_code,173,Moses Kinuthia,verified,Ringers 2001-2016 workbook register
+,ringer_code,174,Trevor Squire,verified,Ringers 2001-2016 workbook register
+,ringer_code,175,Jenny Willsher,verified,Ringers 2001-2016 workbook register
+,ringer_code,176,John Willsher,verified,Ringers 2001-2016 workbook register
+,ringer_code,177,Mercy Njeri,verified,Ringers 2001-2016 workbook register
+,ringer_code,178,Benno van den Hoek,verified,Ringers 2001-2016 workbook register
+,ringer_code,179,Edwig Vanhassel,verified,Ringers 2001-2016 workbook register
+,ringer_code,180,Walter Roggeman,verified,Ringers 2001-2016 workbook register
+,ringer_code,181,David Turner,verified,Ringers 2001-2016 workbook register
+,ringer_code,182,Jeremy Barker,verified,Ringers 2001-2016 workbook register
+,ringer_code,183,Joseph Mwangi,verified,Ringers 2001-2016 workbook register
+,ringer_code,184,James Ndungu,verified,Ringers 2001-2016 workbook register
+,ringer_code,185,Chris Wade,verified,Ringers 2001-2016 workbook register
+,ringer_code,186,Alain Jacot,verified,Ringers 2001-2016 workbook register
+,ringer_code,187,Jeff Davis,verified,Ringers 2001-2016 workbook register
+,ringer_code,188,Rachel Blakey,verified,Ringers 2001-2016 workbook register
+,ringer_code,189,Clive Minton,verified,Ringers 2001-2016 workbook register
+,ringer_code,190,Anthony Roberts,verified,Ringers 2001-2016 workbook register
+,ringer_code,191,Daphne Watson,verified,Ringers 2001-2016 workbook register
+,ringer_code,192,Yoav Perlman,verified,Ringers 2001-2016 workbook register
+,ringer_code,193,Nadav Israeli,verified,Ringers 2001-2016 workbook register
+,ringer_code,194,Bert Kleijn,verified,Ringers 2001-2016 workbook register
+,ringer_code,195,Erik Ness,verified,Ringers 2001-2016 workbook register
+,ringer_code,196,Toby Collett,verified,Ringers 2001-2016 workbook register
+,ringer_code,197,Keith Collett,verified,Ringers 2001-2016 workbook register
+,ringer_code,198,Mike Gee,verified,Ringers 2001-2016 workbook register
+,ringer_code,199,Richard Seddon,verified,Ringers 2001-2016 workbook register
+,ringer_code,200,David Coxon,verified,Ringers 2001-2016 workbook register
+,ringer_code,201,Peter Holmes,verified,Ringers 2001-2016 workbook register
+,ringer_code,202,Samuel Wamae,verified,Ringers 2001-2016 workbook register
+,ringer_code,203,Martin Smola,verified,Ringers 2001-2016 workbook register
+,ringer_code,204,Phil Jones,verified,Ringers 2001-2016 workbook register
+,ringer_code,205,David Fletcher,verified,Ringers 2001-2016 workbook register
+,ringer_code,206,Maria Dimaki,verified,Ringers 2001-2016 workbook register
+,ringer_code,207,Kerry Leonard,verified,Ringers 2001-2016 workbook register
+,ringer_code,208,Darrell Abenethy,verified,Ringers 2001-2016 workbook register
+,ringer_code,209,Ralf Joose,verified,Ringers 2001-2016 workbook register
+,ringer_code,210,Sergey Yerokhov,verified,Ringers 2001-2016 workbook register
+,ringer_code,211,Edson Mlamba,verified,Ringers 2001-2016 workbook register
+,ringer_code,212,Kevin Gichuki,verified,Ringers 2001-2016 workbook register
+,ringer_code,213,Birgita Hansen,verified,Ringers 2001-2016 workbook register
+,ringer_code,214,Inka Veltheim,verified,Ringers 2001-2016 workbook register
+,ringer_code,215,Geoff Mawson,verified,Ringers 2001-2016 workbook register
+,ringer_code,216,Steve Samworth,verified,Ringers 2001-2016 workbook register
+,ringer_code,217,Mike Swindells,verified,Ringers 2001-2016 workbook register
+,ringer_code,218,Ron Haran,verified,Ringers 2001-2016 workbook register
+,ringer_code,219,Yotam Lenhardt,verified,Ringers 2001-2016 workbook register
+,ringer_code,220,Jonathan Halevi,verified,Ringers 2001-2016 workbook register
+,ringer_code,221,Ora Schwartz,verified,Ringers 2001-2016 workbook register
+,ringer_code,222,Bruria Gal,verified,Ringers 2001-2016 workbook register
+,ringer_code,223,Hendrik Reers,verified,Ringers 2001-2016 workbook register
+,ringer_code,224,Lubormir Karasek,verified,Ringers 2001-2016 workbook register
+,ringer_code,225,Nick Branson,verified,Ringers 2001-2016 workbook register
+,ringer_code,226,Roz Jessop,verified,Ringers 2001-2016 workbook register
+,ringer_code,227,Pru Wright,verified,Ringers 2001-2016 workbook register
+,ringer_code,228,Robyn Atkinson,verified,Ringers 2001-2016 workbook register
+,ringer_code,229,Yitzchak Ben Mocha,verified,Ringers 2001-2016 workbook register
+,ringer_code,230,Martin Cade,verified,Ringers 2001-2016 workbook register
+,ringer_code,231,Helen Demopoulos,verified,Ringers 2001-2016 workbook register
+,ringer_code,232,Hans-Jurgen Eilts,verified,Ringers 2001-2016 workbook register
+,ringer_code,233,Franziska Hillig,verified,Ringers 2001-2016 workbook register
+,ringer_code,234,Nathaniel Mkombolo,verified,Ringers 2001-2016 workbook register
+,ringer_code,235,Julia Springett,verified,Ringers 2001-2016 workbook register
+,ringer_code,236,Peter Wairasho,verified,Ringers 2001-2016 workbook register
+,ringer_code,237,Andrew Kinzer,verified,Ringers 2001-2016 workbook register
+,ringer_code,238,Chris Bridges,verified,Ringers 2001-2016 workbook register
+,ringer_code,239,Kane Brides,verified,Ringers 2001-2016 workbook register
+,ringer_code,240,Richard Charles,verified,Ringers 2001-2016 workbook register
+,ringer_code,241,Julia Ibbotson,verified,Ringers 2001-2016 workbook register
+,ringer_code,242,Peter Kennerley,verified,Ringers 2001-2016 workbook register
+,ringer_code,243,Dominic Chesire,verified,Ringers 2001-2016 workbook register
+,ringer_code,244,John Gitiri,verified,Ringers 2001-2016 workbook register
+,ringer_code,245,Vincent van der Spek,verified,Ringers 2001-2016 workbook register
+,ringer_code,246,Joost Valkenberg,verified,Ringers 2001-2016 workbook register
+,ringer_code,247,Maartin Virrips,verified,Ringers 2001-2016 workbook register
+,ringer_code,248,Silas Ekesa,verified,Ringers 2001-2016 workbook register
+,ringer_code,249,Mike Schaad,verified,Ringers 2001-2016 workbook register
+,ringer_code,250,Hannah Hereward,verified,Ringers 2001-2016 workbook register
+,ringer_code,251,Jaap Gijsbertsen,verified,Ringers 2001-2016 workbook register
+,ringer_code,252,Tabitha Njoki,verified,Ringers 2001-2016 workbook register
+,ringer_code,253,Jan Heckmann,verified,Ringers 2001-2016 workbook register
+,ringer_code,254,Kasper Thorup,verified,Ringers 2001-2016 workbook register
+,ringer_code,255,Michael Kuflik,verified,Ringers 2001-2016 workbook register
+,ringer_code,256,Edwin Njuguna,verified,Ringers 2001-2016 workbook register
+,ringer_code,257,Esther Wangoi,verified,Ringers 2001-2016 workbook register
+,ringer_code,258,Dephense Mghoi,verified,Ringers 2001-2016 workbook register
+,ringer_code,259,Susan Taylor,verified,Ringers 2001-2016 workbook register
+,ringer_code,260,Andrew Mwasi,verified,Ringers 2001-2016 workbook register
+,ringer_code,261,Roz Jessop,verified,Ringers 2001-2016 workbook register
+,ringer_code,262,Misha Markovets,verified,Ringers 2001-2016 workbook register
+,ringer_code,263,Brian Watmough,verified,Ringers 2001-2016 workbook register
+,ringer_code,264,Attila Sandor,verified,Ringers 2001-2016 workbook register
+,ringer_code,265,Gladys Kungu,verified,Ringers 2001-2016 workbook register
+,ringer_code,266,Lex Tervelde,verified,Ringers 2001-2016 workbook register
+,ringer_code,267,Paul Roper,verified,Ringers 2001-2016 workbook register
+,ringer_code,268,Lorraine Wheaton,verified,Ringers 2001-2016 workbook register
+,ringer_code,269,Lennox Kirao,verified,Ringers 2001-2016 workbook register
+,ringer_code,270,Julia Loshchagina,verified,Ringers 2001-2016 workbook register
+,ringer_code,271,Nicole Stoeber,verified,Ringers 2001-2016 workbook register
+,ringer_code,272,Sameer Wamae,verified,Ringers 2001-2016 workbook register
+2012.xls,ringer_initial,PK,Peter Kennerley,high,2012 annual report participant roster; source-specific initials match
+2019.xlsx,ringer_initial,BA,Bernard Amakobe,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,CE,Charlotte England,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,CG,Christine George,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,CJ,Colin Jackson,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,CK,Chege Kariuki,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,CL,Chris Lamsdell,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,DC,Dominic Chesire,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,DG,David Gitau,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,DKL,Denise Lamsdell,medium,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,GW,Grace Waiguchu,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,IK,Ian Kerton,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,JG,John Gitiri,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,JK,Jack Kiiru,medium,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,JW,John Wanyoike,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,KD,Keith Dean,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,KHD,Keith Dean,medium,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,KR,Kelly Rayner,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,LD,Lucy Dadour,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,LK,Lennox Kirao,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,LW,Lorraine Wheaton,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,MAA,Mustafa Adamjee,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,MC,Martin Cade,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,MJM,Jacinta Mureithi,medium,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,MO,Martin Omaya,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,MW,Malcolm Wilson,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,NH,Nick Hart,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,NM,Nathaniel Mkombola,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,PJ,Phil Jones,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,PLO,Phoebe Manyonge,medium,2019 annual report roster; unique listed participant matches first initial and omitted middle initials
+2019.xlsx,ringer_initial,PRO,Paul Roper,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,PSW,Peter Wairasho,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,RC,Richard Charles,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,RJ,Roni Jackson,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,SKK,Sikenykeny Kennedy,high,2019 annual report participant roster; initials matched to listed participant
+2019.xlsx,ringer_initial,SS,Sidney Shema,high,2019 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,AB,Albert Baya,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,AJ,Alain Jacot,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,BA,Bernard Amakobe,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,CAL,Christine Lamana,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,CJ,Colin Jackson,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,CL,Christine Lamana,medium,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,EGN,Edwin Gichohi,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,EM,Esther Mbiti,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,EMM,Edson Mlamba,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,GW,Grace Waiguchu,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,JG,John Gitiri,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,JKN,Kimutai Jackson,medium,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,JWW,John Wanyoike,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,LA,Linda Alila,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,LK,Lennox Kirao,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,MAA,Mustafa Adamjee,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,MNM,Martha Nzisa Mutiso,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,PMW,Paul Mwangi,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,SKK,Sikenykeny Kennedy,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,SS,Sidney Shema,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,TI,Titus Imboma,high,2020 annual report participant roster; initials matched to listed participant
+2020.xlsx,ringer_initial,WW,Washington Wachira,high,2020 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,AB,Alice Boyle,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,AEN,Ann Namaemba,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,AH,Adrian Hinkle,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,AN,Ann Namaemba,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,BA,Bernard Amakobe,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,CJ,Colin Jackson,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,DC,Dominic Chesire,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,EGM,Geraldine Mjomba,medium,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,EGN,Edwin Njuguna,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,EMM,Edson Mlamba,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,EN,Edwin Njuguna,medium,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,FW,Florance Wairimu,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,GN,Gerhard Nikolaus,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,JAO,James Apolloh,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,JC,Colin Jackson,low,"Best guess from annual report participant roster; initials are shared, incomplete, or transposed"
+2021.xlsx,ringer_initial,JG,Jaap Gijsbertsen,medium,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,JM,John Musina,medium,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,LK,Lennox Kirao,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,MJM,Maryann Njambi,medium,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,MN,Maryann Njambi,medium,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,MNM,Martha Nzisa Mutiso,medium,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,MNW,Monicah Njambi,medium,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,MO,Martin Omaya,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,NM,Nathaniel Mkombola,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,SY,Suk Ann Yee,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,TI,Titus Imboma,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,TM,Timothy Mwinami,high,2021 annual report participant roster; initials matched to listed participant
+2021.xlsx,ringer_initial,WAB,Alice Boyle,medium,2021 annual report roster; likely fuller initials for listed participant Alice Boyle
+2022.xlsx,ringer_initial,AH,Adrian Hinkle,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,BA,Bernard Amakobe,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,BW,Barry Williams,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,CE,Charlotte England,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,CJ,Colin Jackson,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,CL,Chris Lamsdell,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,DG,David Gitau,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,DL,Denise Lamsdell,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,DV,Dick Veitch,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,FA,Francis Argyle,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,FW,Florance Wairimu,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,JAO,James Apolloh,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,JK,Jack Kiiru,medium,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,JM,John Musina,medium,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,JMM,Julius Mwambire,low,Best guess from adjacent 2023 participant roster; 2022 report has no roster and initials are shared
+2022.xlsx,ringer_initial,JWW,John Wanyoike,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,KD,Keith Dean,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,KJ,Kai Jackson,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,LR,Lorraine Roper,medium,Exact initials of recurring participant in adjacent report rosters; 2022 report has no roster
+2022.xlsx,ringer_initial,LSL,Lempiris Leteipa,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,MAC,Martin Cade,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,MC,Mark Cutts,medium,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,MW,Malcolm Wilson,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,NM,Nathaniel Mkombola,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,PP,Pranav Peshavaria,low,Best guess from exact initials in adjacent 2024 participant roster; 2022 report has no roster
+2022.xlsx,ringer_initial,PRO,Paul Roper,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,RN,Roland Neumann,medium,Exact initials of recurring participant listed in adjacent annual reports; 2022 report has no roster
+2022.xlsx,ringer_initial,SG,Samuel Guchu,low,Best guess from exact initials in adjacent 2024 participant roster; 2022 report has no roster
+2022.xlsx,ringer_initial,SKK,Sikenykeny Kennedy,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,SW,Sameer Wamae,high,Recurring initials in adjacent annual workbooks matched to annual-report participant rosters
+2022.xlsx,ringer_initial,WM,Wilson Mwakulomba,high,Same initials and full name are documented together in the 2023 workbook and annual report
+2023.xlsx,ringer_initial,AH,Adrian Hinkle,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,AMA,Aloise Maina,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,AR,Anna Radkovic,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,BA,Bernard Amakobe,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,CJ,Colin Jackson,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,CK,Chege Kariuki,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,EH,Eric Heisey,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,EK,Eric Kinoti,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,EMM,Edson Mlamba,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,FA,Faith Achieng,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,JAO,James Apolloh,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,JM,John Maganga,low,"Best guess from annual report participant roster; initials are shared, incomplete, or transposed"
+2023.xlsx,ringer_initial,JPM,Julian Moulton,medium,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,KJ,Kai Jackson,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,LK,Lennox Kirao,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,LS,Linda Sogot,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,MA,Mary-Ann,low,"Best guess from annual report participant roster; initials are shared, incomplete, or transposed"
+2023.xlsx,ringer_initial,MAA,Mustafa Adamjee,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,MAC,Martin Cade,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,MC,Mark Cutts,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,MI,Maxwell Issa,medium,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,MIC,Maxwell Issa,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,MN,Mercy Ndinda,medium,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,MNM,Martha Nzisa Mutiso,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,MWN,Wilson Mwakulomba,medium,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,PDP,Pieter du Plessis,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,TI,Titus Imboma,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,TS,Tim Snieder,high,2023 annual report participant roster; initials matched to listed participant
+2023.xlsx,ringer_initial,WM,Wilson Mwakulomba,high,2023 annual report participant roster; initials matched to listed participant
+,ringer_initial,DP,David Pearson,high,Verified against numeric register and annual report participant roster
+,ringer_initial,KT,Kasper Thorup,high,Verified against numeric register and annual report participant roster
+,ringer_name,Adrian Hinkle,Adrian Hinkle,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Alain Jacot,Alain Jacot,verified,Canonical full-name self-match from verified register
+,ringer_name,Albert Baya,Albert Baya,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Alice Boyle,Alice Boyle,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Aloise Maina,Aloise Maina,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Amir Balaban,Amir Balaban,verified,Canonical full-name self-match from verified register
+,ringer_name,Andre Raine,Andre Raine,verified,Canonical full-name self-match from verified register
+,ringer_name,Andrew Kinzer,Andrew Kinzer,verified,Canonical full-name self-match from verified register
+,ringer_name,Andrew Mwasi,Andrew Mwasi,verified,Canonical full-name self-match from verified register
+,ringer_name,Andy Sprenger,Andy Sprenger,verified,Canonical full-name self-match from verified register
+,ringer_name,Ann Namaemba,Ann Namaemba,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Anna Forbes-Watson,Anna Forbes-Watson,verified,Canonical full-name self-match from verified register
+,ringer_name,Anna Radkovic,Anna Radkovic,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Anthony Roberts,Anthony Roberts,verified,Canonical full-name self-match from verified register
+,ringer_name,Attila Sandor,Attila Sandor,verified,Canonical full-name self-match from verified register
+,ringer_name,Barry Williams,Barry Williams,verified,Canonical full-name self-match from verified register
+,ringer_name,Bennie van der Brink,Bennie van der Brink,verified,Canonical full-name self-match from verified register
+,ringer_name,Benno van den Hoek,Benno van den Hoek,verified,Canonical full-name self-match from verified register
+,ringer_name,Bernard Amakobe,Bernard Amakobe,verified,Canonical full-name self-match from verified register
+,ringer_name,Bert Kleijn,Bert Kleijn,verified,Canonical full-name self-match from verified register
+,ringer_name,Birgita Hansen,Birgita Hansen,verified,Canonical full-name self-match from verified register
+,ringer_name,Bob Medland,Bob Medland,verified,Canonical full-name self-match from verified register
+,ringer_name,Brian Manton,Brian Manton,verified,Canonical full-name self-match from verified register
+,ringer_name,Brian Watmough,Brian Watmough,verified,Canonical full-name self-match from verified register
+,ringer_name,Bruria Gal,Bruria Gal,verified,Canonical full-name self-match from verified register
+,ringer_name,Carlton Parry,Carlton Parry,verified,Canonical full-name self-match from verified register
+,ringer_name,Charlotte England,Charlotte England,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Chege Kariuki,Chege Kariuki,verified,Canonical full-name self-match from verified register
+,ringer_name,Chris Bowden,Chris Bowden,verified,Canonical full-name self-match from verified register
+,ringer_name,Chris Bridges,Chris Bridges,verified,Canonical full-name self-match from verified register
+,ringer_name,Chris Lamsdell,Chris Lamsdell,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Chris Wade,Chris Wade,verified,Canonical full-name self-match from verified register
+,ringer_name,Christine George,Christine George,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Christine Lamana,Christine Lamana,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Clive Minton,Clive Minton,verified,Canonical full-name self-match from verified register
+,ringer_name,Colin Jackson,Colin Jackson,verified,Canonical full-name self-match from verified register
+,ringer_name,Colin de Kok,Colin de Kok,verified,Canonical full-name self-match from verified register
+,ringer_name,Daphne Watson,Daphne Watson,verified,Canonical full-name self-match from verified register
+,ringer_name,Darrell Abenethy,Darrell Abenethy,verified,Canonical full-name self-match from verified register
+,ringer_name,David Coxon,David Coxon,verified,Canonical full-name self-match from verified register
+,ringer_name,David Fletcher,David Fletcher,verified,Canonical full-name self-match from verified register
+,ringer_name,David Gitau,David Gitau,verified,Canonical full-name self-match from verified register
+,ringer_name,David Murdoch,David Murdoch,verified,Canonical full-name self-match from verified register
+,ringer_name,David Pearson,David Pearson,verified,Canonical full-name self-match from verified register
+,ringer_name,David Richardson,David Richardson,verified,Canonical full-name self-match from verified register
+,ringer_name,David Turner,David Turner,verified,Canonical full-name self-match from verified register
+,ringer_name,Denise Lamsdell,Denise Lamsdell,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Dephense Mghoi,Dephense Mghoi,verified,Canonical full-name self-match from verified register
+,ringer_name,Dick Veitch,Dick Veitch,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Dominic Chesire,Dominic Chesire,verified,Canonical full-name self-match from verified register
+,ringer_name,Donall Cross,Donall Cross,verified,Canonical full-name self-match from verified register
+,ringer_name,Edson Mlamba,Edson Mlamba,verified,Canonical full-name self-match from verified register
+,ringer_name,Edwig Vanhassel,Edwig Vanhassel,verified,Canonical full-name self-match from verified register
+,ringer_name,Edwin Gichohi,Edwin Gichohi,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Edwin Njuguna,Edwin Njuguna,verified,Canonical full-name self-match from verified register
+,ringer_name,Elias Gonzalo,Elias Gonzalo,verified,Canonical full-name self-match from verified register
+,ringer_name,Eric Heisey,Eric Heisey,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Eric Kinoti,Eric Kinoti,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Erik Ness,Erik Ness,verified,Canonical full-name self-match from verified register
+,ringer_name,Esther Mbiti,Esther Mbiti,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Esther Wangoi,Esther Wangoi,verified,Canonical full-name self-match from verified register
+,ringer_name,Faith Achieng,Faith Achieng,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Florance Wairimu,Florance Wairimu,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Francis Argyle,Francis Argyle,verified,Canonical full-name self-match from verified register
+,ringer_name,Francois Lemoine,Francois Lemoine,verified,Canonical full-name self-match from verified register
+,ringer_name,Franziska Hillig,Franziska Hillig,verified,Canonical full-name self-match from verified register
+,ringer_name,Geoff Mawson,Geoff Mawson,verified,Canonical full-name self-match from verified register
+,ringer_name,Geraldine Mjomba,Geraldine Mjomba,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Gerhard Nikolaus,Gerhard Nikolaus,verified,Canonical full-name self-match from verified register
+,ringer_name,Gidon Perlman,Gidon Perlman,verified,Canonical full-name self-match from verified register
+,ringer_name,Gladys Kungu,Gladys Kungu,verified,Canonical full-name self-match from verified register
+,ringer_name,Grace Waiguchu,Grace Waiguchu,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Graeme Backhurst,Graeme Backhurst,verified,Canonical full-name self-match from verified register
+,ringer_name,Graham Grieve,Graham Grieve,verified,Canonical full-name self-match from verified register
+,ringer_name,Hannah Hereward,Hannah Hereward,verified,Canonical full-name self-match from verified register
+,ringer_name,Hans-Jurgen Eilts,Hans-Jurgen Eilts,verified,Canonical full-name self-match from verified register
+,ringer_name,Helen Demopoulos,Helen Demopoulos,verified,Canonical full-name self-match from verified register
+,ringer_name,Helen Leach,Helen Leach,verified,Canonical full-name self-match from verified register
+,ringer_name,Hendrik Reers,Hendrik Reers,verified,Canonical full-name self-match from verified register
+,ringer_name,Henry Ndithia,Henry Ndithia,verified,Canonical full-name self-match from verified register
+,ringer_name,Herman Bernitz,Herman Bernitz,verified,Canonical full-name self-match from verified register
+,ringer_name,Ian Kerton,Ian Kerton,verified,Canonical full-name self-match from verified register
+,ringer_name,Ingemar Ander,Ingemar Ander,verified,Canonical full-name self-match from verified register
+,ringer_name,Inka Veltheim,Inka Veltheim,verified,Canonical full-name self-match from verified register
+,ringer_name,Itai Shanni,Itai Shanni,verified,Canonical full-name self-match from verified register
+,ringer_name,Jaap Gijsbertsen,Jaap Gijsbertsen,verified,Canonical full-name self-match from verified register
+,ringer_name,Jacinta Mureithi,Jacinta Mureithi,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Jack Kiiru,Jack Kiiru,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,James Apolloh,James Apolloh,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,James Ndungu,James Ndungu,verified,Canonical full-name self-match from verified register
+,ringer_name,Jan Heckmann,Jan Heckmann,verified,Canonical full-name self-match from verified register
+,ringer_name,Jan Rosmus,Jan Rosmus,verified,Canonical full-name self-match from verified register
+,ringer_name,Janette Troop,Janette Troop,verified,Canonical full-name self-match from verified register
+,ringer_name,Jaroslav Jelinek,Jaroslav Jelinek,verified,Canonical full-name self-match from verified register
+,ringer_name,Jeff Davis,Jeff Davis,verified,Canonical full-name self-match from verified register
+,ringer_name,Jenny Willsher,Jenny Willsher,verified,Canonical full-name self-match from verified register
+,ringer_name,Jeremy Barker,Jeremy Barker,verified,Canonical full-name self-match from verified register
+,ringer_name,Jerry Lewis,Jerry Lewis,verified,Canonical full-name self-match from verified register
+,ringer_name,John Cranfield,John Cranfield,verified,Canonical full-name self-match from verified register
+,ringer_name,John Gitiri,John Gitiri,verified,Canonical full-name self-match from verified register
+,ringer_name,John Hornbuckle,John Hornbuckle,verified,Canonical full-name self-match from verified register
+,ringer_name,John Maganga,John Maganga,low,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,John Musina,John Musina,verified,Canonical full-name self-match from verified register
+,ringer_name,John Wanyoike,John Wanyoike,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,John Willsher,John Willsher,verified,Canonical full-name self-match from verified register
+,ringer_name,Jonathan Baya,Jonathan Baya,verified,Canonical full-name self-match from verified register
+,ringer_name,Jonathan Halevi,Jonathan Halevi,verified,Canonical full-name self-match from verified register
+,ringer_name,Joost Valkenberg,Joost Valkenberg,verified,Canonical full-name self-match from verified register
+,ringer_name,Joseph Mwangi,Joseph Mwangi,verified,Canonical full-name self-match from verified register
+,ringer_name,Julia Ibbotson,Julia Ibbotson,verified,Canonical full-name self-match from verified register
+,ringer_name,Julia Loshchagina,Julia Loshchagina,verified,Canonical full-name self-match from verified register
+,ringer_name,Julia Springett,Julia Springett,verified,Canonical full-name self-match from verified register
+,ringer_name,Julian Moulton,Julian Moulton,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Julius Mwambire,Julius Mwambire,low,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Kai Jackson,Kai Jackson,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Kane Brides,Kane Brides,verified,Canonical full-name self-match from verified register
+,ringer_name,Kariuki Ng'ang'a,Kariuki Ng'ang'a,verified,Canonical full-name self-match from verified register
+,ringer_name,Kasper Thorup,Kasper Thorup,verified,Canonical full-name self-match from verified register
+,ringer_name,Keith Collett,Keith Collett,verified,Canonical full-name self-match from verified register
+,ringer_name,Keith Dean,Keith Dean,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Kelly Rayner,Kelly Rayner,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Kerry Leonard,Kerry Leonard,verified,Canonical full-name self-match from verified register
+,ringer_name,Kester Wilson,Kester Wilson,verified,Canonical full-name self-match from verified register
+,ringer_name,Kevin Gichuki,Kevin Gichuki,verified,Canonical full-name self-match from verified register
+,ringer_name,Kimutai Jackson,Kimutai Jackson,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Leif Sandgren,Leif Sandgren,verified,Canonical full-name self-match from verified register
+,ringer_name,Lempiris Leteipa,Lempiris Leteipa,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Lennox Kirao,Lennox Kirao,verified,Canonical full-name self-match from verified register
+,ringer_name,Lex Tervelde,Lex Tervelde,verified,Canonical full-name self-match from verified register
+,ringer_name,Linda Alila,Linda Alila,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Linda Sogot,Linda Sogot,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Lorraine Roper,Lorraine Roper,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Lorraine Wheaton,Lorraine Wheaton,verified,Canonical full-name self-match from verified register
+,ringer_name,Lubor Cerva,Lubor Cerva,verified,Canonical full-name self-match from verified register
+,ringer_name,Lubormir Karasek,Lubormir Karasek,verified,Canonical full-name self-match from verified register
+,ringer_name,Lucy Dadour,Lucy Dadour,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Lucy Williams,Lucy Williams,verified,Canonical full-name self-match from verified register
+,ringer_name,Ludek Hovorka,Ludek Hovorka,verified,Canonical full-name self-match from verified register
+,ringer_name,Ludo Roothaert,Ludo Roothaert,verified,Canonical full-name self-match from verified register
+,ringer_name,Maartin Virrips,Maartin Virrips,verified,Canonical full-name self-match from verified register
+,ringer_name,Malcolm Wilson,Malcolm Wilson,verified,Canonical full-name self-match from verified register
+,ringer_name,Marc Hebbelinck,Marc Hebbelinck,verified,Canonical full-name self-match from verified register
+,ringer_name,Maria Dimaki,Maria Dimaki,verified,Canonical full-name self-match from verified register
+,ringer_name,Mark Collier,Mark Collier,verified,Canonical full-name self-match from verified register
+,ringer_name,Mark Cutts,Mark Cutts,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Mark Warren,Mark Warren,verified,Canonical full-name self-match from verified register
+,ringer_name,Martha Mutiso,Martha Mutiso,verified,Canonical full-name self-match from verified register
+,ringer_name,Martha Nzisa Mutiso,Martha Nzisa Mutiso,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Martin Cade,Martin Cade,verified,Canonical full-name self-match from verified register
+,ringer_name,Martin Omaya,Martin Omaya,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Martin Smola,Martin Smola,verified,Canonical full-name self-match from verified register
+,ringer_name,Mary-Ann,Mary-Ann,low,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Maryann Njambi,Maryann Njambi,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Maxwell Issa,Maxwell Issa,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Mercy Ndinda,Mercy Ndinda,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Mercy Njeri,Mercy Njeri,verified,Canonical full-name self-match from verified register
+,ringer_name,Michael Kuflik,Michael Kuflik,verified,Canonical full-name self-match from verified register
+,ringer_name,Mick Townsend,Mick Townsend,verified,Canonical full-name self-match from verified register
+,ringer_name,Mike Gee,Mike Gee,verified,Canonical full-name self-match from verified register
+,ringer_name,Mike Schaad,Mike Schaad,verified,Canonical full-name self-match from verified register
+,ringer_name,Mike Swindells,Mike Swindells,verified,Canonical full-name self-match from verified register
+,ringer_name,Misha Markovets,Misha Markovets,verified,Canonical full-name self-match from verified register
+,ringer_name,Monicah Njambi,Monicah Njambi,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Moses Kinuthia,Moses Kinuthia,verified,Canonical full-name self-match from verified register
+,ringer_name,Mustafa Adamjee,Mustafa Adamjee,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Nadav Israeli,Nadav Israeli,verified,Canonical full-name self-match from verified register
+,ringer_name,Nathaniel Mkombola,Nathaniel Mkombola,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Nathaniel Mkombolo,Nathaniel Mkombolo,verified,Canonical full-name self-match from verified register
+,ringer_name,Nick Branson,Nick Branson,verified,Canonical full-name self-match from verified register
+,ringer_name,Nick Hart,Nick Hart,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Nick Ward,Nick Ward,verified,Canonical full-name self-match from verified register
+,ringer_name,Nicodemus Nalyanya,Nicodemus Nalyanya,verified,Canonical full-name self-match from verified register
+,ringer_name,Nicole Stoeber,Nicole Stoeber,verified,Canonical full-name self-match from verified register
+,ringer_name,Norbert Roothaert,Norbert Roothaert,verified,Canonical full-name self-match from verified register
+,ringer_name,Ora Schwartz,Ora Schwartz,verified,Canonical full-name self-match from verified register
+,ringer_name,Patrik Wildjang,Patrik Wildjang,verified,Canonical full-name self-match from verified register
+,ringer_name,Paul Mwangi,Paul Mwangi,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Paul Roper,Paul Roper,verified,Canonical full-name self-match from verified register
+,ringer_name,Peter Holmes,Peter Holmes,verified,Canonical full-name self-match from verified register
+,ringer_name,Peter Kennerley,Peter Kennerley,verified,Canonical full-name self-match from verified register
+,ringer_name,Peter Wairasho,Peter Wairasho,verified,Canonical full-name self-match from verified register
+,ringer_name,Phil Jones,Phil Jones,verified,Canonical full-name self-match from verified register
+,ringer_name,Phillista Malaki,Phillista Malaki,verified,Canonical full-name self-match from verified register
+,ringer_name,Phoebe Manyonge,Phoebe Manyonge,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Pieter du Plessis,Pieter du Plessis,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Pranav Peshavaria,Pranav Peshavaria,low,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Pru Wright,Pru Wright,verified,Canonical full-name self-match from verified register
+,ringer_name,Rachel Blakey,Rachel Blakey,verified,Canonical full-name self-match from verified register
+,ringer_name,Raimond Barth,Raimond Barth,verified,Canonical full-name self-match from verified register
+,ringer_name,Ralf Joose,Ralf Joose,verified,Canonical full-name self-match from verified register
+,ringer_name,Ray Knock,Ray Knock,verified,Canonical full-name self-match from verified register
+,ringer_name,Richard Charles,Richard Charles,verified,Canonical full-name self-match from verified register
+,ringer_name,Richard Seddon,Richard Seddon,verified,Canonical full-name self-match from verified register
+,ringer_name,Robyn Atkinson,Robyn Atkinson,verified,Canonical full-name self-match from verified register
+,ringer_name,Roland Neumann,Roland Neumann,medium,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Ron Cleveley,Ron Cleveley,verified,Canonical full-name self-match from verified register
+,ringer_name,Ron Haran,Ron Haran,verified,Canonical full-name self-match from verified register
+,ringer_name,Roni Jackson,Roni Jackson,verified,Canonical full-name self-match from verified register
+,ringer_name,Ros Symonds,Ros Symonds,verified,Canonical full-name self-match from verified register
+,ringer_name,Roz Jessop,Roz Jessop,verified,Canonical full-name self-match from verified register
+,ringer_name,Rui Miguel Brito,Rui Miguel Brito,verified,Canonical full-name self-match from verified register
+,ringer_name,Sameer Wamae,Sameer Wamae,verified,Canonical full-name self-match from verified register
+,ringer_name,Samuel Guchu,Samuel Guchu,low,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Samuel Wamae,Samuel Wamae,verified,Canonical full-name self-match from verified register
+,ringer_name,Sergey Yerokhov,Sergey Yerokhov,verified,Canonical full-name self-match from verified register
+,ringer_name,Shai Agmon,Shai Agmon,verified,Canonical full-name self-match from verified register
+,ringer_name,Sheila Richardson,Sheila Richardson,verified,Canonical full-name self-match from verified register
+,ringer_name,Sidney Shema,Sidney Shema,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Sikenykeny Kennedy,Sikenykeny Kennedy,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Silas Ekesa,Silas Ekesa,verified,Canonical full-name self-match from verified register
+,ringer_name,Simon Valle,Simon Valle,verified,Canonical full-name self-match from verified register
+,ringer_name,Steve Samworth,Steve Samworth,verified,Canonical full-name self-match from verified register
+,ringer_name,Stuart Sharp,Stuart Sharp,verified,Canonical full-name self-match from verified register
+,ringer_name,Suk Ann Yee,Suk Ann Yee,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Susan Taylor,Susan Taylor,verified,Canonical full-name self-match from verified register
+,ringer_name,Sylvester Karimi,Sylvester Karimi,verified,Canonical full-name self-match from verified register
+,ringer_name,Tabitha Njoki,Tabitha Njoki,verified,Canonical full-name self-match from verified register
+,ringer_name,Tim Snieder,Tim Snieder,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Timothy Mwinami,Timothy Mwinami,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Titus Imboma,Titus Imboma,verified,Canonical full-name self-match from verified register
+,ringer_name,Toby Collett,Toby Collett,verified,Canonical full-name self-match from verified register
+,ringer_name,Trevor Squire,Trevor Squire,verified,Canonical full-name self-match from verified register
+,ringer_name,Vincent van der Spek,Vincent van der Spek,verified,Canonical full-name self-match from verified register
+,ringer_name,Walter Roggeman,Walter Roggeman,verified,Canonical full-name self-match from verified register
+,ringer_name,Wanyoike Wamiti,Wanyoike Wamiti,verified,Canonical full-name self-match from verified register
+,ringer_name,Washington Wachira,Washington Wachira,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Wilson Mwakulomba,Wilson Mwakulomba,high,Canonical full-name self-match from annual-report ringer mapping
+,ringer_name,Yitzchak Ben Mocha,Yitzchak Ben Mocha,verified,Canonical full-name self-match from verified register
+,ringer_name,Yoav Perlman,Yoav Perlman,verified,Canonical full-name self-match from verified register
+,ringer_name,Yotam Lenhardt,Yotam Lenhardt,verified,Canonical full-name self-match from verified register
+,ringer_name,Zephne Bernitz,Zephne Bernitz,verified,Canonical full-name self-match from verified register

@@ -8,7 +8,7 @@ library(cli)
 
 # Set paths ---------------------------------------------------------------
 
-project_dir <- normalizePath(".", mustWork = TRUE)
+project_dir <- here::here()
 source(file.path(project_dir, "scripts", "helpers", "data_paths.R"))
 paths <- get_data_paths(project_dir)
 
@@ -146,7 +146,8 @@ djp_daily_counts <- read_csv(
 
 curated_ring_events <- read_csv(
   curated_ring_events_path,
-  show_col_types = FALSE
+  show_col_types = FALSE,
+  col_types = cols(.default = col_character())
 )
 
 file_seasons <- cleaned |>

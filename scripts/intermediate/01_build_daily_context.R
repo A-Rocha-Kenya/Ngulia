@@ -6,9 +6,10 @@ library(cli)
 
 # Set paths ---------------------------------------------------------------
 
-project_dir <- normalizePath(".", mustWork = TRUE)
+project_dir <- here::here()
 source(file.path(project_dir, "scripts", "helpers", "data_paths.R"))
 paths <- get_data_paths(project_dir)
+source(file.path(project_dir, "scripts", "helpers", "season_calendar.R"))
 
 curated_dir <- paths$curated_dir
 daily_counts_dir <- paths$daily_counts_intermediate_dir
@@ -18,9 +19,10 @@ daily_counts_path <- file.path(curated_dir, "daily_counts.csv")
 djp_daily_counts_path <- file.path(daily_counts_dir, "djp_daily_counts.csv")
 djp_metadata_path <- file.path(daily_counts_dir, "djp_daily_metadata.csv")
 era5_daily_weather_path <- file.path(weather_dir, "era5_daily_weather.csv")
-daily_coverage_output_path <- file.path(curated_dir, "daily_coverage.csv")
+daily_context_dir <- paths$daily_context_intermediate_dir
+daily_coverage_output_path <- file.path(daily_context_dir, "daily_context.csv")
 
-dir.create(curated_dir, recursive = TRUE, showWarnings = FALSE)
+dir.create(daily_context_dir, recursive = TRUE, showWarnings = FALSE)
 
 source(file.path(project_dir, "scripts", "helpers", "ring_event_helpers.R"))
 
@@ -70,40 +72,9 @@ compute_moon_metrics <- function(date) {
   )
 }
 
-build_season_dates <- function(..., seasons = 1969:2023) {
-  season_bounds <- bind_rows(...) |>
-    filter(!is.na(date), !is.na(season)) |>
-    distinct(season, date) |>
-    group_by(season) |>
-    summarise(
-      max_date = max(date),
-      .groups = "drop"
-    )
-
-  default_bounds <- tibble(season = as.integer(seasons)) |>
-    mutate(
-      default_min_date = make_date(season, 10L, 20L),
-      default_max_date = make_date(season + 1L, 1L, 12L)
-    ) |>
-    left_join(season_bounds, by = "season") |>
-    mutate(
-      min_date = default_min_date,
-      max_date = case_when(
-        !is.na(max_date) & month(max_date) <= 1L ~ pmax(default_max_date, max_date),
-        TRUE ~ default_max_date
-      )
-    ) |>
-    arrange(season)
-
-  bind_rows(lapply(seq_len(nrow(default_bounds)), function(i) {
-    tibble(
-      date = seq(default_bounds$min_date[[i]], default_bounds$max_date[[i]], by = "1 day"),
-      season = default_bounds$season[[i]]
-    )
-  }))
-}
-
 decode_djp_weather <- function(weather_code) {
+  # Combined codes retain the case-sensitive mist code; suffix R/r is rain.
+  weather_code <- str_remove(weather_code, "(?<=[Mmlco])[Rr]$")
   case_when(
     weather_code == "M" ~ "good_mist_2h_plus",
     weather_code == "m" ~ "light_or_patchy_mist_1h_plus",
@@ -117,6 +88,7 @@ decode_djp_weather <- function(weather_code) {
 }
 
 decode_djp_rain <- function(weather_code, rain_code) {
+  rain_code <- coalesce(rain_code, str_extract(weather_code, "(?<=[Mmlco])[Rr]$"))
   case_when(
     rain_code == "R" ~ "heavy_rain_1h_plus",
     rain_code == "r" ~ "light_or_heavy_showers",
@@ -171,7 +143,7 @@ decode_djp_pax <- function(pax_code) {
 
 # Read data ---------------------------------------------------------------
 
-cli_h1("Build daily coverage")
+cli_h1("Build intermediate daily context")
 
 if (!file.exists(era5_daily_weather_path)) {
   cli_abort(
@@ -227,9 +199,19 @@ era5_daily_weather <- read_csv(
 
 # Compute derived tables --------------------------------------------------
 
+excluded_capture_groups <- read_csv(
+  file.path(project_dir, "config", "analysis", "excluded_capture_groups.csv"),
+  show_col_types = FALSE
+)
+
 daily_ring_totals <- daily_counts |>
   group_by(date) |>
-  summarise(total_birds_ringed = sum(n_records, na.rm = TRUE), .groups = "drop")
+  summarise(
+    all_birds_ringed = sum(n_records, na.rm = TRUE),
+    swallow_birds_ringed = sum(n_records[avibase_id %in% excluded_capture_groups$avibase_id], na.rm = TRUE),
+    total_birds_ringed = all_birds_ringed - swallow_birds_ringed,
+    .groups = "drop"
+  )
 
 djp_daily_totals <- djp_daily_counts |>
   group_by(date) |>
@@ -258,7 +240,8 @@ djp_daily_metadata_clean <- djp_daily_metadata |>
     djp_rain,
     djp_site,
     djp_tape,
-    djp_pax
+    djp_pax,
+    djp_source_row = source_row, djp_reported_total = reported_total
   )
 
 era5_daily_weather_clean <- era5_daily_weather |>
@@ -280,17 +263,27 @@ daily_coverage <- date_index |>
   left_join(djp_daily_metadata_clean, by = "date") |>
   left_join(era5_daily_weather_clean, by = "date") |>
   mutate(
-    total_birds_ringed = coalesce(total_birds_ringed, 0L),
-    djp_total_birds_ringed = coalesce(djp_total_birds_ringed, 0L),
+    # Retain only source-recorded zeros, not gaps in the species-count table.
+    total_birds_ringed = if_else(is.na(total_birds_ringed) & djp_reported_total == 0L, 0L, total_birds_ringed, missing = total_birds_ringed),
+    all_birds_ringed = if_else(is.na(all_birds_ringed) & djp_reported_total == 0L, 0L, all_birds_ringed, missing = all_birds_ringed),
+    swallow_birds_ringed = coalesce(swallow_birds_ringed, 0L),
     has_djp_metadata = coalesce(has_djp_metadata, FALSE),
     has_era5_weather = coalesce(has_era5_weather, FALSE),
-    has_djp_daily_counts = djp_total_birds_ringed > 0L,
-    ringing_happened = total_birds_ringed > 0L
+    has_djp_daily_counts = coalesce(djp_total_birds_ringed > 0L, FALSE),
+    ringing_happened = coalesce(total_birds_ringed > 0L, FALSE),
+    daily_count_status = case_when(
+      ringing_happened ~ "positive_count_recorded",
+      total_birds_ringed == 0L & all_birds_ringed > 0L ~ "zero_after_swallow_exclusion",
+      total_birds_ringed == 0L ~ "zero_in_daily_summary",
+      TRUE ~ "missing"
+    )
   ) |>
   select(
     date,
     season,
     total_birds_ringed,
+    all_birds_ringed,
+    swallow_birds_ringed,
     ringing_happened,
     djp_total_birds_ringed,
     djp_moon_days_from_new_moon,
@@ -302,23 +295,97 @@ daily_coverage <- date_index |>
     djp_site,
     djp_tape,
     djp_pax,
+    djp_source_row,
+    djp_reported_total,
+    daily_count_status,
     total_cloud_cover_mean,
     cloud_base_height_mean_m,
+    cloud_base_height_min_m,
     total_precipitation_00_08_mm,
     wind_u_10m_mean_ms,
     wind_v_10m_mean_ms,
     wind_speed_10m_mean_ms,
     temperature_2m_mean_c,
+    dewpoint_2m_mean_c,
+    dewpoint_depression_min_c,
     relative_humidity_mean_pct,
-    surface_pressure_mean_hpa,
-    mist_score_era5
+    relative_humidity_max_pct,
+    near_saturated_hours,
+    surface_pressure_mean_hpa
   ) |>
   rename(ringing_date = date)
+
+# Reconcile observed covariates with reviewed source evidence ---------------
+# DJP fields remain source-specific; canonical observations can be corrected.
+operations_history <- read_csv(file.path(project_dir, "config", "daily_covariates", "operations_history.csv"), show_col_types = FALSE, guess_max = Inf)
+daily_coverage <- daily_coverage |>
+  mutate(
+    mist_observation = case_when(
+      djp_weather == "good_mist_2h_plus" ~ "good",
+      djp_weather == "light_or_patchy_mist_1h_plus" ~ "light_patchy",
+      djp_weather %in% c("low_cloud", "high_cloud", "clear") ~ "none",
+      TRUE ~ NA_character_
+    ),
+    rain_observed = recode(djp_rain, none = "none", light_or_heavy_showers = "showers", heavy_rain_1h_plus = "heavy_rain", rain_noted_in_weather_code = "rain_unspecified"),
+    net_sites_observed = na_if(djp_site, "unknown"),
+    playback_nocturnal_observed = if_else(is.na(djp_tape), NA_integer_, as.integer(djp_tape != "none")),
+    night_net_operation = if_else(is.na(net_sites_observed), NA_integer_, as.integer(str_detect(net_sites_observed, "outside_night_nets"))),
+    dawn_net_operation = if_else(is.na(net_sites_observed), NA_integer_, as.integer(str_detect(net_sites_observed, "back_bush|front_bush"))),
+    daily_count_source = case_when(
+      daily_count_status == "zero_in_daily_summary" ~ paste0("DJP workbook Sheet1!BS", djp_source_row),
+      ringing_happened ~ "curated daily_counts.csv",
+      TRUE ~ NA_character_
+    )
+  )
+model_daily_fields <- c("mist_observation", "rain_observed", "net_sites_observed",
+  "playback_nocturnal_observed", "night_net_operation", "dawn_net_operation")
+
+daily_updates <- operations_history |>
+  filter(!is.na(daily_values)) |>
+  rowwise() |>
+  reframe(evidence_id, source_path, source_page,
+    ringing_date = seq(daily_start_date, daily_end_date, by = "day"), daily_values) |>
+  tidyr::separate_longer_delim(daily_values, delim = ";") |>
+  tidyr::separate_wider_delim(daily_values, delim = "=", names = c("field", "value")) |>
+  filter(field %in% model_daily_fields)
+# Conflicting source decisions must be resolved in history, not by row order.
+stopifnot(all((daily_updates |> group_by(ringing_date, field) |> summarise(n = n_distinct(value), .groups = "drop"))$n == 1L))
+daily_updates <- daily_updates |> group_by(ringing_date, field, value) |>
+  summarise(source = paste(paste0(evidence_id, ": ", source_path, "; ", source_page), collapse = " | "),
+    evidence_id = paste(evidence_id, collapse = ";"), .groups = "drop")
+reconciliation <- daily_updates |>
+  left_join(daily_coverage |> select(ringing_date, all_of(model_daily_fields)) |>
+    mutate(across(all_of(model_daily_fields), as.character)) |>
+    tidyr::pivot_longer(-ringing_date, names_to = "field", values_to = "previous_value"), by = c("ringing_date", "field")) |>
+  mutate(action = case_when(
+    !ringing_date %in% daily_coverage$ringing_date ~ "outside_calendar",
+    is.na(previous_value) ~ "filled",
+    previous_value == value ~ "validated",
+    TRUE ~ "corrected"
+  ))
+for (field in model_daily_fields) {
+  update <- daily_updates |> filter(.data$field == .env$field)
+  match_row <- match(daily_coverage$ringing_date, update$ringing_date)
+  selected <- !is.na(match_row)
+  value <- update$value[match_row[selected]]
+  if (is.numeric(daily_coverage[[field]])) value <- as.integer(value)
+  daily_coverage[[field]][selected] <- value
+}
+daily_evidence <- daily_updates |>
+  group_by(ringing_date) |>
+  summarise(operations_evidence_ids = paste(sort(unique(unlist(str_split(evidence_id, ";")))), collapse = ";"), .groups = "drop")
+daily_coverage <- daily_coverage |> left_join(daily_evidence, by = "ringing_date")
+reconciliation_dir <- file.path(paths$qa_output_dir, "daily_covariate_reconciliation")
+dir.create(reconciliation_dir, recursive = TRUE, showWarnings = FALSE)
+write_csv(reconciliation, file.path(reconciliation_dir, "source_decisions.csv"))
+write_csv(daily_coverage |> filter(daily_count_status == "zero_in_daily_summary") |>
+  select(ringing_date, total_birds_ringed, djp_source_row, djp_reported_total, daily_count_source, djp_site),
+  file.path(reconciliation_dir, "source_recorded_zeros.csv"))
 
 # Write output ------------------------------------------------------------
 
 write_csv(daily_coverage, daily_coverage_output_path, na = "")
 
 cli_alert_success(
-  "Wrote {nrow(daily_coverage)} daily coverage rows to {daily_coverage_output_path}"
+  "Wrote {nrow(daily_coverage)} intermediate daily-context rows to {daily_coverage_output_path}"
 )

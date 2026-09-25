@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: Please cite the corresponding GitHub release and curated Zenodo data record.
-title: Ngulia data workspace
+title: Ngulia ringing dataset
 type: software
 authors:
 - given-names: Colin
@@ -16,4 +16,4 @@ authors:
   family-names: Backhurst
 - given-names: David J.
   family-names: Pearson
-url: https://github.com/A-Rocha-Kenya/Ngulia
+url: https://github.com/A-Rocha-Kenya/ngulia-dataset

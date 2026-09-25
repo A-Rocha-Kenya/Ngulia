@@ -1,0 +1,456 @@
+## Dataset files
+
+| File                 | One row represents                                          | Main role                                                                                           |
+| -------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `ring_events.csv`    | One cleaned capture event for an individually marked bird.  | Canonical individual ringing observations, biometrics, and moult information.                       |
+| `daily_counts.csv`   | One species with a positive count on one date.              | Selected daily species totals for count-based analyses.                                             |
+| `daily_coverage.csv` | One calendar date within a ringing season window.           | Canonical daily catch, coverage/effort evidence, observed metadata, modeled mist, and ERA5 weather. |
+| `recoveries.csv`     | One distinct recovery or control movement involving Ngulia. | Curated movements between Ngulia and another ringing or recovery location.                          |
+
+`daily_counts.csv` and `daily_coverage.csv` join through `ringing_date` and `season`. The recovery table is independent of the ring-event identifiers because it was curated from separate historical recovery sources.
+
+Empty CSV fields represent unavailable, unresolved, or inapplicable values; field-specific distinctions are documented below. Files are UTF-8 comma-separated text with a header row.
+
+<!-- github-only:start -->
+
+## Repository structure
+
+- `data/01_raw/`: source workbooks, weather downloads, and external archives. Do not edit unless updating source material.
+- `data/02_reference/`: taxonomy lists, range maps, reports, and publications.
+- `data/03_intermediate/`: regenerable staging tables and machine-readable curation audits.
+- `data/04_curated/`: analysis-ready project datasets.
+- `outputs/exploration/`: descriptive dataset tables and figures.
+- `outputs/qa/`: human-facing diagnostics and validation figures.
+- `exports/`: generated website, Zenodo, and GBIF delivery files.
+- `assets/figures/`: manually maintained illustrations, distinct from regenerated figures.
+- `scripts/exploration/`: descriptive dataset summaries and figures. Scientific analyses are maintained in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis).
+- `scripts/intermediate/`: daily-context assembly and modeled covariate products used to build the curated daily table.
+- `scripts/diagnostics/`: QA and method-validation scripts that do not alter curated data.
+- `config/daily_covariates/`: source-linked historical operations evidence kept separate from daily observations.
+- `config/ring_events/`: source specifications, general corrections, reviewed ring-number corrections and warnings, species mappings, measurement ranges, and moult rules.
+- `config/website/`: taxonomy mappings used by the website pipeline.
+- `config/analysis/`: capture-group decisions shared by daily-coverage curation and downstream analyses.
+- `config/publication/`: shared publication metadata.
+
+- `docs/`: concise project documentation, review notes, and forward protocol planning.
+
+All curated datasets are in `data/04_curated/`.
+
+Data files are not tracked in Git. Raw and reference inputs are not distributed through GitHub; curated datasets are published through Zenodo, and Darwin Core exports through GBIF. Access instructions and rights for the source collections still need to be documented before public release.
+
+<!-- github-only:end -->
+
+## Key definitions
+
+- `datetime` is the cleaned event timestamp. It preserves timing information but is not used as the analysis date.
+- `ringing_date` is the canonical analysis date. Events at or after 20:00 are assigned to the following ringing day, unless a source file declares its raw date to be the ringing day with `raw_date_is_ringing_date`.
+- `season` is the year in which the October-January ringing season starts. Dates from June through December use their calendar year; January-May use the previous year. This June 1 administrative boundary keeps the whole ringing season under one label even if its October start shifts slightly between years.
+- `fat_ngulia` is the original Ngulia 0-4 fat score, based on the appearance of the furcular pit. `fat_kaiser` is the Kaiser 0-8 score, based on both the furcular pit and abdomen. The scales are retained separately and are not converted or assumed to be numerically equivalent.
+- `daily_counts.csv` contains positive counts only. Missing species rows can be reconstructed as zero only for a documented date; a missing date is not automatically a zero-count day.
+- `daily_coverage.csv` is a calendar scaffold, not evidence that ringing occurred. `ringing_happened` identifies dates with birds in the selected count source. Its default window starts on October 20 and extends beyond January 12 when source data do.
+
+Detailed interpretation limits and analysis assumptions are included under **Interpretation limits** below.
+
+## Data dictionary
+
+### `ring_events.csv`
+
+| Column                      | Type / unit      | Description                                                                                                                                                                                                                              |
+| --------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ring_event_id`             | text             | Stable event key, normally the cleaned ring number plus `ringing_date`; timestamp information disambiguates the rare non-unique base key.                                                                                                |
+| `season`                    | integer year     | Year in which the October–January ringing season starts.                                                                                                                                                                                 |
+| `ringing_date`              | ISO date         | Canonical ringing and analysis date after applying the source-specific date convention and night rollover.                                                                                                                               |
+| `datetime`                  | ISO date-time    | Cleaned local capture timestamp when source time was available; may be empty.                                                                                                                                                            |
+| `ring_number`               | text             | Cleaned identifier engraved on the bird's ring.                                                                                                                                                                                          |
+| `ring_assignment_id`        | text identifier  | Identifier for one continuous assignment of a ring number. It normally ends in `__A01`; a later `__A02` assignment distinguishes a documented reuse of the same ring number from a retrap. |
+| `ringer_name`               | text             | Full name mapped from the source `Init`, `Ringer`, or `Observer` value through `ringer_lookup.csv`; empty when the source had no ringer value or the entry could not be resolved. Raw initials and numeric identifiers are not exported. |
+| `retrap`                    | boolean          | `TRUE` when the ring has an earlier `ringing_date`, `FALSE` for its first event; empty when source coding conflicts with event history.                                                                                                  |
+| `afring_number`             | integer code     | AFRING taxon code. `0` represents an unresolved identity; negative project codes represent explicitly mapped hybrid labels.                                                                                                              |
+| `avibase_id`                | text identifier  | Avibase identifier for the resolved taxon; empty when unresolved.                                                                                                                                                                        |
+| `subspecies_avibase_id`     | text identifier  | Avibase identifier for an explicitly resolved subspecies or subspecies group derived from mapped note text; otherwise empty.                                                                                                             |
+| `common_name`               | text             | Project-standard English taxon name.                                                                                                                                                                                                     |
+| `species_code`              | text identifier  | eBird/Clements species or subspecies code associated with the Avibase identifier.                                                                                                                                                        |
+| `age`                       | integer code     | EURING age code `0`–`9`; definitions are given under **Age codes**.                                                                                                                                                                      |
+| `sex`                       | controlled text  | `M`, `F`, `M?`, or `F?`; empty when unknown or invalid.                                                                                                                                                                                  |
+| `wing`                      | millimetres      | Source wing-length measurement after numeric parsing and range validation.                                                                                                                                                               |
+| `weight`                    | grams            | Source body-mass measurement after numeric parsing and range validation, exported to one decimal place.                                                                                                                                  |
+| `fat_ngulia`                | integer score    | Original Ngulia fat score, `0`–`4`; retained only for sources using that scale.                                                                                                                                                          |
+| `fat_kaiser`                | integer score    | Kaiser fat score, `0`–`8`; retained only for sources using that scale.                                                                                                                                                                   |
+| `ring_note`                 | text             | Pipe-separated retained source information, uncertainty, corrections, merge details, and QA conflicts that should not be silently discarded. Reviewed but unresolved ring-number anomalies use a `ring_number_warning=...` token.        |
+| `moult_note`                | text             | Original or normalized unresolved moult notation and any moult-specific QA conflicts.                                                                                                                                                    |
+| `primary_moult_status`      | controlled text  | Overall state: `old`, `active`, `suspended`, or `complete`; empty when unresolved.                                                                                                                                                       |
+| `n_old_primaries_remaining` | integer count    | Reported number of old primaries remaining, `0`–`10`.                                                                                                                                                                                    |
+| `body_moult_head`           | score `0`–`3`    | Positioned source body-moult code for the head; its biological meaning is not inferred.                                                                                                                                                  |
+| `body_moult_upperparts`     | score `0`–`3`    | Positioned source body-moult code for the upperparts; its biological meaning is not inferred.                                                                                                                                            |
+| `body_moult_underparts`     | score `0`–`3`    | Positioned source body-moult code for the underparts; its biological meaning is not inferred.                                                                                                                                            |
+| `p1`–`p10`                  | controlled score | Primary-feather scores in source order. Nine-primary formats leave `p10` empty.                                                                                                                                                          |
+| `s1`–`s6`                   | controlled score | Secondary-feather scores in source order.                                                                                                                                                                                                |
+| `t1`–`t3`                   | controlled score | Tertial-feather scores in source order.                                                                                                                                                                                                  |
+| `tail1`–`tail6`             | controlled score | Tail-feather scores in source order.                                                                                                                                                                                                     |
+
+Feather-score meanings and source-specific interpretation are documented under **Moult fields and standardization**.
+
+### `daily_counts.csv`
+
+| Column          | Type / unit   | Description                                                                              |
+| --------------- | ------------- | ---------------------------------------------------------------------------------------- |
+| `ringing_date`  | ISO date      | Canonical ringing and analysis date.                                                     |
+| `season`        | integer year  | Year in which the October–January ringing season starts.                                 |
+| `avibase_id`    | text identifier | Avibase identifier for the resolved taxon, used to align daily summaries and ring-event-derived counts. |
+| `common_name`   | text          | Project-standard English taxon name.                                                     |
+| `n_records`     | integer count | Positive number of birds for the species and date from the season-selected count source. |
+
+### `daily_coverage.csv`
+
+This is the one public daily analysis table. It is assembled from source-specific daily context, the unified observed/ERA5 mist model, and exactly dated operations evidence. ERA5 fields summarize 00:00–08:00 local time at the project grid point. The `djp`-prefixed fields are decoded from the historical daily-summary workbook and are empty outside its coverage.
+
+| Column                                                                            | Type / unit                  | Description                                                                                                                                                                                                                                                                                                               |
+| --------------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ringing_date`                                                                    | ISO date                     | Canonical ringing date in the season scaffold.                                                                                                                                                                                                                                                                            |
+| `season`                                                                          | integer year                 | Year in which the October–January ringing season starts.                                                                                                                                                                                                                                                                  |
+| `all_birds_ringed`                                                                | integer count                | Sum of all species in `daily_counts.csv` before separating targeted swallow and martin catches.                                                                                                                                                                                                                           |
+| `swallow_birds_ringed`                                                            | integer count                | Daily swallow and martin catch retained for audit but excluded from the total-catch model because it comes from a separate targeted process.                                                                                                                                                                              |
+| `total_birds_ringed`                                                              | integer count                | `all_birds_ringed - swallow_birds_ringed`, or a source-recorded zero from the DJP workbook daily-total cell. Blank daily-total cells remain empty.                                                                                                                                                                        |
+| `ringing_happened`                                                                | boolean                      | `TRUE` when the non-swallow `total_birds_ringed > 0`; this is not a complete effort or documented-coverage indicator.                                                                                                                                                                                                     |
+| `daily_count_status`, `daily_count_source`                                        | controlled text and text     | Distinguishes `positive_count_recorded`, `zero_in_daily_summary`, and `missing`, with the source of a positive or zero count.                                                                                                                                                                                             |
+| `djp_reported_total`                                                              | integer count                | Daily total recorded in workbook column `BS`; an explicit numeric zero is retained and a blank cell remains empty.                                                                                                                                                                                                        |
+| `djp_source_row`                                                                  | integer row number           | Row in the source workbook `Sheet1` from which the DJP daily metadata and reported total were extracted.                                                                                                                                                                                                                  |
+| `moon_days_from_new_moon`                                                         | integer days                 | Astronomically derived signed days from new moon; values after full moon are negative.                                                                                                                                                                                                                                    |
+| `season_day`, `moon_distance_from_new_moon`                                       | integer days                 | Day since 20 October and absolute distance from new moon.                                                                                                                                                                                                                                                                 |
+| `moon_illumination_fraction`                                                      | fraction `0`–`1`             | Astronomically derived illuminated fraction of the lunar disc.                                                                                                                                                                                                                                                            |
+| `moon_phase_name`                                                                 | controlled text              | Derived phase: `new_moon`, `waxing_crescent`, `first_quarter`, `waxing_gibbous`, `full_moon`, `waning_gibbous`, `last_quarter`, or `waning_crescent`.                                                                                                                                                                     |
+| `djp_weather`                                                                     | controlled text              | Decoded historical mist/cloud condition; unrecognized source text is retained.                                                                                                                                                                                                                                            |
+| `djp_rain`                                                                        | controlled text              | Decoded historical rain condition.                                                                                                                                                                                                                                                                                        |
+| `djp_site`                                                                        | controlled text              | Comma-separated decoded netting sites: back bush, front bush, outside night nets, lodge veranda, or swallow nets; `none` and `unknown` are explicit values.                                                                                                                                                               |
+| `djp_tape`                                                                        | controlled text              | Source playback locations: `front_tapes` (`T`), `behind_lodge_tapes` (`t`), or `none`. The workbook calls this field “Night tape use”; the codes do not identify night-net versus bush-net speakers.                                                                                                                      |
+| `bush_net_configuration`                                                          | controlled text              | Historical bush-net position: `back_bush` in 1977–1993, `transition` in 1994–1995, and `front_bush` from 1996. The source says northern use began in 1994 and became routine in 1995, while the workbook retains mixed `B`/`F` codes in 1995. Pre-1977 is missing. This is a period classification, not daily deployment. |
+| `night_net_configuration`                                                         | controlled text              | `established` from 1977 onward; pre-1977 is missing for post-transition comparison. Daily operation is recorded separately.                                                                                                                                                                                               |
+| `djp_pax`                                                                         | controlled text              | Historical “Team size — Ringers and others” code.                                                                                                                                                                                                                                                                         |
+| `djp_team_size_total`, `djp_team_size_minimum`, `djp_team_size_interpretation`    | people and controlled text   | Parsed exact or minimum-known team size, with the interpretation retained.                                                                                                                                                                                                                                                |
+| `effort_status`                                                                   | controlled text              | `documented_operation`, `inferred_operation_from_positive_catch`, `documented_no_operation`, `conflicting_positive_catch_and_no_site`, or `unknown`. It is evidence, not quantitative effort.                                                                                                                             |
+| `mist_observation`                                                                | controlled text              | Observed mist evidence: `none`, `light_patchy`, `good`, or `present_unspecified`; otherwise empty. The canonical field reconciles DJP codes with reviewed dated sources.                                                                                                                                                  |
+| `rain_observed`                                                                   | controlled text              | Canonical observed rain class: `none`, `showers`, `heavy_rain`, or `rain_unspecified`, reconciled with reviewed dated sources.                                                                                                                                                                                            |
+| `net_sites_observed`                                                              | controlled text              | Canonical observed net-site combination, retaining the source-specific historical site labels.                                                                                                                                                                                                                            |
+| `playback_nocturnal_observed`                                                     | binary                       | Explicit nocturnal playback evidence. Empty means unknown, not absence. Within DJP metadata, blank night-tape cells follow the workbook convention and mean no nocturnal playback.                                                                                                                                        |
+| `night_net_operation`, `dawn_net_operation`                                       | binary                       | Explicit evidence that night or dawn nets did (`1`) or did not (`0`) operate; otherwise empty.                                                                                                                                                                                                                            |
+| `operations_evidence_ids`                                                         | text identifiers             | Semicolon-separated history IDs that contributed reviewed values to the model-facing daily fields. Full provenance remains in `operations_history.csv`.                                                                                                                                                                   |
+| `mist_probability_none`, `mist_probability_light_patchy`, `mist_probability_good` | probabilities summing to `1` | Unified three-state mist distribution. Direct observations fix or constrain the state; ERA5 supplies probabilities elsewhere.                                                                                                                                                                                             |
+| `total_cloud_cover_mean`                                                          | fraction `0`–`1`             | Mean ERA5 total cloud cover from 00:00–08:00 local time.                                                                                                                                                                                                                                                                  |
+| `cloud_base_height_mean_m`                                                        | metres                       | Mean ERA5 cloud-base height from 00:00–08:00 local time.                                                                                                                                                                                                                                                                  |
+| `total_precipitation_00_08_mm`                                                    | millimetres                  | Sum of ERA5 precipitation from 00:00–08:00 local time.                                                                                                                                                                                                                                                                    |
+| `wind_u_10m_mean_ms`                                                              | metres/second                | Mean eastward ERA5 10-m wind component; negative values point westward.                                                                                                                                                                                                                                                   |
+| `wind_v_10m_mean_ms`                                                              | metres/second                | Mean northward ERA5 10-m wind component; negative values point southward.                                                                                                                                                                                                                                                 |
+| `wind_speed_10m_mean_ms`                                                          | metres/second                | Mean ERA5 10-m wind-speed magnitude.                                                                                                                                                                                                                                                                                      |
+| `temperature_2m_mean_c`                                                           | degrees Celsius              | Mean ERA5 2-m air temperature.                                                                                                                                                                                                                                                                                            |
+| `relative_humidity_mean_pct`                                                      | percent                      | Mean relative humidity calculated from ERA5 2-m temperature and dew point.                                                                                                                                                                                                                                                |
+| `surface_pressure_mean_hpa`                                                       | hectopascals                 | Mean ERA5 surface pressure.                                                                                                                                                                                                                                                                                               |
+
+### `recoveries.csv`
+
+One row represents one distinct movement encounter involving Ngulia. Ordinary retraps at Ngulia are excluded. If one ring was encountered on multiple occasions away from its ringing site, each distinct encounter is a separate row. Ngulia is implicit as one endpoint; the `other_*` fields describe the non-Ngulia endpoint.
+
+| Column                     | Type / unit              | Description                                                                                                                                                                                            |
+| -------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `recovery_id`              | text identifier          | Sequential project identifier `NGREC-0001`–`NGREC-0254`, assigned after sorting by direction, species, ringing date, ring number, and encounter date.                                                  |
+| `direction`                | controlled text          | `from_ngulia` when ringed at Ngulia and subsequently encountered elsewhere; `to_ngulia` when ringed elsewhere and encountered at Ngulia.                                                               |
+| `encounter_type`           | controlled text          | `control` for a bird encountered alive through ringing or recapture, or `recovery` for other recovery reports.                                                                                         |
+| `avibase_id`               | text identifier          | Repository-standard Avibase identifier for the species.                                                                                                                                                |
+| `common_name`              | text                     | Repository-standard English common name.                                                                                                                                                               |
+| `ring_scheme`              | text                     | Ringing scheme or centre printed in the source, standardized where its identity is clear.                                                                                                              |
+| `ring_number`              | text identifier          | Normalized identifier engraved on the bird's ring; leading zeroes are significant.                                                                                                                     |
+| `ringing_date_raw`         | text                     | Ringing date exactly or closely retained from the selected evidence before ISO normalization.                                                                                                          |
+| `ringing_date`             | ISO date or partial date | Normalized ringing date. Partial dates retain only known components and are never filled with 1 January.                                                                                               |
+| `ringing_date_precision`   | controlled text          | Precision of `ringing_date`: `day`, `month`, `year`, `range`, or `unknown`.                                                                                                                            |
+| `encounter_date_raw`       | text                     | Encounter-date notation retained from the selected evidence, including parentheses, zeroes, seasons, or other uncertainty.                                                                             |
+| `encounter_date`           | ISO date or partial date | Normalized date of recovery or control when the encounter date itself is known. Partial dates retain only known components.                                                                            |
+| `encounter_date_precision` | controlled text          | Precision of `encounter_date`: `day`, `month`, `year`, `range`, or `unknown`.                                                                                                                          |
+| `report_date`              | ISO date or partial date | Date on which an otherwise undated recovery was reported. In the historical list, a date in parentheses is the date of the reporting letter, not the encounter date.                                   |
+| `other_location_raw`       | text                     | Combined source description of the non-Ngulia endpoint before separation into site, region, and country.                                                                                               |
+| `other_site`               | text                     | Standardized locality at the non-Ngulia endpoint.                                                                                                                                                      |
+| `other_region`             | text                     | Province, district, oblast, or other region at the non-Ngulia endpoint.                                                                                                                                |
+| `other_country`            | text                     | Standardized country at the non-Ngulia endpoint.                                                                                                                                                       |
+| `other_latitude`           | decimal degrees          | Latitude of the non-Ngulia endpoint; negative values are south.                                                                                                                                        |
+| `other_longitude`          | decimal degrees          | Longitude of the non-Ngulia endpoint; negative values are west.                                                                                                                                        |
+| `coordinate_source`        | text                     | Provenance category for the non-Ngulia coordinates, such as an official notification, formatted list, or master spreadsheet.                                                                           |
+| `coordinate_precision`     | controlled text          | Spatial precision: `exact`, `locality`, `region`, `country`, or `unknown`.                                                                                                                             |
+| `encounter_method`         | text                     | Retained source-reported method or circumstance of the encounter. This text is not replaced by the standardized classifications.                                                                       |
+| `encounter_condition`      | controlled text          | Standardized condition at encounter: `alive`, `dead`, or `unknown`.                                                                                                                                    |
+| `mortality_cause_class`    | controlled text          | Cause class for a dead bird: `intentional_human`, `unintentional_human`, `domestic_animal`, `wild_predation`, `unspecified_killing`, or `unknown`. Empty when the encounter did not establish a death. |
+| `duration_days`            | days                     | Elapsed days between ringing and encounter. A credible source value is retained; when inconsistent with exact dates, the date-derived value is used and documented.                                    |
+| `distance_km`              | kilometres               | Movement distance reported by the selected evidence or, where documented, curated from endpoint coordinates.                                                                                           |
+| `ringing_age_code`         | EURING code              | Source age code at the original ringing event.                                                                                                                                                         |
+| `ringing_sex`              | controlled text          | Sex at ringing: `M` or `F`; empty when unknown or not credible.                                                                                                                                        |
+| `ringing_wing_mm`          | millimetres              | Wing length measured at the original ringing event.                                                                                                                                                    |
+| `ringing_mass_g`           | grams                    | Body mass measured at the original ringing event.                                                                                                                                                      |
+| `ringing_fat_score`        | source score             | Fat score measured at the original ringing event; the historical source scale is retained.                                                                                                             |
+| `encounter_age_code`       | EURING code              | Source age code at the recovery or control encounter.                                                                                                                                                  |
+| `encounter_sex`            | controlled text          | Sex at encounter: `M` or `F`; empty when unknown or not credible.                                                                                                                                      |
+| `encounter_wing_mm`        | millimetres              | Wing length measured at the recovery or control encounter.                                                                                                                                             |
+| `encounter_mass_g`         | grams                    | Body mass measured at the recovery or control encounter.                                                                                                                                               |
+| `encounter_fat_score`      | source score             | Fat score measured at the recovery or control encounter; the historical source scale is retained.                                                                                                      |
+| `primary_source`           | project-relative path    | Highest-precedence project source used for the curated row.                                                                                                                                            |
+| `primary_source_locator`   | text                     | Sheet row, document entry, page, image, email date, or other locator within `primary_source`.                                                                                                          |
+| `supporting_sources`       | pipe-separated paths     | Other project sources describing or corroborating the same movement.                                                                                                                                   |
+| `source_count`             | integer count            | Number of primary plus supporting source references associated with the row.                                                                                                                           |
+| `curation_status`          | controlled text          | `complete`, `incomplete`, `conflict_resolved`, or `needs_review`. Completeness refers to the surviving evidence, not necessarily to every optional measurement.                                        |
+| `curation_notes`           | text                     | Material uncertainty, conflict resolution, inferred value, split event, or other decision that should not be hidden.                                                                                   |
+
+Empty fields mean unavailable, unresolved, or inapplicable. Parenthesized recovery-list dates are mapped to `report_date`; all 21 such rows deliberately leave `encounter_date` empty. The one-off source inventory, duplicate accounting, conflict resolutions, and validation results are retained as an intermediate audit in `data/03_intermediate/recoveries/recoveries_audit.md` and are not part of the public data package. `recoveries.csv` remains a manually curated canonical table: `06_standardize_recovery_encounters.R` only applies deterministic labels to its existing records and does not recreate the source inventory.
+
+<!-- github-only:start -->
+
+## Software setup
+
+Install the required R packages from the project root:
+
+```r
+source("scripts/setup/01_install_dependencies.R")
+```
+
+The DJP metadata extractor uses Python 3 and only Python standard-library modules.
+
+## Run the pipeline
+
+Run scripts from the project root, in this order.
+
+```r
+# Curated data ------------------------------------------------------------
+source("scripts/curated/01_build_ring_events.R")
+source("scripts/curated/02_extract_djp_daily_counts.R")
+source("scripts/curated/03_build_daily_counts.R")
+source("scripts/curated/04_build_era5_daily_weather.R")
+source("scripts/intermediate/01_build_daily_context.R")
+source("scripts/intermediate/02_build_mist_model.R")
+source("scripts/curated/05_build_daily_coverage.R")
+source("scripts/curated/06_standardize_recovery_encounters.R")
+
+# Documentation -----------------------------------------------------------
+source("scripts/exports/00_build_citation.R")
+
+# Dataset exploration -----------------------------------------------------
+source("scripts/exploration/dataset_overview/00_summarize_datasets.R")
+source("scripts/exploration/dataset_overview/01_plot_daily_rings_by_season.R")
+
+# Exports -----------------------------------------------------------------
+source("scripts/exports/01_build_website_exports.R")
+source("scripts/exports/02_build_zenodo_package.R")
+source("scripts/exports/03_build_gbif_export.R")
+```
+
+| Step                                                  | Purpose                                                                                                                                                                                                                                                              | Main outputs                                                                |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `01_build_ring_events.R`                              | Imports, cleans, and validates annual ringing workbooks.                                                                                                                                                                                                             | `ring_events.csv`, ring-event QA                                            |
+| `02_extract_djp_daily_counts.R`                       | Stages DJP species-day counts and metadata.                                                                                                                                                                                                                          | `data/03_intermediate/daily_counts/`                                        |
+| `03_build_daily_counts.R`                             | Selects the preferred count source by season. DJP is preferred when available for a whole season.                                                                                                                                                                    | `daily_counts.csv`                                                          |
+| `04_build_era5_daily_weather.R`                       | Produces 00:00-08:00 local ERA5 daily weather.                                                                                                                                                                                                                       | `era5_daily_weather.csv`                                                    |
+| `01_build_daily_context.R`                            | Assembles source-specific daily observations, moon fields, and ERA5 weather.                                                                                                                                                                                         | `data/03_intermediate/daily_context/daily_context.csv`                      |
+| `02_build_mist_model.R`                               | Builds one three-state mist model from observed classifications and ERA5.                                                                                                                                                                                            | `data/03_intermediate/mist_model/`                                          |
+| `05_build_daily_coverage.R`                           | Builds the canonical daily catch, coverage/effort, and covariate table.                                                                                                                                                                                              | `data/04_curated/daily_coverage.csv`                                        |
+| `06_standardize_recovery_encounters.R`                | Applies deterministic encounter and mortality labels to the manually curated recovery table.                                                                                                                                                                         | Updated `recoveries.csv`                                                    |
+| `00_build_citation.R`                                 | Builds the GitHub README and citation file from shared metadata and authored prose.                                                                                                                                                                                  | `README.md`, `CITATION.cff`                                                 |
+| `dataset_overview/00_summarize_datasets.R`            | Creates descriptive dataset summaries. | `outputs/exploration/dataset_overview/` |
+| `dataset_overview/01_plot_daily_rings_by_season.R`    | Plots daily capture totals by day within each ringing season. | `outputs/exploration/dataset_overview/figures/daily_rings_by_season.png` |
+| `01_build_website_exports.R`                          | Creates website JSON exports.                                                                                                                                                                                                                                        | `exports/website/`                                                          |
+| `02_build_zenodo_package.R`                           | Builds a worksheet for completing the online Zenodo form.                                                                                                                                                                                                            | `exports/zenodo/zenodo_form.md`                                             |
+| `03_build_gbif_export.R`                              | Builds the sampling-event Darwin Core Archive with daily events, individual captures, and bird-level measurements.                                                                                                                                                   | `exports/gbif/`                                                             |
+
+<!-- github-only:end -->
+
+## Processing and standardization
+
+### How ring events are built
+
+`scripts/curated/01_build_ring_events.R` is the main ingestion and cleaning script. It converts heterogeneous annual workbooks from `data/01_raw/ring_events/` into a consistent event table while preserving source references in the QA outputs.
+
+The script applies these steps in order:
+
+1. **Read source-specific workbook regions.** `config/ring_events/file_specs.csv` identifies the file, sheet, header and final rows, expected years, and source-specific column conventions. It also controls exceptional date/time handling, swapped age and sex columns, retrap-code use, and fat scale.
+2. **Apply explicit source corrections.** `config/ring_events/corrections.csv` records known row or row-range corrections to dates, species fields, measurements, and shifted columns. `config/ring_events/ring_number_review.csv` separately applies audited ring-number replacements or appends warnings for unresolved values. Both remain separate from the raw workbooks.
+3. **Construct dates and seasons.** Raw date and time fields are parsed into `datetime`; `ringing_date` is constructed using the source date convention and 20:00 rollover rule; `season` is then derived from `ringing_date` using the June 1 boundary described above.
+4. **Resolve species identity.** `species_lookup.csv` maps accepted numeric codes, Ngulia codes, abbreviations, and names to AFRING numbers. `species_reference.csv` adds project-standard common names, Avibase IDs, and website species codes. Missing, unmatched, or conflicting species identities are retained as AFRING number `0`. If one ring number is assigned to different species across events, the conflicting values are recorded in `ring_note`.
+5. **Clean biological fields.** Age and sex are converted to controlled project values. Fat scores are assigned to `fat_ngulia` or `fat_kaiser` according to the source specification. Wing and weight are parsed and checked against species-specific ranges from `measurement_ranges.csv`; invalid measurements are set to missing and recorded in QA.
+6. **Resolve ringer identity.** Source columns named `Init`, `Initial`, `Initials`, `Ringer`, `Ringed by`, or `Observer` produce three internal lookup keys: a three-digit code with trailing punctuation removed, an uppercase alphanumeric initial, and a normalized full-name key. `config/ring_events/ringer_lookup.csv` maps these values to the canonical `ringer_name`. A row with `source_file` filled applies only to that workbook and takes precedence; a blank `source_file` is the default mapping for every workbook. Only the full name is exported.
+7. **Handle repeated rings.** Records with the same ring number on the same `ringing_date` are merged into one event. The `retrap` field is compared with earlier event-day history for that ring. When history and the raw retrap code disagree, `retrap` is left missing and the conflict is described in `ring_note` and the QA log.
+8. **Decode moult.** Source-specific columns and expected sequence lengths are described in `moult_specs.csv`. The pipeline decodes feather and body-moult scores where their structure is sufficiently clear, while retaining unresolved source notation in `moult_note` and the component-specific QA log.
+9. **Add taxonomy and subspecies.** Standard species metadata are joined to the cleaned events. When configured, labels extracted from `ring_note` and matched through `subspecies_lookup.csv` add a subspecies Avibase ID.
+10. **Export curated and QA products.** The script writes one `ring_events.csv` containing event, biometric, and moult fields, plus the row-level issue logs, the source-file audit, and a source-by-source list of ringer values that remain unmatched.
+
+`ring_number_review.csv` identifies records with `source_file`, `source_sheet`, `source_row`, and optional inclusive `source_row_end`. Its `expected_pattern` is checked against the cleaned source ring before any edit. A nonblank `replacement` is applied as a regular-expression replacement; a nonblank `warning` is appended to `ring_note`. Every rule must provide a replacement or warning. The build stops if a target row is absent, expanded rules overlap, or an expected pattern does not match.
+
+The ringer lookup has six columns: `source_file`, `input_type`, `input_text`, `ringer_name`, `mapping_confidence`, and `mapping_basis`. `input_type` is `ringer_code`, `ringer_initial`, or `ringer_name`. The pipeline first tries a matching row for the current `source_file`, then falls back to the same key with blank `source_file`. This keeps common codes and names global while allowing an ambiguous value such as an initial to mean different people in different workbooks. `mapping_confidence` distinguishes verified register entries from high-, medium-, and low-confidence inferences; `mapping_basis` records the evidence used. These review fields remain in configuration and are not exported with bird records.
+
+Rows need a valid date, allowed October-January event month and source year, ring number, an initial species value after unknown coding, and non-recovery status to enter `ring_events.csv`. A later cross-event ring/species conflict sets `afring_number` to `0` without removing the event. Rows mapping to AFRING code `9999` (`Lost or destroyed ring`) are excluded because they do not represent taxon occurrences. Rows marked with raw retrap code `X` are excluded from `ring_events.csv`; identifiable movement records are curated independently in `recoveries.csv`.
+
+### How encoded values are parsed and standardized
+
+Explicit row-level fixes in `config/ring_events/corrections.csv` and audited ring-number rules in `config/ring_events/ring_number_review.csv` are applied before the general rules below. They document recoverable entry errors without editing the raw Excel workbooks.
+
+| Field            | Source parsing and standardized output                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date and time    | Excel dates and common year-month-day, day-month-year, and month-day-year text are parsed. Times may be Excel fractions, decimal hours, four-digit `HHMM`, or clock text. A missing time produces date precision rather than an invented event time. `ringing_date` and `season` are then derived as described under **Key definitions**.                                                                                                                                                                                                                                                                                                                                                |
+| Ring number      | Text is uppercased, whitespace is removed, and characters other than letters, digits, `/`, and `-` are discarded. Reviewed rules then replace matching source values where a correction is known; unresolved configured values are retained with a `ring_number_warning=...` entry in `ring_note`. A missing result excludes the row.                                                                                                                                                                                                                                                                                                                                                    |
+| Ringer identity  | Source `Init`, `Ringer`, and `Observer` values can be matched as a three-digit code, an uppercase alphanumeric initial, or a normalized full name through `ringer_lookup.csv`. Source-specific matches take precedence over blank-`source_file` defaults. Only the canonical `ringer_name` is exported.                                                                                                                                                                                                                                                                                                                                                                                  |
+| Event identifier | `ring_event_id` normally combines the cleaned ring number and `ringing_date` as `RING__YYYYMMDD`. If that base is not unique, the cleaned timestamp is used instead.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Species          | Numeric AFRING and Ngulia codes are normalized as numbers; text labels are lowercased and punctuation is ignored for matching. Matching priority is explicit AFRING number, Ngulia number, Ngulia text, then the general species label. Text may match a configured Latin abbreviation, Ngulia abbreviation, English name, scientific name, or AviList English name in `species_lookup.csv`. Missing, unmatched, or disagreeing species identities produce `afring_number = 0`; configured `-1` values identify unresolved _Lanius_ hybrid labels whose true AFRING number is not available. Conflicting values across events carrying the same ring number are retained in `ring_note`. |
+| Taxonomy         | `avibase_id`, `common_name`, and `species_code` are joined through `species_reference.csv` and the `auk` taxonomy rather than parsed independently from each workbook. Pipe-separated `ring_note` tokens can add `subspecies_avibase_id` only when the species-and-note combination is explicitly mapped in `subspecies_lookup.csv`.                                                                                                                                                                                                                                                                                                                                                     |
+| Age              | Source values are standardized to the numeric EURING subset `0`-`9`; details are given below. The pipeline does not calculate a bird's age from an earlier capture.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Sex              | `1`, `M`, `m`, and `Male` become `M`; `2`, `F`, `f`, and `Female` become `F`; `3`, `(M)`, and `Male?` become `M?`; `4`, `(F)`, and `Female?` become `F?`. Blank, `0`, `?`, and `Unknown` become missing. Any other value also becomes missing and is reported in QA.                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Wing and weight  | Decimal commas are converted to decimal points and the result is parsed numerically. Values outside the configured species range, or the global fallback range when no species range exists, become missing and are reported in QA. Weight is exported to one decimal place.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Fat              | The source file specification determines whether a column uses the Ngulia or Kaiser scale. Integer-like values such as `3`, `3.0`, or `3,0` are accepted. `?` and `Unknown` become missing. Ngulia accepts `0`-`4`; Kaiser accepts `0`-`8`; out-of-range or nonnumeric values become missing and are reported in QA. The scales are never converted into one another.                                                                                                                                                                                                                                                                                                                    |
+| Retrap           | The final `retrap` value is derived from event history: it is `TRUE` when the cleaned ring number has an earlier `ringing_date`, otherwise `FALSE`. In source files that use retrap codes, uppercase code `2` means retrap and `X` marks a recovery row that is excluded from this dataset. Other nonblank codes mean not-retrap. If a nonblank source code disagrees with event history, final `retrap` is missing and the disagreement is retained in `ring_note` and QA.                                                                                                                                                                                                              |
+
+#### Age codes
+
+Age is a plumage-based observation following the [EURING Exchange Code](https://euring.org/files/documents/E2020ExchangeCodeV202.pdf), not an age recalculated from the known history of a ring. Codes change at the calendar-year boundary.
+
+| Code | Meaning                                                                                    |
+| ---- | ------------------------------------------------------------------------------------------ |
+| `0`  | Age unknown or not recorded.                                                               |
+| `1`  | Pullus: nestling or chick not yet able to fly freely.                                      |
+| `2`  | Full-grown and able to fly freely, but age otherwise unknown.                              |
+| `3`  | First calendar year; hatched during the current calendar year.                             |
+| `4`  | After first calendar year; hatched before the current calendar year, exact year unknown.   |
+| `5`  | Second calendar year; hatched during the previous calendar year.                           |
+| `6`  | After second calendar year; hatched before the previous calendar year, exact year unknown. |
+| `7`  | Third calendar year; hatched two calendar years earlier.                                   |
+| `8`  | After third calendar year; older than code `7`, exact year unknown.                        |
+| `9`  | Fourth calendar year; hatched three calendar years earlier.                                |
+
+Blank or invalid age values become `0`. The uncertain source forms `2(3)`, `2(4)`, `3(2)`, `3?`, and `?3` are conservatively standardized to `2`, with the original value retained in `ring_note`. Valid but unusual codes `7` and `9` are retained and receive a warning in `ring_note` and QA. Letter codes for ages above `9` are not currently accepted by this pipeline.
+
+### Moult fields and standardization
+
+Moult notation varies substantially among years. The pipeline therefore uses a source-specific, conservative mapping and stores the decoded or unresolved values as nullable columns in `ring_events.csv`.
+
+#### Moult column structure
+
+Every row remains one ring event. Moult columns are empty when the event has no decoded value or unresolved source notation for that field.
+
+| Column                                                              | Content                                                                                                                                                                   |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `moult_note`                                                        | Original or normalized source notation that should not be silently discarded, including unresolved values and QA conflicts. Moult text is kept separate from `ring_note`. |
+| `primary_moult_status`                                              | Overall primary-moult state: `old`, `active`, `suspended`, or `complete`.                                                                                                 |
+| `n_old_primaries_remaining`                                         | Source count of old primaries, from `0` to `10`, when supplied.                                                                                                           |
+| `body_moult_head`, `body_moult_upperparts`, `body_moult_underparts` | The three positioned source body-moult codes, restricted to `0`-`3`. Their biological meanings are not inferred.                                                          |
+| `p1`-`p10`                                                          | Primary-feather scores in source order. Nine-primary formats leave `p10` missing.                                                                                         |
+| `s1`-`s6`                                                           | Secondary-feather scores in source order.                                                                                                                                 |
+| `t1`-`t3`                                                           | Tertial-feather scores in source order.                                                                                                                                   |
+| `tail1`-`tail6`                                                     | Tail-feather scores in source order.                                                                                                                                      |
+
+The positioned feather columns use this common exported vocabulary:
+
+| Exported score | Meaning                                                        | Source schemes                          |
+| -------------- | -------------------------------------------------------------- | --------------------------------------- |
+| `0`            | Old feather.                                                   | Legacy Ngulia and SAFRING-style sheets. |
+| `1`            | Feather missing or in pin.                                     | Legacy Ngulia and SAFRING-style sheets. |
+| `2`            | New feather grown to at most one third.                        | Legacy Ngulia and SAFRING-style sheets. |
+| `3`            | New feather between one and two thirds grown.                  | Legacy Ngulia and SAFRING-style sheets. |
+| `4`            | New feather more than two thirds grown, with sheath remaining. | Legacy Ngulia and SAFRING-style sheets. |
+| `5`            | Fully grown new feather.                                       | Legacy Ngulia and SAFRING-style sheets. |
+| `8`            | Fully grown feather whose age cannot be determined.            | SAFRING-style sheets only.              |
+| `S`            | Summer-generation feather.                                     | Legacy Ngulia sheets only.              |
+
+The feather columns must be imported as text because they contain numeric-looking scores plus `S`. A simple lossless `readr` import is `read_csv("data/04_curated/ring_events.csv", col_types = cols(.default = col_character()))`; convert date and numeric-only columns afterward when needed.
+
+#### Source mapping and processing
+
+`config/ring_events/moult_specs.csv` assigns each workbook its source columns, expected primary length, overall-status scheme, and feather-score scheme. The processing then follows these rules:
+
+1. Source columns are read and combined in their original order. Empty positions in pipe-separated sequences are retained so that later scores are not shifted to the wrong feather.
+2. Legacy Ngulia feather codes use the documented `0`-`5` progression. Source `O` maps to `0`, `N` maps to `5`, and `9` or `S` maps to exported `S`.
+3. The 2020-2023 SAFRING-style sheets retain `0`-`5` and SAFRING code `8`. Legacy `O`, `N`, `9`, and `S` aliases are not applied to these sheets.
+4. Exact structural variants are normalized only when positions remain unambiguous: scalar primary `0` becomes an all-zero sequence; an 11-character sequence containing one repeated score is reduced to ten positions; combined primary, secondary, and tertial strings are split using their configured lengths; and a nine-character secondary-plus-tertial string is split into six secondary and three tertial positions when no separate tertial value exists.
+5. Structured note text such as `S1=...`, `1.1=...`, `T1=...`, or `1.2=...` can fill otherwise empty secondary or tertial positions. If a note conflicts with a dedicated score column, the conflicting component is left missing and both representations are retained in `moult_note` and QA.
+6. Historical Ngulia overall-status codes map as `0 = old`, `1 = active`, `2 = suspended`, and `5 = complete`. Other summary codes remain unresolved unless a complete primary sequence supplies the status.
+7. A complete primary sequence containing only `0`-`5` determines `primary_moult_status`: any score `1`-`4` means `active`; all `0` means `old`; all `5` means `complete`; and a mixture of only `0` and `5` means `suspended`. This sequence-derived status takes precedence over a conflicting historical summary, with the disagreement recorded in `moult_note` and QA.
+8. Unsupported codes are not guessed. If sequence positions are clear, valid positions are retained and only unsupported positions are missing. If positions cannot be established, the whole affected component remains missing. The original notation and the action taken are retained in `moult_note` and the component-specific QA issue.
+
+The pipeline does not apply an assumed EURING crosswalk: `V`, `X`, and other unsupported letters remain unresolved unless a source-specific meaning is documented later. The implemented mappings are based on the coding notes embedded in the 2006-2007 Ngulia workbook, the primary-moult states described in the 2014 main report, and the documented SAFRING feather-score definitions.
+
+## Other processing decisions
+
+- The unified mist distribution combines observed three-state classifications with ERA5 cloud, humidity, cloud-base, and wind information.
+- Recovery taxonomy and locations are standardized with files in `config/website/`.
+
+<!-- github-only:start -->
+
+## Diagnostics and additional analysis
+
+Diagnostics are optional and do not alter curated data.
+
+```r
+source("scripts/diagnostics/plot_ring_event_measurements.R")
+source("scripts/diagnostics/qa_daily_context.R")
+source("scripts/diagnostics/compare_daily_count_sources.R")
+source("scripts/diagnostics/assess_ring_event_date_modes.R")
+source("scripts/diagnostics/plot_daily_coverage_matrices.R")
+source("scripts/diagnostics/summarize_daily_covariate_coverage.R")
+source("scripts/diagnostics/audit_djp_team_size.R")
+source("scripts/diagnostics/validate_mist_model.R")
+```
+
+Legacy paper-update figures have been reassigned to their scientific analysis folders.
+
+<!-- github-only:end -->
+
+## Data quality and validation
+
+### Ring-event QA
+
+`01_build_ring_events.R` runs QA while cleaning the source workbooks and writes five complementary outputs to `data/03_intermediate/ring_events/qa/`:
+
+- `ring_events_issues.csv`: machine-readable issues with the source file, sheet, row, affected value, explanation, and action taken.
+- `ring_events_issues.md`: the same issues grouped by type for review, including the original spreadsheet-row context.
+- `source_file_audit.csv`: one summary row per source sheet, including imported and exported rows, missing dates/times, ringer lookup coverage, same-day merges, invalid fields, and moult decoding results.
+- `ringer_lookup_audit.csv`: every distinct nonblank source ringer value, its resolved full name, confidence and evidence basis, with total and exportable-row counts.
+- `ringer_lookup_unmatched.csv`: every distinct nonblank ringer value that did not resolve, grouped by source file and sheet with total and exportable-row counts. This is the review queue for extending `ringer_lookup.csv`.
+
+The `action` column in the issue log records what the pipeline did:
+
+| Action                                        | Meaning                                                                                                                                                                                                   |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `exclude_row`                                 | The row cannot define a valid ring event and is omitted from `ring_events.csv`.                                                                                                                           |
+| `replace_species_unknown`                     | The row is retained with `afring_number = 0`; conflicting source values are appended to `ring_note` when applicable.                                                                                      |
+| `replace_age_unknown` / `replace_sex_unknown` | The row is retained with age `0` or a missing sex value.                                                                                                                                                  |
+| `replace_field_missing`                       | The row is retained, but the invalid measurement or decoded moult field is left missing.                                                                                                                  |
+| `replace_status_from_sequence`                | A complete primary-feather sequence supplies the status when the historical overall status is unsupported or conflicts with it; the source value and derived interpretation are retained in `moult_note`. |
+| `replace_retrap_missing`                      | The event is retained with `retrap` missing and the inconsistency appended to `ring_note`.                                                                                                                |
+
+Checks and consequences are:
+
+| Check                    | What is tested                                                                                                                                                                                                                                                                                  | Result                                                                                                                                                                                                                                                                                            |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Date and source range    | Date parsing, October-January month, and the expected year range for the source file. A missing time is allowed.                                                                                                                                                                                | Invalid-date or out-of-range rows are excluded.                                                                                                                                                                                                                                                   |
+| Ring number              | A cleaned ring number is present, and configured reviewed source values match their expected patterns.                                                                                                                                                                                          | Recoverable errors are corrected before histories and event IDs are built; unresolved values are retained with a warning; missing ring numbers are excluded. A missing review target or pattern mismatch stops the build.                                                                         |
+| Species identity         | Species is present, matches the lookup, and agrees across source columns.                                                                                                                                                                                                                       | Missing, unmatched, or conflicting identities are retained as AFRING `0`.                                                                                                                                                                                                                         |
+| Age and sex              | Age uses numeric EURING codes `0`–`9`; sex uses the accepted source mappings.                                                                                                                                                                                                                   | Invalid age becomes `0`; uncertain historical notation such as `2(3)` or `3?` becomes age `2` with the original value in `ring_note`. Valid but unusual ages `7` and `9` are retained with a warning in `ring_note`. Invalid sex becomes missing.                                                 |
+| Wing and weight          | Values are numeric and within the configured species range.                                                                                                                                                                                                                                     | The invalid measurement is set to missing; the event is retained.                                                                                                                                                                                                                                 |
+| Fat                      | `fat_ngulia` is 0-4 and `fat_kaiser` is 0-8, according to the configured source scale.                                                                                                                                                                                                          | The invalid score is set to missing; the event is retained. The two scales are not converted.                                                                                                                                                                                                     |
+| Moult                    | Overall status, old-primary count, primary, secondary, tertial, tail, and body notation are checked independently against the configured source scheme. Structured text is compared with dedicated score columns, and a complete primary sequence is compared with the reported overall status. | Valid positions and components are retained. Unresolved positions remain missing and raw notation is preserved in `moult_note`. Conflicting duplicate representations are left missing; when only overall status conflicts, the sequence-derived status is used and the disagreement is reported. |
+| Same-day records         | The same ring number occurs more than once on one `ringing_date`.                                                                                                                                                                                                                               | Rows are merged into one event; merge counts are reported in the file audit.                                                                                                                                                                                                                      |
+| Ring-species consistency | One ring number resolves to more than one species across the dataset.                                                                                                                                                                                                                           | Affected events use `afring_number = 0`; the conflicting values are appended to `ring_note`.                                                                                                                                                                                                      |
+| Retrap consistency       | The raw retrap code agrees with whether the ring has an earlier event-day record.                                                                                                                                                                                                               | On disagreement, `retrap` is left missing and an explanatory text is appended to `ring_note`.                                                                                                                                                                                                     |
+
+The separate `assess_ring_event_date_modes.R` diagnostic compares alternative source-date interpretations with DJP daily counts. It supports review of `raw_date_is_ringing_date` settings but does not change curated data automatically.
+
+Dataset exploration scripts write descriptive outputs under `outputs/exploration/`. QA scripts write human-facing diagnostics to `outputs/qa/`; machine-readable curation audits remain beside their staging data in `data/03_intermediate/`.
+
+<!-- github-only:start -->
+
+## Rebuilding after changes
+
+- Change ringing source specifications or corrections: rebuild ring events, then daily counts, daily coverage, dataset exploration, diagnostics, and exports.
+- Change the preferred source, `ringing_date`, or season definition: rebuild all curated data and downstream products in this repository; record the new dataset version in downstream analyses.
+- Change taxonomy or the manually curated `recoveries.csv`: rebuild website exports.
+
+## Website export
+
+`01_build_website_exports.R` reads curated daily counts, the manually curated recovery table, and taxonomy mappings, then writes JSON to `exports/website/`.
+
+For local website syncing, point the website preprocessing configuration to this project's `exports/website/` directory.
+
+<!-- github-only:end -->
+
+## Related resources
+
+The GBIF export in `exports/gbif/` uses confirmed capture dates as the Event core, individual ringing records as the Occurrence extension, and biometric and moult observations as bird-level ExtendedMeasurementOrFact rows. Resolved `ringer_name` values are exported as the Darwin Core `recordedBy` field. Daily species counts and environmental variables are excluded; the EML description links to the complete Zenodo research dataset.

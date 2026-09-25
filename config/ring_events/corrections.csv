@@ -34,6 +34,8 @@ source_file,source_sheet,source_row,source_row_end,field,corrected_value,note
 2019.xlsx,Ringing Data,7411,,date_raw,26.11.2019,
 2019.xlsx,Ringing Data,9068,,date_raw,03.12.2019,
 2017.xlsx,Ringing Data,181,,date_raw,14.11.2017,
+2017.xlsx,Ringing Data,14838,,ringer_raw,,A ten-primary moult score was entered in RingedBy; clear the non-ringer value.
+2017.xlsx,Ringing Data,14838,,primary_scores_raw,5500000000,Move the misplaced ten-primary moult score from RingedBy to the configured primary-score field.
 2014.xls,Sheet1,5198,,species_ngulia_raw,3,
 2017.xlsx,Ringing Data,243,,species_label_raw,Irinia,Text species should be Irinia; sex=2 indicates the number is correct and the original text label is wrong.
 2018.xlsx,Ringing Data,1123,,species_no_raw,607,Species number should be 607; no Little Rush Warbler were ringed that year.

@@ -7,12 +7,12 @@ library(cli)
 
 # Set paths ---------------------------------------------------------------
 
-project_dir <- normalizePath(".", mustWork = TRUE)
+project_dir <- here::here()
 source(file.path(project_dir, "scripts", "helpers", "data_paths.R"))
 paths <- get_data_paths(project_dir)
 
 curated_dir <- paths$curated_dir
-summary_dir <- paths$summaries_dir
+summary_dir <- file.path(paths$exploration_output_dir, "dataset_overview", "tables")
 
 ring_events_path <- file.path(curated_dir, "ring_events.csv")
 daily_counts_path <- file.path(curated_dir, "daily_counts.csv")
@@ -62,7 +62,7 @@ ring_events <- read_csv(
   mutate(
     ringing_date = as.Date(ringing_date),
     season = assign_season_from_date(ringing_date),
-    afring_number = str_replace_all(afring_number, "[^0-9]+", "")
+    afring_number = clean_signed_number_key(afring_number)
   )
 
 # Summarize by species ----------------------------------------------------

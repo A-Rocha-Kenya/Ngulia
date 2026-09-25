@@ -6,7 +6,7 @@ library(cli)
 
 # Set paths ---------------------------------------------------------------
 
-project_dir <- normalizePath(".", mustWork = TRUE)
+project_dir <- here::here()
 source(file.path(project_dir, "scripts", "helpers", "data_paths.R"))
 paths <- get_data_paths(project_dir)
 
@@ -76,6 +76,7 @@ species_reference <- load_species_reference(species_reference_path) |>
 
 ring_daily_counts <- read_csv(
   ring_events_path,
+  col_select = c(ringing_date, afring_number),
   show_col_types = FALSE,
   col_types = cols(.default = col_character())
 ) |>

@@ -1,11 +1,12 @@
 dataset:
-  title: "Ngulia data workspace"
+  title: "Ngulia ringing dataset"
   data_title: "Long-term Bird Migration Monitoring at Ngulia, Kenya: Ringing, Counts, Moult and Recoveries"
   description: >-
     Research data and reproducible processing workflows for the Ngulia ringing project.
   data_description: >-
-    Curated ringing events, moult records, daily counts, daily coverage, and recovery records
-    from the Ngulia ringing project in Kenya.
+    Curated ringing events, moult records, daily counts, daily coverage, modeled daily
+    covariates, daily effort evidence, source-linked operations history, and recovery records from the Ngulia
+    ringing project in Kenya.
   language: "eng"
   license: "CC-BY-4.0"
   rights_holder: ""
@@ -37,9 +38,9 @@ dataset:
     are treated as unknown coverage rather than known zero-catch days.
 
 documents:
-  dataset_documentation: "config/publication/dataset_documentation.md"
-  data_limitations: "config/publication/data_limitations.md"
-  contributor_acknowledgements: "config/publication/contributor_acknowledgements.md"
+  dataset_documentation: "docs/dataset.md"
+  data_limitations: "docs/data_limitations.md"
+  contributor_acknowledgements: "docs/contributors.md"
   bibliography: "data/02_reference/publications/references.bib"
 
 # The full bibliography is copied to Zenodo and GBIF. These core publications are
@@ -149,7 +150,7 @@ acknowledgements:
   - "Swedish Ringing Centre — rings and recovery reporting."
 
 repository:
-  url: "https://github.com/A-Rocha-Kenya/Ngulia"
+  url: "https://github.com/A-Rocha-Kenya/ngulia-dataset"
   website_url: ""
   code_license: ""
   website_note: "The project website is maintained in a separate repository."
@@ -159,11 +160,11 @@ repository:
 zenodo:
   resource_type: "dataset"
   access_right: "open"
-  concept_doi: "10.5281/zenodo.21395879"
+  concept_doi: ""
   notes: >-
-    Ring-event, daily-count, coverage, and moult CSV files are curated outputs of the reproducible
-    workflow in the associated GitHub repository. recoveries.csv is a manually curated one-off
-    consolidation with a separate intermediate audit and no regeneration script.
+    The ring-event CSV, including moult fields, and the daily-count and coverage CSV files are
+    curated outputs of the reproducible workflow in the associated GitHub repository. recoveries.csv
+    is a manually curated one-off consolidation with a separate intermediate audit and no regeneration script.
 
 gbif:
   dataset_type: "sampling-event"
@@ -174,12 +175,13 @@ gbif:
 
 files:
   - name: "ring_events.csv"
-    description: "One cleaned ringing event per row."
-  - name: "ring_event_moult.csv"
-    description: "Decoded moult records linked to ringing events by ring_event_id."
+    description: "One cleaned ringing event per row, including biometrics, mapped ringer name, and moult fields when recorded."
   - name: "daily_counts.csv"
     description: "Positive species-day counts from the selected source."
   - name: "daily_coverage.csv"
-    description: "Daily calendar, coverage, moon, project metadata, and ERA5 weather."
+    description: "Canonical daily catch, coverage/effort evidence, observed metadata, calibrated mist probability, and ERA5 weather."
   - name: "recoveries.csv"
     description: "Comprehensive curated recovery and control movements involving Ngulia, with event-level provenance."
+  - name: "operations_history.csv"
+    path: "config/daily_covariates/operations_history.csv"
+    description: "Source- and page-linked historical operations states and events; broad periods remain contextual rather than imputed daily measurements."

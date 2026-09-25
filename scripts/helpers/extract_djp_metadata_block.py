@@ -88,11 +88,12 @@ def main() -> int:
             values.get("BX", ""),
             values.get("BY", ""),
             values.get("BZ", ""),
+            values.get("BS", ""),
         ])
 
     with output_path.open("w", newline="") as handle:
         writer = csv.writer(handle)
-        writer.writerow(["row_index", "moon", "weather", "rain", "site", "tape", "pax"])
+        writer.writerow(["row_index", "moon", "weather", "rain", "site", "tape", "pax", "reported_total"])
         writer.writerows(rows)
 
     return 0

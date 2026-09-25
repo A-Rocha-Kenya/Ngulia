@@ -7,15 +7,16 @@ library(cli)
 
 # Set paths ---------------------------------------------------------------
 
-project_dir <- normalizePath(".", mustWork = TRUE)
+project_dir <- here::here()
+source(file.path(project_dir, "scripts", "helpers", "plot_style.R"))
 source(file.path(project_dir, "scripts", "helpers", "data_paths.R"))
 paths <- get_data_paths(project_dir)
 
 config_dir <- paths$ring_events_config_dir
-summary_dir <- paths$summaries_dir
+summary_dir <- file.path(paths$analysis_output_dir, "00_dataset_overview", "tables")
 daily_counts_dir <- paths$daily_counts_intermediate_dir
 qa_dir <- file.path(daily_counts_dir, "qa")
-figure_dir <- file.path(paths$figures_dir, "daily_count_source_qa")
+figure_dir <- ngulia_figure_dir(file.path(paths$qa_output_dir, "daily_counts", "figures"))
 dir.create(qa_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(figure_dir, recursive = TRUE, showWarnings = FALSE)
 
@@ -52,7 +53,7 @@ cli_h1("Compare daily count sources")
 
 ring_summary <- read_csv(ring_summary_path, show_col_types = FALSE) |>
   transmute(
-    date,
+    date = ringing_date,
     afring_number,
     ring_n_records = n_records
   )
@@ -267,7 +268,7 @@ matrix_plot <- ggplot(
     y = "Season",
     fill = "Daily source state"
   ) +
-  theme_minimal(base_size = 12) +
+  ngulia_theme(base_size = 12) +
   theme(
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
