@@ -17,7 +17,7 @@ The public [Ngulia website](https://a-rocha-kenya.github.io/ngulia-website/) is 
 ## Publication order
 
 1. Create a Zenodo dataset record from the six listed files and the worksheet. Record the **version DOI**, concept DOI, version number, publication date, Git commit, and file checksums. Do not use the concept DOI as a fixed input version for analyses.
-2. Add the verified concept DOI to `config/publication/dataset_metadata.yml`, regenerate the GBIF archive, and register or update the dataset under the configured A Rocha Kenya GBIF publisher. The GBIF resource contains the ringing-event subset; Zenodo contains the broader curated research dataset.
+2. Add the verified concept DOI to `config/publication/dataset_metadata.yml` and regenerate the GBIF archive. Publish it through an IPT account associated with A Rocha Kenya, or host the archive at a stable public URL and request manual registration through the GBIF Help Desk. The GBIF resource contains the ringing-event subset; Zenodo contains the broader curated research dataset. An archive file alone does not create a GBIF record.
 3. After both records resolve, add their links and a short dataset guide to the existing website dashboard and data page. Keep scientific interpretation and the main interactive dashboard there. This repository can show reproducible static dataset figures in its README or documentation without creating a second public portal.
 
 The current local export files are preparation artifacts. Neither an export file nor a DOI written in metadata proves that a public record is live.
