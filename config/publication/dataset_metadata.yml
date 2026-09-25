@@ -38,7 +38,7 @@ dataset:
     are treated as unknown coverage rather than known zero-catch days.
 
 documents:
-  dataset_documentation: "docs/dataset.md"
+  dataset_documentation: "data/README.md"
   data_limitations: "docs/data_limitations.md"
   contributor_acknowledgements: "docs/contributors.md"
   bibliography: "data/02_reference/publications/references.bib"

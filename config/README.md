@@ -29,4 +29,4 @@ These files record how source material is interpreted. They are versioned separa
 | [`website/ngulia_taxonomy_crosswalk.csv`](website/ngulia_taxonomy_crosswalk.csv) | Links among source labels, Ngulia names, Avibase IDs, and other taxonomies, with review flags. | Website export and geolocator-path scripts use it to match species across datasets. |
 | [`publication/dataset_metadata.yml`](publication/dataset_metadata.yml) | Dataset title, creators, coverage, licenses, references, and Zenodo and GBIF settings. | Citation, Zenodo-package, and GBIF-export scripts read it so those outputs use the same metadata. |
 
-The [dataset guide](../docs/dataset.md) explains the processing decisions; [daily covariate evidence](../docs/daily_covariates.md) and the [publication guide](../docs/publication.md) provide the longer context.
+The [scripts README](../scripts/README.md) explains the processing sequence, the [data README](../data/README.md) defines the exported fields, and [daily covariate evidence](../docs/daily_covariates.md) and the [publication guide](../docs/publication.md) provide longer context.

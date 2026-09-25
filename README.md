@@ -19,7 +19,9 @@ Roles describe contributions to this curated dataset and are a project-maintaine
 ## Project guide
 
 - [Documentation index](docs/README.md): methods, reviews, planning, and publication guidance.
-- [Dataset documentation](docs/dataset.md): files, data dictionary, processing, and run order.
+- [Data README](data/README.md): curated files, field dictionary, and value standardization.
+- [Scripts README](scripts/README.md): run order and processing workflow.
+- [Outputs README](outputs/README.md): QA checks and diagnostic files.
 - [Publication status](docs/publication.md): Zenodo and GBIF preparation and record checks.
 - [Data limitations](docs/data_limitations.md): interpretation limits for catch, effort, and historical covariates.
 - [Daily covariate evidence](docs/daily_covariates.md): operations-history structure and evidence rules.
@@ -35,7 +37,7 @@ Regenerate this figure with `scripts/exploration/dataset_overview/01_plot_daily_
 
 ## Repository layout
 
-Each top-level folder has a short README explaining its role and pointing to the detailed references in `docs/`.
+Each top-level folder has a README explaining its files and workflow. Supporting references remain in `docs/`.
 
 | Folder | Start here |
 | --- | --- |

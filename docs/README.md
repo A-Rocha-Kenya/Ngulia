@@ -1,8 +1,10 @@
 # Documentation
 
-Long-form methods, interpretation, publication guidance, and review notes live here. The other top-level folders have short READMEs for orientation.
+Interpretation, publication guidance, planning, and review notes live here. The other top-level folders document their own files and workflows in their READMEs.
 
-- [Dataset guide](dataset.md): tables, field dictionary, processing decisions, QA, and run order.
+- [Data README](../data/README.md): curated tables, field dictionary, and value standardization.
+- [Scripts README](../scripts/README.md): run order and processing workflow.
+- [Outputs README](../outputs/README.md): QA checks and diagnostic files.
 - [Data limitations](data_limitations.md): what catch, effort, and historical variables can support.
 - [Daily covariate evidence](daily_covariates.md): source hierarchy, operations history, and daily application rules.
 - [Publication guide](publication.md): Zenodo and GBIF preparation and record status.

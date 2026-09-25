@@ -57,4 +57,4 @@ The DJP workbook column `BS` is the source daily total. A numeric zero in that c
 
 The main operational sources are the 1969–2012 synthesis, contemporary early ringing accounts, annual reports, field diaries, and weather notes. The published *Scopus* annual accounts through autumn 1991 are now held in the reference library. The strongest remaining opportunities are original daily notebooks or diaries and privately circulated annual reports, especially for 1992–2003. Individual ringing-book scans are useful only where they contain a complete, legible effort note; bird records or partly completed effort headers must not be used to infer netting activity.
 
-For field protocols and future direct measurement, see [Future Ngulia protocol standardization](planning/field_protocol.md). Dataset field definitions are in [dataset documentation](dataset.md).
+For field protocols and future direct measurement, see [Future Ngulia protocol standardization](planning/field_protocol.md). Dataset field definitions are in the [data README](../data/README.md).
