@@ -4,7 +4,7 @@ The curated tables describe birds recorded at Ngulia and the evidence available 
 
 ## Counts and missing dates
 
-`daily_counts.csv` contains positive species-day counts. For each season, the pipeline uses DJP daily summaries if that source has rows for the season; otherwise it summarizes curated ring events. It does not choose the better-looking source separately for each day. In `daily_coverage.csv`, `daily_count_source` identifies a positive total from curated `daily_counts.csv` or a source-recorded DJP zero; it does not identify which source was selected upstream for the season. Use the count-source comparison audit for that distinction.
+`daily_counts.csv` contains positive species-day counts. For each season, the pipeline uses DJP daily summaries if that source has rows for the season; otherwise it summarizes curated ring events. It does not choose the better-looking source separately for each day. In this version DJP supplies seasons 1969–2014 and ring events supply 2015–2023. In `daily_coverage.csv`, `daily_count_source` identifies a positive total from curated `daily_counts.csv` or a source-recorded DJP zero; it does not identify which source was selected upstream for the season. The repository generates a count-source comparison audit, which is not part of the Zenodo deposit.
 
 A species absent from a recorded date can be treated as zero only if that date meets the coverage rule of the analysis. A date absent from `daily_counts.csv` is not a zero-catch day. The DJP daily-total cell provides a separate distinction: a numeric zero is retained as `daily_count_status = zero_in_daily_summary`; a blank remains `missing`. A source-recorded zero does not by itself prove that nets were open.
 
@@ -20,19 +20,19 @@ A species absent from a recorded date can be treated as zero only if that date m
 
 Recorded catch depends on migration aloft, grounding weather, light attraction, net placement and opening, playback, staffing, and the capacity to process birds. A high catch need not mean high regional abundance; a low catch can reflect weak passage, poor grounding conditions, limited effort, or an unobserved date. Protocol changes across decades, including the introduction and relocation of night and dawn nets, lighting changes, and targeted daytime catching, make raw annual totals difficult to compare as abundance.
 
-The selected daily count source may also differ from the individual ring-event table. Do not assume that summing `ring_events.csv` will reproduce every published daily count. The [count-source comparison](../outputs/README.md#other-qa-products) and source provenance fields are available for review.
+The selected daily count source may also differ from the individual ring-event table. Do not assume that summing `ring_events.csv` will reproduce every published daily count. The repository generates a [count-source comparison](../outputs/README.md#other-qa-products) for review.
 
 ## Weather and historical covariates
 
 ERA5 supplies regional weather summaries for 00:00–08:00 East Africa Time; it does not directly observe mist at the lodge. The three `mist_probability_*` fields combine direct classifications where available with an ERA5-calibrated model elsewhere. Probabilities are estimates, not three independent observations.
 
-DJP metadata, annual reports, diaries, and the operations register differ in precision. Reviewed daily corrections are applied to canonical fields, while raw `djp_*` fields remain available. Absence of a report entry does not mean normal operation, no playback, or no rain. Details of the evidence hierarchy and unresolved historical conflicts are in [daily covariate evidence](daily_covariates.md).
+DJP metadata, annual reports, diaries, and the operations register differ in precision. Reviewed daily corrections are applied to canonical fields, while raw `djp_*` fields remain available. Absence of a report entry does not mean normal operation, no playback, or no rain. Specific dated corrections and unresolved conflicts are retained in `operations_history.csv`.
 
 ## Recoveries and source coverage
 
 `recoveries.csv` is a manually consolidated set of identifiable movements involving Ngulia, not a complete detection history of every ringed bird. Encounter location and date precision vary by source; `primary_source`, `supporting_sources`, and `curation_notes` retain that context. `06_standardize_recovery_encounters.R` updates classifications in the curated file but does not reconstruct it from the original documents.
 
-Some raw workbooks, annual reports, and reference material are available only in the local ignored data tree. The prepared Zenodo package includes the curated tables and operations history, not the source archive. Readers should use the exported provenance fields and contact the project for source verification where needed.
+Some raw workbooks, annual reports, and reference material are available only in the local ignored data tree. The Zenodo delivery files include the curated tables and operations history, not the source archive. Readers should use the exported provenance fields and contact the project for source verification where needed.
 
 ## Practical use
 

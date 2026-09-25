@@ -41,6 +41,7 @@ data/07_gbif/
 !/exports/zenodo/
 /exports/zenodo/*
 !/exports/zenodo/README.md
+!/exports/zenodo/DATA_DICTIONARY.md
 
 # Temporary files
 tmp/

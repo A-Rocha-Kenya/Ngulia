@@ -163,10 +163,11 @@ build_clean_output <- function(data, ringer_lookup) {
         ringer_raw,
         ringer_lookup
       ),
+      # Internal UTC-tagged values preserve source wall time; export the Ngulia offset.
       datetime = if_else(
         datetime_precision == "date",
         format(parsed_date, "%Y-%m-%d"),
-        format(datetime, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
+        paste0(format(datetime, "%Y-%m-%dT%H:%M:%S", tz = "UTC"), "+03:00")
       ),
       note_race_plumage = case_when(
         !is.na(race_form_raw) &

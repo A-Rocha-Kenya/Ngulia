@@ -207,6 +207,7 @@ ring_events <- ring_events |>
     ),
     captureEventDate = case_when(
       str_length(datetime) == 10 ~ datetime,
+      str_ends(datetime, fixed("+03:00")) ~ datetime,
       str_ends(datetime, "Z") ~ str_replace(datetime, "Z$", "+03:00"),
       TRUE ~ paste0(str_replace(datetime, " ", "T"), "+03:00")
     )
