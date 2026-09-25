@@ -38,13 +38,11 @@ dataset:
     are treated as unknown coverage rather than known zero-catch days.
 
 documents:
-  dataset_documentation: "data/README.md"
-  data_limitations: "docs/data_limitations.md"
   contributor_acknowledgements: "docs/contributors.md"
   bibliography: "data/02_reference/publications/references.bib"
 
-# The full bibliography is copied to Zenodo and GBIF. These core publications are
-# additionally exposed as machine-readable related identifiers where possible.
+# The bibliography is included in the GBIF metadata. These selected publications
+# can be entered as related identifiers in the Zenodo record metadata.
 related_references:
   - citekey: "Yohannes2007"
     relation: "isSourceOf"
@@ -181,7 +179,7 @@ files:
   - name: "daily_coverage.csv"
     description: "Canonical daily catch, coverage/effort evidence, observed metadata, calibrated mist probability, and ERA5 weather."
   - name: "recoveries.csv"
-    description: "Comprehensive curated recovery and control movements involving Ngulia, with event-level provenance."
+    description: "Curated recovery and control movements involving Ngulia, with event-level provenance."
   - name: "operations_history.csv"
     path: "config/daily_covariates/operations_history.csv"
     description: "Source- and page-linked historical operations states and events; broad periods remain contextual rather than imputed daily measurements."

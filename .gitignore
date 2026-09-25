@@ -38,6 +38,9 @@ data/07_gbif/
 !/outputs/README.md
 /exports/*
 !/exports/README.md
+!/exports/zenodo/
+/exports/zenodo/*
+!/exports/zenodo/README.md
 
 # Temporary files
 tmp/

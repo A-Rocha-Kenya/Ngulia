@@ -1,4 +1,3 @@
-<!-- github-only:start -->
 # Data
 
 The local pipeline runs from source material to four curated CSV tables. Raw, reference, intermediate, and curated files are excluded from Git.
@@ -22,7 +21,7 @@ The Git repository does not contain the source archive or generated CSVs. Keep t
 | `01_raw/daily_counts/djp_daily_and_annual_summaries_1969_2012.xlsx` | DJP species-day summaries and daily metadata. |
 | `01_raw/weather/era5_hourly_single_levels_timeseries/` | Cached ERA5 hourly CSV or ZIP; the weather script requests the required period if its cache is absent. |
 | `02_reference/taxonomy/ebird_clements_2025_integrated_checklist.csv` | Optional name fallback when building daily counts. |
-| `02_reference/publications/references.bib` | Bibliography used to prepare Zenodo and GBIF metadata. |
+| `02_reference/publications/references.bib` | Bibliography used for GBIF metadata and publication review. |
 | `03_intermediate/daily_counts/` | Extracted DJP counts, metadata, and source-comparison audits. |
 | `03_intermediate/weather/era5_daily_weather.csv` | ERA5 weather summarized for each date. |
 | `03_intermediate/daily_context/daily_context.csv` | Joined daily observations and reviewed operations evidence before mist modeling. |
@@ -32,7 +31,6 @@ The Git repository does not contain the source archive or generated CSVs. Keep t
 | `04_curated/recoveries.csv` | Manually curated input to the recovery-classification script; preserve it when rebuilding. |
 
 `03_intermediate/geolocator_paths/` and some external reference collections support optional website or exploration exports. They are not inputs to the four curated tables.
-<!-- github-only:end -->
 
 ## Dataset files
 
@@ -56,9 +54,7 @@ Empty CSV fields represent unavailable, unresolved, or inapplicable values; fiel
 - `daily_counts.csv` contains positive counts only. Missing species rows can be reconstructed as zero only for a documented date; a missing date is not automatically a zero-count day.
 - `daily_coverage.csv` is a calendar scaffold, not evidence that ringing occurred. `ringing_happened` identifies dates with a positive selected count after targeted swallow and martin catches are excluded. Its default window starts on October 20 and extends beyond January 12 when source data do.
 
-<!-- github-only:start -->
 Detailed interpretation limits and analysis assumptions are in [data limitations](../docs/data_limitations.md).
-<!-- github-only:end -->
 
 ## Data dictionary
 
@@ -210,9 +206,7 @@ Empty fields mean unavailable, unresolved, or inapplicable. Parenthesized recove
 
 Annual ringing workbooks are imported using reviewed source specifications and row-level corrections. DJP daily counts are preferred for a whole season when available; otherwise the selected daily totals come from curated ring events. Daily coverage combines the season calendar, counts, operational evidence, observed metadata, modeled mist state, and ERA5 weather. Recoveries were consolidated and curated separately; the recovery script standardizes labels in that table rather than rebuilding its source inventory.
 
-<!-- github-only:start -->
 The run order and ring-event build steps are in the [scripts README](../scripts/README.md).
-<!-- github-only:end -->
 
 ## How encoded values are parsed and standardized
 
@@ -304,6 +298,4 @@ The pipeline does not apply an assumed EURING crosswalk: `V`, `X`, and other uns
 
 Invalid or unresolved source values are recorded in machine-readable audits under `data/03_intermediate/`; invalid measurements are left missing while the event is retained. Ring-event QA records the source file and row, affected value, issue, and action taken. Source-file summaries and ringer-lookup audits make import and identity decisions reviewable.
 
-<!-- github-only:start -->
 The [outputs README](../outputs/README.md) explains the full set of ring-event checks and diagnostic files.
-<!-- github-only:end -->

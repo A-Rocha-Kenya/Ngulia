@@ -2,34 +2,6 @@ read_publication_metadata <- function(path = here::here("config/publication/data
   yaml::read_yaml(path)
 }
 
-read_publication_text <- function(path) {
-  paste(readLines(here::here(path), warn = FALSE), collapse = "\n")
-}
-
-publication_dataset_documentation <- function(path, audience = c("github", "zenodo")) {
-  audience <- match.arg(audience)
-  documentation <- read_publication_text(path)
-
-  if (audience == "zenodo") {
-    documentation <- stringr::str_remove_all(
-      documentation,
-      stringr::regex("<!-- github-only:start -->.*?<!-- github-only:end -->\\s*", dotall = TRUE)
-    )
-    documentation <- publication_strip_local_links(documentation)
-  } else {
-    documentation <- stringr::str_remove_all(
-      documentation,
-      "<!-- github-only:(start|end) -->\\n?"
-    )
-  }
-
-  stringr::str_trim(documentation)
-}
-
-publication_strip_local_links <- function(text) {
-  stringr::str_replace_all(text, "\\[([^]]+)\\]\\((?!https?://|mailto:|#)[^)]+\\)", "\\1")
-}
-
 xml_escape <- function(x) {
   x |>
     stringr::str_replace_all("&", "&amp;") |>

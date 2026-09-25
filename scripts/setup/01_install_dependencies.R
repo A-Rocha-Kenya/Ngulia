@@ -20,7 +20,6 @@ packages <- c(
   "stringr",
   "tidyr",
   "data.table",
-  "digest",
   "htmltools",
   "MASS",
   "nnet",
