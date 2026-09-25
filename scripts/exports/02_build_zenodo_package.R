@@ -140,7 +140,7 @@ form <- glue(
   "Do not upload raw workbooks, intermediate files, QA logs, website exports, or the GBIF archive to this Zenodo dataset record.\n"
 )
 
-unlink(list.files(output_dir, full.names = TRUE, all.files = TRUE, no.. = TRUE))
+unlink(list.files(output_dir, full.names = TRUE, all.files = TRUE, no.. = TRUE), recursive = TRUE)
 writeLines(form, output_path)
 writeLines(zenodo_readme, readme_path)
 

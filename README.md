@@ -18,11 +18,11 @@ Roles describe contributions to this curated dataset and are a project-maintaine
 
 ## Project guide
 
+- [Documentation index](docs/README.md): methods, reviews, planning, and publication guidance.
 - [Dataset documentation](docs/dataset.md): files, data dictionary, processing, and run order.
 - [Publication status](docs/publication.md): Zenodo and GBIF preparation and record checks.
-- [Dataset exploration](scripts/exploration/dataset_overview/): descriptive tables and figures.
 - [Data limitations](docs/data_limitations.md): interpretation limits for catch, effort, and historical covariates.
-- [Daily covariate evidence](config/daily_covariates/README.md): operations-history structure and evidence rules.
+- [Daily covariate evidence](docs/daily_covariates.md): operations-history structure and evidence rules.
 - [Field protocol planning](docs/planning/field_protocol.md): future measurements and standardisation.
 
 ## Dataset overview
@@ -35,6 +35,16 @@ Regenerate this figure with `scripts/exploration/dataset_overview/01_plot_daily_
 
 ## Repository layout
 
-`data/01_raw/` holds source material; `data/02_reference/` holds reference material; `data/03_intermediate/` holds regenerable staging products; and `data/04_curated/` holds analysis-ready datasets. Scripts progress through `scripts/curated/`, `scripts/intermediate/`, `scripts/exploration/`, `scripts/diagnostics/`, and `scripts/exports/`. Generated exploration and QA products are written under `outputs/`; delivery formats under `exports/`.
+Each folder has a short README explaining its role and pointing to the detailed references in `docs/`.
+
+| Folder | Start here |
+| --- | --- |
+| Data | [data/README.md](data/README.md) |
+| Curation rules | [config/README.md](config/README.md) |
+| Runnable workflow | [scripts/README.md](scripts/README.md) |
+| Generated deliveries | [exports/README.md](exports/README.md) |
+| Exploration and QA | [outputs/README.md](outputs/README.md) |
+| Figures and illustrations | [assets/README.md](assets/README.md) |
+| Detailed references | [docs/README.md](docs/README.md) |
 
 Question-specific research is maintained in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis). The [Ngulia website](https://a-rocha-kenya.github.io/ngulia-website/) is the public project entry point; the [forecast](https://a-rocha-kenya.github.io/ngulia-forcast/) is a separate tool. Zenodo and GBIF publication records are in preparation. Source collections and regenerated products are not tracked in Git.

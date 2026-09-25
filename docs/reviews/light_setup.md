@@ -1,7 +1,7 @@
 # Ngulia light attraction: mechanisms, evidence and measurement
 
 **Working review — 18 September 2026**  
-**Scope:** how artificial light can affect nocturnally migrating birds at Ngulia, and what must be measured for a defensible LED transition or experiment. The dated history of lamps, geometry, outages and other operational conditions is consolidated in [daily covariate configuration](config/daily_covariates/README.md) and its source table.
+**Scope:** how artificial light can affect nocturnally migrating birds at Ngulia, and what must be measured for a defensible LED transition or experiment. The dated history of lamps, geometry, outages and other operational conditions is consolidated in [daily covariate configuration](../daily_covariates.md) and its source table.
 
 ## Executive summary
 
@@ -42,7 +42,7 @@ For reference, the European Commission gives typical tungsten-halogen efficacy a
 
 Ngulia Safari Lodge is near the top of an east-facing escarpment, below the Ngulia ridge. Its north-facing floodlights make an isolated illuminated volume where low cloud frequently descends to lodge level during the short rains. The original lights illuminated game-drinking pools on the northern side of the lodge; night nets and, later, dawn nets were positioned within this broader setting.
 
-The early observations establish the field mechanism: birds often appear within an hour of mist arriving; rain is not required, but attraction is weak on clear nights and near full moon. In very thick mist, illuminated walls can create collision or exhaustion risk. Catch remains an index of a fall, because birds can remain aloft, settle outside nets, escape capture, or overwhelm handling capacity. These statements come from [Pearson & Backhurst (1976)](<data/02_reference/publications/pdfs/Pearson_Backhurst___1976___The_Southward_Migration_of_Palaearctic_Birds_Over_Ngulia_Kenya.pdf>) and [Pearson, Backhurst & Jackson (2014)](<data/02_reference/publications/pdfs/149917_394216_1_SM.pdf>). The dated operational history and its catch implications are in the [daily covariate configuration](config/daily_covariates/README.md) and `operations_history.csv`.
+The early observations establish the field mechanism: birds often appear within an hour of mist arriving; rain is not required, but attraction is weak on clear nights and near full moon. In very thick mist, illuminated walls can create collision or exhaustion risk. Catch remains an index of a fall, because birds can remain aloft, settle outside nets, escape capture, or overwhelm handling capacity. These statements come from [Pearson & Backhurst (1976)](<../../data/02_reference/publications/pdfs/Pearson_Backhurst___1976___The_Southward_Migration_of_Palaearctic_Birds_Over_Ngulia_Kenya.pdf>) and [Pearson, Backhurst & Jackson (2014)](<../../data/02_reference/publications/pdfs/149917_394216_1_SM.pdf>). The dated operational history and its catch implications are in the [daily covariate configuration](../daily_covariates.md) and `operations_history.csv`.
 
 ## 3. Evidence from experiments and comparative studies
 
@@ -292,10 +292,10 @@ The most valuable result of the next season would not be a single “winning” 
 
 ### Ngulia archive
 
-- Pearson, D. J. & Backhurst, G. C. (1976). The southward migration of Palaearctic birds over Ngulia, Kenya. [Local PDF](<data/02_reference/publications/pdfs/Pearson_Backhurst___1976___The_Southward_Migration_of_Palaearctic_Birds_Over_Ngulia_Kenya.pdf>).
-- Pearson, D., Backhurst, G. & Jackson, C. (2014). Palaearctic birds at Ngulia Lodge, Tsavo, Kenya 1969–2012. [Local PDF](<data/02_reference/publications/pdfs/149917_394216_1_SM.pdf>).
-- Pearson, D. (2016). Ringing and observation of migrants at Ngulia Lodge, 2013–2015. [Local PDF](<data/02_reference/publications/pdfs/ajol_file_journals_523_articles_139731_submission_proof_139731_6157_372749_1_10_20160718.pdf>).
-- Ngulia Ringing Group annual reports. [Report directory](<data/02_reference/reports/>).
+- Pearson, D. J. & Backhurst, G. C. (1976). The southward migration of Palaearctic birds over Ngulia, Kenya. [Local PDF](<../../data/02_reference/publications/pdfs/Pearson_Backhurst___1976___The_Southward_Migration_of_Palaearctic_Birds_Over_Ngulia_Kenya.pdf>).
+- Pearson, D., Backhurst, G. & Jackson, C. (2014). Palaearctic birds at Ngulia Lodge, Tsavo, Kenya 1969–2012. [Local PDF](<../../data/02_reference/publications/pdfs/149917_394216_1_SM.pdf>).
+- Pearson, D. (2016). Ringing and observation of migrants at Ngulia Lodge, 2013–2015. [Local PDF](<../../data/02_reference/publications/pdfs/ajol_file_journals_523_articles_139731_submission_proof_139731_6157_372749_1_10_20160718.pdf>).
+- Ngulia Ringing Group annual reports. [Report directory](<../../data/02_reference/reports/>).
 - Related planning note: [Future Ngulia protocol and standardisation](../planning/field_protocol.md).
 
 ### External research and technical sources

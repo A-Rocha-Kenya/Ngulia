@@ -13,30 +13,11 @@ Empty CSV fields represent unavailable, unresolved, or inapplicable values; fiel
 
 <!-- github-only:start -->
 
-## Repository structure
+## Repository navigation
 
-- `data/01_raw/`: source workbooks, weather downloads, and external archives. Do not edit unless updating source material.
-- `data/02_reference/`: taxonomy lists, range maps, reports, and publications.
-- `data/03_intermediate/`: regenerable staging tables and machine-readable curation audits.
-- `data/04_curated/`: analysis-ready project datasets.
-- `outputs/exploration/`: descriptive dataset tables and figures.
-- `outputs/qa/`: human-facing diagnostics and validation figures.
-- `exports/`: generated website, Zenodo, and GBIF delivery files.
-- `assets/figures/`: manually maintained illustrations, distinct from regenerated figures.
-- `scripts/exploration/`: descriptive dataset summaries and figures. Scientific analyses are maintained in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis).
-- `scripts/intermediate/`: daily-context assembly and modeled covariate products used to build the curated daily table.
-- `scripts/diagnostics/`: QA and method-validation scripts that do not alter curated data.
-- `config/daily_covariates/`: source-linked historical operations evidence kept separate from daily observations.
-- `config/ring_events/`: source specifications, general corrections, reviewed ring-number corrections and warnings, species mappings, measurement ranges, and moult rules.
-- `config/website/`: taxonomy mappings used by the website pipeline.
-- `config/analysis/`: capture-group decisions shared by daily-coverage curation and downstream analyses.
-- `config/publication/`: shared publication metadata.
+Start with the folder READMEs for [data](../data/README.md), [configuration](../config/README.md), [scripts](../scripts/README.md), [generated exports](../exports/README.md), [local outputs](../outputs/README.md), and [assets](../assets/README.md). The [documentation index](README.md) links the longer method, limitation, and publication references.
 
-- `docs/`: concise project documentation, review notes, and forward protocol planning.
-
-All curated datasets are in `data/04_curated/`.
-
-Data files are not tracked in Git. Raw and reference inputs are not distributed through GitHub; curated datasets are published through Zenodo, and Darwin Core exports through GBIF. Access instructions and rights for the source collections still need to be documented before public release.
+Data and regenerated products are not tracked in Git. The curated tables are prepared for Zenodo and the ringing-event subset for GBIF; current record status is in the [publication guide](publication.md).
 
 <!-- github-only:end -->
 
