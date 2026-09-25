@@ -8,4 +8,4 @@ The dataset documentation now lives beside the files it describes:
 - [Exports README](../exports/README.md): website and GBIF delivery details.
 - [Configuration README](../config/README.md): each reviewed input rule and how it is used.
 
-For interpretation limits, see [data limitations](data_limitations.md). For publication status, see [the publication guide](publication.md).
+For interpretation limits, see [data limitations](data_limitations.md). For publication status, see the [exports README](../exports/README.md).

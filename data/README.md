@@ -10,7 +10,7 @@ The local pipeline runs from source material to four curated CSV tables. Raw, re
 | `03_intermediate/` | Regenerable staging tables and machine-readable curation audits. |
 | `04_curated/` | Canonical `ring_events.csv`, `daily_counts.csv`, `daily_coverage.csv`, and `recoveries.csv`. |
 
-The [scripts README](../scripts/README.md) gives the build order and processing workflow. The [outputs README](../outputs/README.md) explains QA results. Interpretation limits are in [data limitations](../docs/data_limitations.md); publication status is in the [publication guide](../docs/publication.md).
+The [scripts README](../scripts/README.md) gives the build order and processing workflow. The [outputs README](../outputs/README.md) explains QA results. Interpretation limits are in [data limitations](../docs/data_limitations.md); publication status is in the [exports README](../exports/README.md).
 <!-- github-only:end -->
 
 ## Dataset files

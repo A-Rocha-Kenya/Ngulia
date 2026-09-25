@@ -1,21 +1,39 @@
-# Generated delivery files
+# Exports and publication
 
-This folder contains local, regenerable exports and is excluded from Git except for this README. Build them with the export scripts listed in [`scripts/`](../scripts/README.md).
+This folder holds regenerable delivery files; only this README is tracked in Git. Run export scripts from the repository root after rebuilding the curated tables and reviewing QA results.
 
 | Folder | Contents |
 | --- | --- |
-| `website/` | Files consumed by the separate Ngulia website. |
-| `zenodo/` | Six upload files, checksum manifest, deposit worksheet, and dataset README. The builder replaces this folder's contents. |
+| `website/` | JSON files consumed by the separate Ngulia website. |
+| `zenodo/` | Dataset README, six upload files, SHA-256 manifest, and deposit worksheet. The builder replaces this folder's contents. |
 | `gbif/` | Darwin Core Archive and its event, occurrence, measurement, and metadata files. |
 
-Review [publication status and order](../docs/publication.md) before uploading or registering any export.
+## Build and review
+
+1. Rebuild the four curated tables using the [scripts README](../scripts/README.md) and review the [QA outputs](../outputs/README.md), especially ring-event corrections, coverage evidence, and recoveries.
+2. Run the dataset overview scripts in `scripts/exploration/dataset_overview/` and check their summaries and figures.
+3. Run `Rscript scripts/exports/00_build_citation.R`, `Rscript scripts/exports/02_build_zenodo_package.R`, and `Rscript scripts/exports/03_build_gbif_export.R`.
+4. Review `zenodo/zenodo_form.md`, the six files in `zenodo/upload/`, `zenodo/upload_manifest.csv`, and `gbif/ngulia_gbif_dwca.zip`. Confirm licenses, attribution, coordinates, record counts, and [interpretation limits](../docs/data_limitations.md).
+
+## Current record status
+
+The latest documented record checks were on **2026-09-25**. The export builders prepare files but do not publish them.
+
+- **Zenodo:** No resolving concept DOI is recorded. The former `10.5281/zenodo.21395879` value did not resolve at that check and was removed from publication metadata. The six upload files, checksums, and form worksheet can be generated locally.
+- **GBIF:** No Ngulia dataset was returned for the configured A Rocha Kenya publisher at that check. The Darwin Core Archive can be generated locally; registration and ingestion remain pending.
+
+A local export file or an identifier in metadata does not establish that a public record is live.
+
+## Publication order
+
+1. Create the Zenodo dataset record using `zenodo/upload/` and the worksheet. Record the **version DOI**, concept DOI, version number, publication date, Git commit, and file checksums. Analyses should cite a fixed version DOI.
+2. Add the verified concept DOI to [`config/publication/dataset_metadata.yml`](../config/publication/dataset_metadata.yml) and rebuild the GBIF archive. Publish it through an IPT account associated with A Rocha Kenya, or host the archive at a stable public URL and request manual registration through the GBIF Help Desk. GBIF contains the ringing-event subset; Zenodo contains the broader research dataset. An archive file alone does not create a GBIF record.
+3. Once both records resolve, add their links and a short dataset guide to the existing [Ngulia website](https://a-rocha-kenya.github.io/ngulia-website/). The website is the public project entry point and hosts the interactive science dashboard; the separate [forecast](https://a-rocha-kenya.github.io/ngulia-forcast/) hosts its operational dashboard. Question-specific research belongs in [ngulia-analysis](https://github.com/A-Rocha-Kenya/ngulia-analysis).
 
 ## Website export
 
-`01_build_website_exports.R` reads curated daily counts, the manually curated recovery table, and taxonomy mappings, then writes JSON to `exports/website/`.
+`01_build_website_exports.R` reads curated daily counts, the manually curated recovery table, and taxonomy mappings, then writes JSON to `website/`. For local syncing, point the website preprocessing configuration to `exports/website/`.
 
-For local website syncing, point the website preprocessing configuration to this project's `exports/website/` directory.
+## GBIF archive
 
-## Related resources
-
-The GBIF export in `exports/gbif/` uses confirmed capture dates as the Event core, individual ringing records as the Occurrence extension, and biometric and moult observations as bird-level ExtendedMeasurementOrFact rows. Resolved `ringer_name` values are exported as the Darwin Core `recordedBy` field. Daily species counts and environmental variables are excluded; the EML description links to the complete Zenodo research dataset.
+The GBIF export uses confirmed capture dates as the Event core, individual ringing records as the Occurrence extension, and biometric and moult observations as bird-level ExtendedMeasurementOrFact rows. Resolved `ringer_name` values become Darwin Core `recordedBy`. Daily species counts and environmental variables are excluded; the EML description links to the broader Zenodo research dataset.
