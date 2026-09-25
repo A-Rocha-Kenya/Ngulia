@@ -25,6 +25,14 @@ Roles describe contributions to this curated dataset and are a project-maintaine
 - [Daily covariate evidence](config/daily_covariates/README.md): operations-history structure and evidence rules.
 - [Field protocol planning](docs/planning/field_protocol.md): future measurements and standardisation.
 
+## Dataset overview
+
+The figure shows recorded daily ringing totals by season. Blank dates are not assumed to be zero-catch days; see the coverage table before interpreting gaps.
+
+![Daily rings by season](assets/generated/daily_rings_by_season.png)
+
+Regenerate this figure with `scripts/exploration/dataset_overview/01_plot_daily_rings_by_season.R` and copy the reviewed result from `outputs/exploration/dataset_overview/figures/` to `assets/generated/`.
+
 ## Repository layout
 
 `data/01_raw/` holds source material; `data/02_reference/` holds reference material; `data/03_intermediate/` holds regenerable staging products; and `data/04_curated/` holds analysis-ready datasets. Scripts progress through `scripts/curated/`, `scripts/intermediate/`, `scripts/exploration/`, `scripts/diagnostics/`, and `scripts/exports/`. Generated exploration and QA products are written under `outputs/`; delivery formats under `exports/`.
