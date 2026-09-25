@@ -127,6 +127,125 @@ load_corrections <- function(path) {
     select(-source_row_end)
 }
 
+load_ring_number_review <- function(path) {
+  required_columns <- c(
+    "source_file",
+    "source_sheet",
+    "source_row",
+    "source_row_end",
+    "expected_pattern",
+    "replacement",
+    "warning"
+  )
+  review <- read_config_csv(
+    path,
+    "ring_number_review",
+    suppress_warnings = TRUE
+  )
+  missing_columns <- setdiff(required_columns, names(review))
+  if (length(missing_columns) > 0) {
+    cli_abort(c(
+      "ring_number_review is missing required columns.",
+      "i" = "Fix the config file before rerunning.",
+      setNames(missing_columns, rep("x", length(missing_columns)))
+    ))
+  }
+
+  review <- review |>
+    transmute(
+      source_file = blank_to_na(source_file),
+      source_sheet = blank_to_na(source_sheet),
+      source_row = as.integer(source_row),
+      source_row_end = as.integer(blank_to_na(source_row_end)),
+      expected_pattern = blank_to_na(expected_pattern),
+      replacement = blank_to_na(replacement),
+      warning = blank_to_na(warning)
+    ) |>
+    mutate(source_row_end = coalesce(source_row_end, source_row))
+
+  abort_on_invalid_rows(
+    review |>
+      mutate(
+        detail = paste0(
+          source_file, " | ", source_sheet,
+          " | source_row=", source_row, ":", source_row_end,
+          " | expected_pattern=", expected_pattern
+        )
+      ),
+    is.na(source_file) |
+      is.na(source_sheet) |
+      is.na(source_row) |
+      source_row < 1 |
+      is.na(source_row_end) |
+      source_row_end < source_row |
+      is.na(expected_pattern) |
+      (is.na(replacement) & is.na(warning)),
+    "ring_number_review",
+    "detail",
+    path
+  )
+
+  review <- review |>
+    rowwise() |>
+    mutate(source_row = list(seq.int(source_row, source_row_end))) |>
+    ungroup() |>
+    unnest(source_row) |>
+    select(-source_row_end)
+
+  abort_on_duplicate_keys(
+    review,
+    c("source_file", "source_sheet", "source_row"),
+    "ring_number_review",
+    path
+  )
+
+  review
+}
+
+load_ring_history_review <- function(path) {
+  review <- read_config_csv(
+    path,
+    "ring_history_review",
+    suppress_warnings = TRUE
+  ) |>
+    transmute(
+      source_file = blank_to_na(source_file),
+      source_sheet = blank_to_na(source_sheet),
+      source_row = as.integer(source_row),
+      expected_pattern = blank_to_na(expected_pattern),
+      ring_history_action = blank_to_na(action),
+      ring_history_review_note = blank_to_na(note)
+    )
+
+  abort_on_invalid_rows(
+    review |>
+      mutate(
+        detail = paste0(
+          source_file, " | ", source_sheet, " | source_row=", source_row,
+          " | action=", ring_history_action
+        )
+      ),
+    is.na(source_file) |
+      is.na(source_sheet) |
+      is.na(source_row) |
+      source_row < 1 |
+      is.na(expected_pattern) |
+      !ring_history_action %in% c("new_assignment", "same_assignment"),
+    "ring_history_review",
+    "detail",
+    path
+  )
+
+  abort_on_duplicate_keys(
+    review,
+    c("source_file", "source_sheet", "source_row"),
+    "ring_history_review",
+    path
+  )
+
+  review
+}
+
 load_species_lookup <- function(path) {
   species_lookup <- read_config_csv(path, "species_lookup") |>
     transmute(
@@ -175,6 +294,69 @@ load_species_reference <- function(path) {
   )
 
   species_reference
+}
+
+clean_ringer_lookup_input <- function(input_text, input_type) {
+  input_text <- blank_to_na(input_text)
+  code_input <- input_text |>
+    str_to_upper() |>
+    str_remove("[[:punct:]]+$")
+  initial_input <- input_text |>
+    str_to_upper() |>
+    str_remove_all("[^A-Z0-9]+")
+
+  case_when(
+    input_type == "ringer_code" ~ if_else(
+      str_detect(code_input, "^[0-9]{3}$"),
+      code_input,
+      NA_character_
+    ),
+    input_type == "ringer_initial" ~ initial_input,
+    input_type == "ringer_name" ~ clean_key(input_text),
+    TRUE ~ NA_character_
+  )
+}
+
+load_ringer_lookup <- function(path) {
+  ringer_lookup <- read_config_csv(path, "ringer_lookup") |>
+    transmute(
+      source_file = blank_to_na(source_file),
+      input_type = blank_to_na(input_type),
+      input_text = clean_ringer_lookup_input(input_text, input_type),
+      ringer_name = blank_to_na(ringer_name),
+      mapping_confidence = blank_to_na(mapping_confidence),
+      mapping_basis = blank_to_na(mapping_basis)
+    )
+
+  abort_on_duplicate_keys(
+    ringer_lookup,
+    c("source_file", "input_type", "input_text"),
+    "ringer_lookup",
+    path
+  )
+
+  abort_on_invalid_rows(
+    ringer_lookup |>
+      mutate(detail = paste(
+        source_file,
+        input_type,
+        input_text,
+        ringer_name,
+        mapping_confidence,
+        sep = " | "
+      )),
+    is.na(input_type) | !input_type %in% c("ringer_code", "ringer_initial", "ringer_name") |
+      is.na(input_text) | input_text == "" |
+      is.na(ringer_name) | ringer_name == "" |
+      is.na(mapping_confidence) |
+      !mapping_confidence %in% c("verified", "high", "medium", "low") |
+      is.na(mapping_basis) | mapping_basis == "",
+    "ringer_lookup",
+    "detail",
+    path
+  )
+
+  ringer_lookup
 }
 
 load_subspecies_lookup <- function(path) {
@@ -842,6 +1024,10 @@ read_spec <- function(spec, moult_spec = NULL) {
   } else {
     NA_character_
   }
+  ringer_col <- first_existing_col(
+    data,
+    c("Init", "Initial", "Initials", "Ringer", "Ringed by", "Observer")
+  )
   date_col <- first_existing_col(data, c("Date"))
   day_col <- first_existing_col(data, c("DAY", "Day"))
   month_col <- first_existing_col(data, c("MON", "MONTH", "Month"))
@@ -910,6 +1096,7 @@ read_spec <- function(spec, moult_spec = NULL) {
     weight_raw = col_or_na(data, weight_col),
     fat_ngulia_raw = col_or_na(data, fat_ngulia_col),
     fat_kaiser_raw = col_or_na(data, fat_kaiser_col),
+    ringer_raw = col_or_na(data, ringer_col),
     ringNumber_raw = col_or_na(data, ring_col),
     retrap_code_raw = if (use_retrap_code) {
       col_or_na(data, retrap_code_col)
@@ -1079,6 +1266,191 @@ apply_corrections <- function(data, corrections) {
         species_no_raw,
         species_ngulia_raw,
         species_label_raw
+      )
+    )
+}
+
+apply_ring_number_review <- function(data, review) {
+  if (nrow(review) == 0) {
+    return(data)
+  }
+
+  missing_targets <- review |>
+    anti_join(
+      data |>
+        distinct(source_file, source_sheet, source_row),
+      by = c("source_file", "source_sheet", "source_row")
+    )
+  if (nrow(missing_targets) > 0) {
+    missing_text <- missing_targets |>
+      transmute(
+        detail = paste0(source_file, " | ", source_sheet, " | ", source_row)
+      ) |>
+      pull(detail)
+    cli_abort(c(
+      "ring_number_review targets source rows that were not imported.",
+      "i" = "Update the review file or the source specifications.",
+      setNames(missing_text, rep("x", length(missing_text)))
+    ))
+  }
+
+  reviewed <- review |>
+    left_join(
+      data |>
+        select(
+          source_file,
+          source_sheet,
+          source_row,
+          ringNumber_raw,
+          note_raw
+        ),
+      by = c("source_file", "source_sheet", "source_row")
+    ) |>
+    mutate(
+      ring_review_value = clean_ring_number(ringNumber_raw),
+      ring_review_matches = str_detect(
+        ring_review_value,
+        expected_pattern
+      )
+    )
+
+  mismatches <- reviewed |>
+    filter(!coalesce(ring_review_matches, FALSE))
+  if (nrow(mismatches) > 0) {
+    mismatch_text <- mismatches |>
+      transmute(
+        detail = paste0(
+          source_file, " | ", source_sheet, " | ", source_row,
+          " | expected ", expected_pattern,
+          " | found ", coalesce(ring_review_value, "<missing>")
+        )
+      ) |>
+      pull(detail)
+    cli_abort(c(
+      "ring_number_review no longer matches the source data.",
+      "i" = "Review the changed source rows before applying corrections.",
+      setNames(mismatch_text, rep("x", length(mismatch_text)))
+    ))
+  }
+
+  n_corrections <- sum(!is.na(reviewed$replacement))
+  n_warnings <- sum(!is.na(reviewed$warning))
+  cli_alert_info(
+    "Ring-number review: applying {n_corrections} corrections and {n_warnings} warnings"
+  )
+
+  applied_review <- reviewed |>
+    mutate(
+      corrected_ring_number = if_else(
+        !is.na(replacement),
+        str_replace(
+          ring_review_value,
+          expected_pattern,
+          replacement
+        ),
+        ringNumber_raw
+      ),
+      warning_safe = coalesce(warning, "__NO_RING_WARNING__"),
+      corrected_note = case_when(
+        is.na(warning) ~ note_raw,
+        is.na(note_raw) ~ warning,
+        str_detect(note_raw, fixed(warning_safe)) ~ note_raw,
+        TRUE ~ paste(note_raw, warning, sep = "|")
+      ),
+      ring_review_applied = TRUE
+    ) |>
+    select(
+      source_file,
+      source_sheet,
+      source_row,
+      corrected_ring_number,
+      corrected_note,
+      ring_review_applied
+    )
+
+  data |>
+    left_join(
+      applied_review,
+      by = c("source_file", "source_sheet", "source_row")
+    ) |>
+    mutate(
+      ringNumber_raw = if_else(
+        coalesce(ring_review_applied, FALSE),
+        corrected_ring_number,
+        ringNumber_raw
+      ),
+      note_raw = if_else(
+        coalesce(ring_review_applied, FALSE),
+        corrected_note,
+        note_raw
+      )
+    ) |>
+    select(
+      -corrected_ring_number,
+      -corrected_note,
+      -ring_review_applied
+    )
+}
+
+apply_ring_history_review <- function(data, review) {
+  missing_targets <- review |>
+    anti_join(
+      data |>
+        distinct(source_file, source_sheet, source_row),
+      by = c("source_file", "source_sheet", "source_row")
+    )
+  if (nrow(missing_targets) > 0) {
+    cli_abort("ring_history_review targets source rows that were not imported.")
+  }
+
+  reviewed <- review |>
+    left_join(
+      data |>
+        select(source_file, source_sheet, source_row, ringNumber_raw),
+      by = c("source_file", "source_sheet", "source_row")
+    ) |>
+    mutate(
+      ring_review_value = clean_ring_number(ringNumber_raw),
+      ring_review_matches = str_detect(ring_review_value, expected_pattern)
+    )
+
+  mismatches <- reviewed |>
+    filter(!coalesce(ring_review_matches, FALSE))
+  if (nrow(mismatches) > 0) {
+    mismatch_text <- mismatches |>
+      transmute(
+        detail = paste0(
+          source_file, " | ", source_sheet, " | ", source_row,
+          " | expected ", expected_pattern,
+          " | found ", coalesce(ring_review_value, "<missing>")
+        )
+      ) |>
+      pull(detail)
+    cli_abort(c(
+      "ring_history_review no longer matches the corrected source data.",
+      setNames(mismatch_text, rep("x", length(mismatch_text)))
+    ))
+  }
+
+  cli_alert_info("Ring-history review: applying {nrow(reviewed)} decisions")
+
+  data |>
+    left_join(
+      reviewed |>
+        select(
+          source_file,
+          source_sheet,
+          source_row,
+          ring_history_action,
+          ring_history_review_note
+        ),
+      by = c("source_file", "source_sheet", "source_row")
+    ) |>
+    mutate(
+      note_raw = case_when(
+        is.na(ring_history_review_note) ~ note_raw,
+        is.na(note_raw) ~ ring_history_review_note,
+        TRUE ~ paste(note_raw, ring_history_review_note, sep = "|")
       )
     )
 }

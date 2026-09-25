@@ -1,0 +1,38 @@
+source_file,source_sheet,source_row,source_row_end,expected_pattern,replacement,warning
+1993.xls,1993 All,14522,14523,^B---[0-9]{2}$,,ring_number_warning=recorded ring is partial and cannot be reconstructed from the source sequence
+1995.xls,Sheet1,2865,,^BH030467$,,ring_number_warning=BH030467 has six numeric digits while the BH stock has five; the intended ring is unresolved
+1995.xls,Sheet1,4171,,^BG9222$,BG09222,
+1995.xls,Sheet1,7440,,^38$,,ring_number_warning=only the digits 38 were recorded and the intended BH-series ring is unresolved
+1995.xls,Sheet1,14540,14546,^T2300(0[3-9])$,T230\1,
+1996.xls,Sheet1,252,,^3$,BL40249,
+1996.xls,Sheet1,1809,,^3BL41806$,BL41806,
+1996.xls,Sheet1,17835,17883,^JKJ,2KJ,
+1997.xls,Sheet1,17114,,^61155769$,6115769,
+1998.xls,Sheet1,19748,,^1EJ04100$,1EJ04000,
+2000.xls,Sheet1,17764,,^NORING$,,ring_number_warning=the source explicitly says NO RING and no ring number can be reconstructed
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,36780,,^BSS80611$,BS80611,
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,38855,,^BU558889$,BU55889,
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,41854,,^U68048$,1EK68048,
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,44856,,^BT82390$,,ring_number_warning=BT82390 is a singleton stock and may be BZ82390; the sequence does not prove the correction
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,48671,,^BZZ91653$,BZ91653,
+2001-2005_Processed(1993-2000 present too).xlsx,Ngulia Data 1993-2005,49469,,^2KL772KL77361$,,ring_number_warning=two 2KL ring strings appear concatenated and the intended ring is unresolved
+2006-2007_Processed.xls,Sheet1,75,76,^CGC,CG0,
+2006-2007_Processed.xls,Sheet1,2638,,^CG15640$,CG05640,
+2006-2007_Processed.xls,Sheet1,4556,,^CC17794$,,ring_number_warning=CC17794 may be an old CC ring or a typo of CG17794; the sequence is inconclusive
+2008_Processed.xlsx,Sheet1,17355,,^CL0670I$,CL06701,
+2013.xls,Sheet1,5545,,^507929$,,ring_number_warning=507929 appears to lack a final digit in the 507929x series; the digit cannot be inferred safely
+2018.xlsx,Ringing Data,6195,,^493$,XA59330,
+2018.xlsx,Ringing Data,7009,,^618502$,6184502,
+2019.xlsx,Ringing Data,9120,9138,^2XS,2KS,
+2020.xlsx,Ring Data,2600,,^363715$,3637115,
+2020.xlsx,Ring Data,4011,,^XA7399$,XA07399,
+2020.xlsx,Ring Data,5834,,^XA68300$,XA69300,
+2020.xlsx,Ring Data,7584,,^184503$,6184503,
+2023.xlsx,2023 Ringing Data ALL books,123,,^3X00635$,,ring_number_warning=3X00635 was entered as a new ring but duplicates a 2022 ring; the intended value is unresolved
+2023.xlsx,2023 Ringing Data ALL books,813,,^3XN00646$,3X00646,
+2023.xlsx,2023 Ringing Data ALL books,933,,^3X0047$,3X00647,
+2023.xlsx,2023 Ringing Data ALL books,1490,,^3X00551$,3X00651,
+2023.xlsx,2023 Ringing Data ALL books,4692,,^3X00364$,3X00654,
+2023.xlsx,2023 Ringing Data ALL books,5325,,^3X00557$,3X00657,
+2023.xlsx,2023 Ringing Data ALL books,5884,5886,^2XLL[0-9]{3}$,,ring_number_warning=2XLL is a three-ring singleton stock; interpreting the second L as digit 1 would collide with 2019 rings
+2023.xlsx,2023 Ringing Data ALL books,6586,,^3X00017$,3X00107,

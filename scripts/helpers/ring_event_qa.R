@@ -276,18 +276,24 @@ build_issues <- function(raw_data, merged_data, same_day_groups) {
     )
 
   ring_species_conflict_rows <- merged_data |>
-    filter(keep_year, clean_required, !is.na(ringNumber), !is.na(afring_number))
+    filter(
+      keep_year,
+      clean_required,
+      !is.na(ring_assignment_id),
+      !is.na(afring_number)
+    )
 
   conflict_rings <- ring_species_conflict_rows |>
-    distinct(ringNumber, afring_number) |>
-    count(ringNumber, name = "species_n") |>
+    distinct(ring_assignment_id, afring_number) |>
+    count(ring_assignment_id, name = "species_n") |>
     filter(species_n > 1)
 
   ring_species_conflict_issues <- ring_species_conflict_rows |>
-    semi_join(conflict_rings, by = "ringNumber") |>
-    arrange(ringNumber, datetime, source_file, source_sheet, source_row) |>
-    group_by(ringNumber) |>
+    semi_join(conflict_rings, by = "ring_assignment_id") |>
+    arrange(ring_assignment_id, datetime, source_file, source_sheet, source_row) |>
+    group_by(ring_assignment_id) |>
     summarise(
+      ringNumber = first(ringNumber),
       source_file = first(source_file),
       source_sheet = first(source_sheet),
       source_row = first(source_row),
@@ -310,7 +316,9 @@ build_issues <- function(raw_data, merged_data, same_day_groups) {
       field = "ringNumber",
       value = ringNumber,
       detail = paste0(
-        "Ring number resolves to conflicting species values across the dataset (",
+        "Ring assignment ",
+        ring_assignment_id,
+        " resolves to conflicting species values (",
         species_values,
         "). Source rows: ",
         source_rows,
@@ -321,6 +329,42 @@ build_issues <- function(raw_data, merged_data, same_day_groups) {
         "Events are exported with afring_number = 0 and the conflicting values ",
         species_values,
         " described in ring_note."
+      )
+    )
+
+  ring_number_reuse_issues <- merged_data |>
+    filter(keep_year, clean_required, ring_number_reused) |>
+    transmute(
+      source_file,
+      source_sheet,
+      source_row,
+      datetime = case_when(
+        datetime_precision == "date" ~ format(parsed_date, "%Y-%m-%d"),
+        TRUE ~ format(datetime, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
+      ),
+      ringNumber,
+      issue_type = "ring_number_reused",
+      field = "ringNumber",
+      value = ringNumber,
+      detail = case_when(
+        str_starts(ring_assignment_basis, "review:") ~ paste0(
+          "Ring number occurred earlier and the reviewed history identifies this ",
+          "event as a new assignment (", ring_assignment_id, ")."
+        ),
+        TRUE ~ paste0(
+          "Ring number occurred earlier, but raw code '",
+          retrap_code_clean,
+          "' identifies this event as a new bird. A new ring assignment was started (",
+          ring_assignment_id,
+          ")."
+        )
+      ),
+      action = "separate_ring_assignment",
+      action_detail = paste0(
+        "The event is not linked to the earlier assignment of this ring number. ",
+        "Retrap and species consistency are evaluated within ",
+        ring_assignment_id,
+        "."
       )
     )
 
@@ -373,13 +417,81 @@ build_issues <- function(raw_data, merged_data, same_day_groups) {
       )
     )
 
+  retrap_without_prior_issues <- merged_data |>
+    filter(keep_year, clean_required, retrap_without_prior_event) |>
+    transmute(
+      source_file,
+      source_sheet,
+      source_row,
+      datetime = case_when(
+        datetime_precision == "date" ~ format(parsed_date, "%Y-%m-%d"),
+        TRUE ~ format(datetime, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
+      ),
+      ringNumber,
+      issue_type = "retrap_without_prior_event",
+      field = "retrap_code",
+      value = retrap_code_clean,
+      detail = paste0(
+        "Raw code '2' identifies a retrap, but no earlier event for ",
+        ring_assignment_id,
+        " exists in the curated source coverage."
+      ),
+      action = "retain_source_retrap",
+      action_detail = paste0(
+        "The event is exported with retrap = TRUE. It cannot be linked to an ",
+        "earlier date unless the missing source event is recovered."
+      )
+    )
+
   bind_rows(
     base_issues,
     species_disagreement_issues,
     ring_species_conflict_issues,
-    retrap_code_issues
+    ring_number_reuse_issues,
+    retrap_code_issues,
+    retrap_without_prior_issues
   ) |>
     arrange(source_file, source_sheet, source_row, issue_type)
+}
+
+build_ring_history_audit <- function(data) {
+  repeated_rings <- data |>
+    filter(clean_required, !is.na(ringNumber)) |>
+    count(ringNumber, name = "n_ring_events") |>
+    filter(n_ring_events > 1L)
+
+  data |>
+    filter(clean_required, !is.na(ringNumber)) |>
+    semi_join(repeated_rings, by = "ringNumber") |>
+    group_by(ringNumber) |>
+    mutate(
+      n_ring_events = n(),
+      n_ring_assignments = n_distinct(ring_assignment_id)
+    ) |>
+    ungroup() |>
+    arrange(ringNumber, ringing_date, datetime, source_file, source_sheet, source_row) |>
+    transmute(
+      ringNumber,
+      ring_assignment_id,
+      ring_assignment_number,
+      ring_assignment_basis,
+      n_ring_events,
+      n_ring_assignments,
+      ringing_date,
+      season,
+      retrap_code_raw = blank_to_na(retrap_code_raw),
+      retrap_code_clean,
+      retrap,
+      prior_ringing_date,
+      retrap_without_prior_event,
+      has_prior_ring_number_history,
+      ring_number_reused,
+      afring_number,
+      ring_species_conflict,
+      source_file,
+      source_sheet,
+      source_row
+    )
 }
 
 build_file_audit <- function(raw_data, merged_data, same_day_groups) {

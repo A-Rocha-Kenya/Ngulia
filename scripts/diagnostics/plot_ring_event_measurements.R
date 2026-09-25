@@ -8,13 +8,14 @@ library(grid)
 
 # Set paths ---------------------------------------------------------------
 
-project_dir <- normalizePath(".", mustWork = TRUE)
+project_dir <- here::here()
+source(file.path(project_dir, "scripts", "helpers", "plot_style.R"))
 source(file.path(project_dir, "scripts", "helpers", "data_paths.R"))
 paths <- get_data_paths(project_dir)
 
 curated_dir <- paths$curated_dir
 config_dir <- paths$ring_events_config_dir
-figures_dir <- paths$figures_dir
+figures_dir <- file.path(paths$qa_output_dir, "ring_events", "figures")
 dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
 
 ring_events_path <- file.path(curated_dir, "ring_events.csv")
@@ -39,8 +40,8 @@ ring_events <- read_csv(
     common_name = na_if(common_name, ""),
     species = coalesce(common_name, afring_number),
     has_time = str_detect(datetime, "T"),
-    datetime_utc = suppressWarnings(ymd_hms(datetime, tz = "UTC")),
-    hour_of_day = hour(datetime_utc) + minute(datetime_utc) / 60,
+    datetime_local = suppressWarnings(ymd_hms(datetime, tz = "Africa/Nairobi")),
+    hour_of_day = hour(datetime_local) + minute(datetime_local) / 60,
     hour_shifted = if_else(hour_of_day < 20, hour_of_day + 24, hour_of_day),
     wing = parse_measurement(wing),
     weight = parse_measurement(weight),
@@ -73,8 +74,8 @@ plot_measurement_histogram <- function(data, value_col, x_label, min_value, max_
         theme_void(base_size = 12) +
         theme(
           plot.title = element_text(face = "bold", size = 13, hjust = 0),
-          plot.background = element_rect(fill = "#fcfaf5", color = NA),
-          panel.background = element_rect(fill = "#fcfaf5", color = NA)
+          plot.background = element_rect(fill = "#FFFFFF", color = NA),
+          panel.background = element_rect(fill = "#FFFFFF", color = NA)
         )
     )
   }
@@ -122,14 +123,14 @@ plot_measurement_histogram <- function(data, value_col, x_label, min_value, max_
       x = x_label,
       y = "Number of captures"
     ) +
-    theme_minimal(base_size = 12) +
+    ngulia_theme(base_size = 12) +
     theme(
       panel.grid.minor = element_blank(),
       panel.grid.major.x = element_blank(),
       plot.title = element_text(face = "bold", size = 13),
       plot.subtitle = element_text(color = "grey30", size = 10),
-      plot.background = element_rect(fill = "#fcfaf5", color = NA),
-      panel.background = element_rect(fill = "#fcfaf5", color = NA)
+      plot.background = element_rect(fill = "#FFFFFF", color = NA),
+      panel.background = element_rect(fill = "#FFFFFF", color = NA)
     ) +
     {
       if (!is.na(min_value) && !is.na(max_value)) {
@@ -174,8 +175,8 @@ plot_time_histogram <- function(data) {
         theme_void(base_size = 12) +
         theme(
           plot.title = element_text(face = "bold", size = 13, hjust = 0),
-          plot.background = element_rect(fill = "#fcfaf5", color = NA),
-          panel.background = element_rect(fill = "#fcfaf5", color = NA)
+          plot.background = element_rect(fill = "#FFFFFF", color = NA),
+          panel.background = element_rect(fill = "#FFFFFF", color = NA)
         )
     )
   }
@@ -203,15 +204,15 @@ plot_time_histogram <- function(data) {
       x = "Hour of day, shifted to start at 20:00",
       y = "Number of captures"
     ) +
-    theme_minimal(base_size = 12) +
+    ngulia_theme(base_size = 12) +
     theme(
       panel.grid.minor = element_blank(),
       panel.grid.major.x = element_blank(),
       plot.title = element_text(face = "bold", size = 13),
       plot.subtitle = element_text(color = "grey30", size = 10),
       axis.text.x = element_text(size = 9),
-      plot.background = element_rect(fill = "#fcfaf5", color = NA),
-      panel.background = element_rect(fill = "#fcfaf5", color = NA)
+      plot.background = element_rect(fill = "#FFFFFF", color = NA),
+      panel.background = element_rect(fill = "#FFFFFF", color = NA)
     )
 }
 

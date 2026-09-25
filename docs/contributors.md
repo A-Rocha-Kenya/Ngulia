@@ -1,6 +1,6 @@
 # Funding and contributor acknowledgements
 
-This catalogue separates formal dataset creators from the much wider community that has enabled Ngulia ringing and data collection. It is an acknowledgement record, not an authorship list. It is based on the Ngulia annual reports held in `data/02_reference/reports/` (1998 and 2004–2024), supplemented by the project’s long-term acknowledgement record.
+This catalogue separates formal dataset creators from the wider community that enabled Ngulia ringing and data collection. It is an acknowledgement record, not an authorship list. The creators used in citation and deposit metadata are maintained in [`config/publication/dataset_metadata.yml`](../config/publication/dataset_metadata.yml). The names below come from Ngulia annual reports held in `data/02_reference/reports/` (1998 and 2004–2024) and the project's long-term acknowledgement record.
 
 ## Funders and financial support
 

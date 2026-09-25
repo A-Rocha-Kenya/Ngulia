@@ -15,10 +15,9 @@ source(file.path(project_dir, "scripts", "helpers", "publication_metadata.R"))
 paths <- get_data_paths(project_dir)
 
 ring_events_path <- file.path(paths$curated_dir, "ring_events.csv")
-moult_path <- file.path(paths$curated_dir, "ring_event_moult.csv")
 species_reference_path <- file.path(paths$ring_events_config_dir, "species_reference.csv")
 species_lookup_path <- file.path(paths$ring_events_config_dir, "species_lookup.csv")
-output_dir <- file.path(project_dir, "data", "07_gbif")
+output_dir <- paths$gbif_export_dir
 
 metadata <- read_publication_metadata()
 bibliography_xml <- str_c(
@@ -34,7 +33,7 @@ metadata_scalar <- function(x) {
 
 zenodo_concept_doi <- metadata_scalar(metadata$zenodo$concept_doi)
 zenodo_url <- if (is.na(zenodo_concept_doi)) {
-  "TO_COMPLETE_ZENODO_CONCEPT_DOI"
+  metadata$repository$url
 } else if (str_starts(zenodo_concept_doi, "http")) {
   zenodo_concept_doi
 } else {
@@ -52,11 +51,13 @@ license_url <- case_when(
 ring_events <- read_csv(
   ring_events_path,
   col_types = cols(
+    .default = col_character(),
     ring_event_id = col_character(),
     season = col_integer(),
     ringing_date = col_date(),
     datetime = col_character(),
     ring_number = col_character(),
+    ringer_name = col_character(),
     afring_number = col_integer(),
     age = col_integer(),
     sex = col_character(),
@@ -74,10 +75,21 @@ ring_events <- read_csv(
 ) |>
   rename(ringNumber = ring_number)
 
-moult <- read_csv(
-  moult_path,
-  col_types = cols(.default = col_character())
-) |>
+moult_fields <- c(
+  "moult_note",
+  "primary_moult_status",
+  "n_old_primaries_remaining",
+  "body_moult_head",
+  "body_moult_upperparts",
+  "body_moult_underparts",
+  paste0("p", 1:10),
+  paste0("s", 1:6),
+  paste0("t", 1:3),
+  paste0("tail", 1:6)
+)
+
+moult <- ring_events |>
+  select(ring_event_id, all_of(moult_fields)) |>
   rename_with(~ str_replace(.x, "^p", "P"), matches("^p\\d+$")) |>
   rename_with(~ str_replace(.x, "^s", "S"), matches("^s\\d+$")) |>
   rename_with(~ str_replace(.x, "^t", "T"), matches("^t\\d+$")) |>
@@ -195,6 +207,7 @@ ring_events <- ring_events |>
     ),
     captureEventDate = case_when(
       str_length(datetime) == 10 ~ datetime,
+      str_ends(datetime, fixed("+03:00")) ~ datetime,
       str_ends(datetime, "Z") ~ str_replace(datetime, "Z$", "+03:00"),
       TRUE ~ paste0(str_replace(datetime, " ", "T"), "+03:00")
     )
@@ -263,6 +276,7 @@ occurrences <- ring_events |>
       !retrap ~ '{"retrap":false}'
     ),
     occurrenceRemarks = ring_note,
+    recordedBy = ringer_name,
     identificationRemarks,
     datasetName = metadata$dataset$data_title,
     license = license_url
@@ -411,9 +425,10 @@ meta_xml <- paste0(
   "    <field index=\"19\" term=\"http://rs.tdwg.org/dwc/terms/lifeStage\"/>\n",
   "    <field index=\"20\" term=\"http://rs.tdwg.org/dwc/terms/dynamicProperties\"/>\n",
   "    <field index=\"21\" term=\"http://rs.tdwg.org/dwc/terms/occurrenceRemarks\"/>\n",
-  "    <field index=\"22\" term=\"http://rs.tdwg.org/dwc/terms/identificationRemarks\"/>\n",
-  "    <field index=\"23\" term=\"http://rs.tdwg.org/dwc/terms/datasetName\"/>\n",
-  "    <field index=\"24\" term=\"http://purl.org/dc/terms/license\"/>\n",
+  "    <field index=\"22\" term=\"http://rs.tdwg.org/dwc/terms/recordedBy\"/>\n",
+  "    <field index=\"23\" term=\"http://rs.tdwg.org/dwc/terms/identificationRemarks\"/>\n",
+  "    <field index=\"24\" term=\"http://rs.tdwg.org/dwc/terms/datasetName\"/>\n",
+  "    <field index=\"25\" term=\"http://purl.org/dc/terms/license\"/>\n",
   "  </extension>\n",
   "  <extension encoding=\"UTF-8\" linesTerminatedBy=\"\\n\" fieldsTerminatedBy=\",\" fieldsEnclosedBy=\"&quot;\" ignoreHeaderLines=\"1\" rowType=\"http://rs.iobis.org/obis/terms/ExtendedMeasurementOrFact\">\n",
   "    <files><location>extended_measurement_or_fact.csv</location></files>\n",
@@ -515,10 +530,7 @@ license_xml <- case_when(
   ),
   TRUE ~ glue("    <intellectualRights><para>{xml_escape(metadata$dataset$license)}</para></intellectualRights>")
 )
-eml_package_id <- glue(
-  "https://github.com/A-Rocha-Kenya/Ngulia/gbif/eml-",
-  "{metadata$dataset$temporal_coverage$end}.xml"
-)
+eml_package_id <- glue("{metadata$repository$url}/gbif/eml-{metadata$dataset$temporal_coverage$end}.xml")
 
 eml <- glue(
   "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
@@ -530,7 +542,7 @@ eml <- glue(
   "    <pubDate>{format(Sys.Date(), '%Y-%m-%d')}</pubDate>\n",
   "    <language>{metadata$dataset$language}</language>\n",
   "    <abstract>\n",
-  "      <para>This GBIF resource contains confirmed daily ringing events from the Ngulia ringing project in Kenya, individual bird capture and recapture occurrences, and bird-level biometric and moult observations. It excludes daily species-count summaries, environmental covariates, and analytical products. The complete research dataset, documentation, quality-assurance outputs, and reproducible processing workflow are available from Zenodo: {xml_escape(zenodo_url)}</para>\n",
+  "      <para>This GBIF resource contains confirmed daily ringing events from the Ngulia ringing project in Kenya, individual bird capture and recapture occurrences, and bird-level biometric and moult observations. It excludes daily species-count summaries, environmental covariates, and analytical products. Dataset documentation and the reproducible processing workflow are available at {xml_escape(zenodo_url)}</para>\n",
   "    </abstract>\n",
   "    <keywordSet>\n{keywords}\n        <keywordThesaurus>None</keywordThesaurus>\n    </keywordSet>\n",
   "    <additionalInfo>\n",
@@ -566,8 +578,6 @@ writeLines(eml, file.path(output_dir, "eml.xml"))
 unlink(file.path(output_dir, c(
   ".DS_Store",
   "README.md",
-  "data_limitations.md",
-  "contributor_acknowledgements.md",
   "references.bib",
   "ngulia_gbif_dwca.zip"
 )))

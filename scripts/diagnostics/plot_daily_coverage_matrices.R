@@ -8,18 +8,27 @@ library(scales)
 
 # Set paths ---------------------------------------------------------------
 
-project_dir <- normalizePath(".", mustWork = TRUE)
+project_dir <- here::here()
+source(file.path(project_dir, "scripts", "helpers", "plot_style.R"))
 source(file.path(project_dir, "scripts", "helpers", "data_paths.R"))
 paths <- get_data_paths(project_dir)
 
-curated_dir <- paths$curated_dir
-figure_dir <- file.path(paths$figures_dir, "season_matrices")
+figure_variant <- Sys.getenv("NGULIA_FIGURE_VARIANT", unset = "paper")
+figure_dir <- file.path(paths$qa_output_dir, "daily_coverage", "figures", "season_matrices")
+if (figure_variant == "dark_ppt") figure_dir <- file.path(figure_dir, "dark_ppt")
 
-daily_counts_path <- file.path(curated_dir, "daily_counts.csv")
-daily_coverage_path <- file.path(curated_dir, "daily_coverage.csv")
+daily_counts_path <- file.path(paths$curated_dir, "daily_counts.csv")
+daily_coverage_path <- file.path(paths$daily_context_intermediate_dir, "daily_context.csv")
 season_matrices_pdf_path <- file.path(figure_dir, "season_matrices.pdf")
 
 dir.create(figure_dir, recursive = TRUE, showWarnings = FALSE)
+
+matrix_colours <- ngulia_palette(dark = figure_variant == "dark_ppt")
+
+theme_matrix <- function() {
+  ngulia_theme(dark = figure_variant == "dark_ppt") +
+    theme(panel.grid = element_blank())
+}
 
 # Helpers -----------------------------------------------------------------
 
@@ -102,7 +111,7 @@ make_matrix_plot <- function(data, fill_var, title, subtitle, fill_scale) {
       x = "Day within season",
       y = "Season"
     ) +
-    theme_minimal(base_size = 11) +
+    theme_matrix() +
     theme(
       panel.grid = element_blank(),
       axis.text.x = element_text(angle = 45, hjust = 1),
@@ -130,6 +139,7 @@ daily_counts <- read_csv(
 daily_coverage <- read_csv(
   daily_coverage_path,
   show_col_types = FALSE,
+  guess_max = Inf,
   col_types = cols(
     ringing_date = col_date(),
     season = col_integer(),
@@ -138,39 +148,16 @@ daily_coverage <- read_csv(
 ) |>
   rename(date = ringing_date)
 
-# Daily count matrix ------------------------------------------------------
+# Daily count presence ----------------------------------------------------
 
 daily_count_totals <- daily_counts |>
   group_by(season, date) |>
   summarise(total_ringed = sum(n_records, na.rm = TRUE), .groups = "drop") |>
   mutate(season_plot_date = to_season_plot_date(date, season))
 
-season_plot_window <- range(daily_count_totals$season_plot_date, na.rm = TRUE)
 season_plot_window <- range(
   to_season_plot_date(daily_coverage$date, daily_coverage$season),
   na.rm = TRUE
-)
-
-count_grid <- build_season_grid(
-  seasons = daily_count_totals$season,
-  plot_dates = daily_count_totals$season_plot_date
-) |>
-  left_join(
-    daily_count_totals |>
-      select(season, season_plot_date, total_ringed),
-    by = c("season", "season_plot_date")
-  )
-
-counts_plot <- make_matrix_plot(
-  data = count_grid,
-  fill_var = "total_ringed",
-  title = "Daily rings by season and day of year",
-  subtitle = "Based on data/04_curated/daily_counts.csv; January is shown after December within each season; fill uses a log-scaled continuous count gradient",
-  fill_scale = scale_fill_viridis_c(
-    trans = "log1p",
-    na.value = "#f1efe8",
-    name = "Daily ring total"
-  )
 )
 
 # Metadata coverage matrices ----------------------------------------------
@@ -244,7 +231,7 @@ djp_metadata_plot <- make_matrix_plot(
       all_variables_available = "#2c7fb8",
       some_variables_missing = "#fdae6b",
       no_group_variables_available = "#cb181d",
-      no_documented_coverage = "#f1efe8"
+      no_documented_coverage = matrix_colours[["no_data"]]
     ),
     breaks = c(
       "all_variables_available",
@@ -304,13 +291,13 @@ presence_plot <- make_matrix_plot(
   data = metadata_ring_presence,
   fill_var = "presence_state",
   title = "Metadata coverage versus days with at least one ring",
-  subtitle = "Compares metadata availability in data/04_curated/daily_coverage.csv against days with at least one ring in data/04_curated/daily_counts.csv",
+  subtitle = "Compares source-context availability in data/03_intermediate/daily_context/daily_context.csv against days with at least one ring in data/04_curated/daily_counts.csv",
   fill_scale = scale_fill_manual(
     values = c(
       both_metadata_and_rings = "#2b8cbe",
       metadata_only = "#7bccc4",
       rings_only = "#f16913",
-      neither_coverage_nor_rings = "#f1efe8"
+      neither_coverage_nor_rings = matrix_colours[["no_data"]]
     ),
     breaks = c(
       "both_metadata_and_rings",
@@ -331,9 +318,13 @@ presence_plot <- make_matrix_plot(
 # Write output ------------------------------------------------------------
 
 pdf(season_matrices_pdf_path, width = 11, height = 8.5, onefile = TRUE)
-print(counts_plot)
 print(djp_metadata_plot)
 print(presence_plot)
 dev.off()
+
+if (figure_variant == "dark_ppt") {
+  ggsave(file.path(figure_dir, "season_matrices_djp_coverage.png"), djp_metadata_plot, width = 11, height = 8.5, dpi = 240, bg = matrix_colours[["paper"]])
+  ggsave(file.path(figure_dir, "season_matrices_metadata_vs_rings.png"), presence_plot, width = 11, height = 8.5, dpi = 240, bg = matrix_colours[["paper"]])
+}
 
 cli_alert_success("Wrote season matrices PDF to {season_matrices_pdf_path}")

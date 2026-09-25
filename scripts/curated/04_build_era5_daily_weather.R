@@ -8,9 +8,10 @@ library(ecmwfr)
 
 # Set paths ---------------------------------------------------------------
 
-project_dir <- normalizePath(".", mustWork = TRUE)
+project_dir <- here::here()
 source(file.path(project_dir, "scripts", "helpers", "data_paths.R"))
 paths <- get_data_paths(project_dir)
+source(file.path(project_dir, "scripts", "helpers", "season_calendar.R"))
 
 curated_dir <- paths$curated_dir
 daily_counts_dir <- paths$daily_counts_intermediate_dir
@@ -81,15 +82,6 @@ compute_relative_humidity <- function(temperature_c, dewpoint_c) {
   saturation_vapor_pressure <- 6.112 *
     exp((17.67 * temperature_c) / (temperature_c + 243.5))
   pmin(pmax(100 * vapor_pressure / saturation_vapor_pressure, 0), 100)
-}
-
-compute_mist_score <- function(total_cloud_cover, cloud_base_height_m, relative_humidity_pct) {
-  plogis(
-    -11.50510 +
-      1.702231 * total_cloud_cover +
-      -0.0004641302 * cloud_base_height_m +
-      0.1257025 * relative_humidity_pct
-  )
 }
 
 read_era5_timeseries_csv <- function(csv_path) {
@@ -194,39 +186,6 @@ make_era5_request <- function(start_date, end_date, target_name) {
   )
 }
 
-build_season_dates <- function(..., seasons = 1969:2023) {
-  season_bounds <- bind_rows(...) |>
-    filter(!is.na(date), !is.na(season)) |>
-    distinct(season, date) |>
-    group_by(season) |>
-    summarise(
-      max_date = max(date),
-      .groups = "drop"
-    )
-
-  default_bounds <- tibble(season = as.integer(seasons)) |>
-    mutate(
-      default_min_date = make_date(season, 10L, 20L),
-      default_max_date = make_date(season + 1L, 1L, 12L)
-    ) |>
-    left_join(season_bounds, by = "season") |>
-    mutate(
-      min_date = default_min_date,
-      max_date = case_when(
-        !is.na(max_date) & month(max_date) <= 1L ~ pmax(default_max_date, max_date),
-        TRUE ~ default_max_date
-      )
-    ) |>
-    arrange(season)
-
-  bind_rows(lapply(seq_len(nrow(default_bounds)), function(i) {
-    tibble(
-      date = seq(default_bounds$min_date[[i]], default_bounds$max_date[[i]], by = "1 day"),
-      season = default_bounds$season[[i]]
-    )
-  }))
-}
-
 # Build request window ----------------------------------------------------
 
 daily_counts_dates <- read_csv(
@@ -324,6 +283,7 @@ hourly_weather <- read_era5_timeseries_csv(timeseries_input_path) |>
     wind_speed_10m_ms = sqrt(wind_u_10m_ms^2 + wind_v_10m_ms^2),
     temperature_2m_c = temperature_2m - 273.15,
     dewpoint_2m_c = dewpoint_2m - 273.15,
+    dewpoint_depression_c = temperature_2m_c - dewpoint_2m_c,
     surface_pressure_hpa = surface_pressure / 100,
     relative_humidity_pct = compute_relative_humidity(
       temperature_2m_c,
@@ -344,21 +304,19 @@ daily_weather <- hourly_weather |>
     n_hours = n_distinct(datetime_local),
     total_cloud_cover_mean = mean(total_cloud_cover, na.rm = TRUE),
     cloud_base_height_mean_m = mean(cloud_base_height_m, na.rm = TRUE),
+    cloud_base_height_min_m = if (all(is.na(cloud_base_height_m))) NA_real_ else min(cloud_base_height_m, na.rm = TRUE),
     total_precipitation_00_08_mm = sum(total_precipitation_mm, na.rm = TRUE),
     wind_u_10m_mean_ms = mean(wind_u_10m_ms, na.rm = TRUE),
     wind_v_10m_mean_ms = mean(wind_v_10m_ms, na.rm = TRUE),
     wind_speed_10m_mean_ms = mean(wind_speed_10m_ms, na.rm = TRUE),
     temperature_2m_mean_c = mean(temperature_2m_c, na.rm = TRUE),
+    dewpoint_2m_mean_c = mean(dewpoint_2m_c, na.rm = TRUE),
+    dewpoint_depression_min_c = min(dewpoint_depression_c, na.rm = TRUE),
     relative_humidity_mean_pct = mean(relative_humidity_pct, na.rm = TRUE),
+    relative_humidity_max_pct = max(relative_humidity_pct, na.rm = TRUE),
+    near_saturated_hours = sum(relative_humidity_pct >= 95, na.rm = TRUE),
     surface_pressure_mean_hpa = mean(surface_pressure_hpa, na.rm = TRUE),
     .groups = "drop"
-  ) |>
-  mutate(
-    mist_score_era5 = compute_mist_score(
-      total_cloud_cover_mean,
-      cloud_base_height_mean_m,
-      relative_humidity_mean_pct
-    )
   )
 
 weather_output <- date_grid |>
@@ -367,14 +325,18 @@ weather_output <- date_grid |>
     date,
     total_cloud_cover_mean,
     cloud_base_height_mean_m,
+    cloud_base_height_min_m,
     total_precipitation_00_08_mm,
     wind_u_10m_mean_ms,
     wind_v_10m_mean_ms,
     wind_speed_10m_mean_ms,
     temperature_2m_mean_c,
+    dewpoint_2m_mean_c,
+    dewpoint_depression_min_c,
     relative_humidity_mean_pct,
-    surface_pressure_mean_hpa,
-    mist_score_era5
+    relative_humidity_max_pct,
+    near_saturated_hours,
+    surface_pressure_mean_hpa
   )
 
 # Write output ------------------------------------------------------------

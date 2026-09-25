@@ -19,6 +19,14 @@ packages <- c(
   "scales",
   "stringr",
   "tidyr",
+  "data.table",
+  "htmltools",
+  "MASS",
+  "nnet",
+  "rnaturalearth",
+  "rnaturalearthdata",
+  "sf",
+  "tibble",
   "yaml"
 )
 

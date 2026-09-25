@@ -8,7 +8,7 @@ library(cli)
 
 # Set paths ---------------------------------------------------------------
 
-project_dir <- normalizePath(".", mustWork = TRUE)
+project_dir <- here::here()
 source(file.path(project_dir, "scripts", "helpers", "data_paths.R"))
 paths <- get_data_paths(project_dir)
 
@@ -107,7 +107,7 @@ species_reference <- read_csv(
   col_types = cols(.default = col_character())
 ) |>
   mutate(
-    afring_number = clean_number_key(afring_number),
+    afring_number = clean_signed_number_key(afring_number),
     code_key = clean_key(latin_abbreviation)
   ) |>
   filter(!is.na(code_key), !is.na(afring_number)) |>
@@ -144,6 +144,8 @@ daily_data <- sheet1 |>
     month = suppressWarnings(as.integer(V2)),
     day = suppressWarnings(as.integer(V3)),
     date = make_date(year, month, day),
+    source_row = row_index,
+    reported_total = as.integer(reported_total),
     moon = blank_to_na(moon),
     weather = blank_to_na(weather),
     rain = blank_to_na(rain),
@@ -178,7 +180,7 @@ species_by_day <- daily_data |>
 # Daily metadata ----------------------------------------------------------
 
 daily_metadata <- daily_data |>
-  select(year, month, day, date, moon, weather, rain, site, tape, pax) |>
+  select(year, month, day, date, moon, weather, rain, site, tape, pax, source_row, reported_total) |>
   arrange(date)
 
 # Write outputs -----------------------------------------------------------

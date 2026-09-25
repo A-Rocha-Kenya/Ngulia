@@ -1,12 +1,173 @@
-build_clean_output <- function(data) {
+match_ringer_lookup <- function(
+  source_file,
+  input_type,
+  input_text,
+  ringer_lookup,
+  field = "ringer_name"
+) {
+  source_lookup <- ringer_lookup[!is.na(ringer_lookup$source_file), ]
+  default_lookup <- ringer_lookup[is.na(ringer_lookup$source_file), ]
+
+  coalesce(
+    source_lookup[[field]][match(
+      paste(source_file, input_type, input_text, sep = "\r"),
+      paste(
+        source_lookup$source_file,
+        source_lookup$input_type,
+        source_lookup$input_text,
+        sep = "\r"
+      )
+    )],
+    default_lookup[[field]][match(
+      paste(input_type, input_text, sep = "\r"),
+      paste(default_lookup$input_type, default_lookup$input_text, sep = "\r")
+    )]
+  )
+}
+
+resolve_ringer_field <- function(
+  source_file,
+  ringer_value,
+  ringer_lookup,
+  field
+) {
+  ringer_code <- standardize_ringer_code(ringer_value)
+  ringer_initial <- standardize_ringer_initial(ringer_value)
+  ringer_name_key <- clean_key(ringer_value)
+
+  coalesce(
+    match_ringer_lookup(
+      source_file,
+      "ringer_code",
+      ringer_code,
+      ringer_lookup,
+      field
+    ),
+    match_ringer_lookup(
+      source_file,
+      "ringer_initial",
+      ringer_initial,
+      ringer_lookup,
+      field
+    ),
+    match_ringer_lookup(
+      source_file,
+      "ringer_name",
+      ringer_name_key,
+      ringer_lookup,
+      field
+    ),
+    ringer_lookup[[field]][match(
+      ringer_name_key,
+      clean_key(ringer_lookup$ringer_name)
+    )]
+  )
+}
+
+resolve_ringer_name <- function(source_file, ringer_value, ringer_lookup) {
+  resolve_ringer_field(
+    source_file,
+    ringer_value,
+    ringer_lookup,
+    "ringer_name"
+  )
+}
+
+build_ringer_lookup_audit <- function(data, ringer_lookup) {
+  data |>
+    mutate(
+      ringer_value = blank_to_na(ringer_raw),
+      ringer_code = standardize_ringer_code(ringer_value),
+      ringer_initial = standardize_ringer_initial(ringer_value),
+      ringer_name = resolve_ringer_name(
+        source_file,
+        ringer_value,
+        ringer_lookup
+      ),
+      mapping_confidence = resolve_ringer_field(
+        source_file,
+        ringer_value,
+        ringer_lookup,
+        "mapping_confidence"
+      ),
+      mapping_basis = resolve_ringer_field(
+        source_file,
+        ringer_value,
+        ringer_lookup,
+        "mapping_basis"
+      )
+    ) |>
+    filter(!is.na(ringer_value)) |>
+    group_by(
+      source_file,
+      source_sheet,
+      ringer_value,
+      ringer_code,
+      ringer_initial,
+      ringer_name,
+      mapping_confidence,
+      mapping_basis
+    ) |>
+    summarise(
+      n_rows = n(),
+      n_exportable_rows = sum(clean_required, na.rm = TRUE),
+      .groups = "drop"
+    ) |>
+    arrange(source_file, source_sheet, desc(n_rows), ringer_value)
+}
+
+build_ringer_unmatched <- function(ringer_lookup_audit) {
+  ringer_lookup_audit |>
+    filter(is.na(ringer_name)) |>
+    select(
+      source_file,
+      source_sheet,
+      ringer_value,
+      ringer_code,
+      ringer_initial,
+      n_rows,
+      n_exportable_rows
+    )
+}
+
+build_ringer_audit <- function(data, ringer_lookup) {
+  data |>
+    mutate(
+      ringer_value = blank_to_na(ringer_raw),
+      ringer_name = resolve_ringer_name(
+        source_file,
+        ringer_value,
+        ringer_lookup
+      )
+    ) |>
+    group_by(source_file, source_sheet) |>
+    summarise(
+      n_rows_with_ringer_value = sum(!is.na(ringer_value)),
+      n_rows_with_ringer_name = sum(!is.na(ringer_name)),
+      pct_ringer_mapped = if_else(
+        n_rows_with_ringer_value > 0,
+        n_rows_with_ringer_name / n_rows_with_ringer_value,
+        NA_real_
+      ),
+      .groups = "drop"
+    )
+}
+
+build_clean_output <- function(data, ringer_lookup) {
   data |>
     assign_ring_event_ids() |>
     filter(clean_required) |>
     mutate(
+      ringer_name = resolve_ringer_name(
+        source_file,
+        ringer_raw,
+        ringer_lookup
+      ),
+      # Internal UTC-tagged values preserve source wall time; export the Ngulia offset.
       datetime = if_else(
         datetime_precision == "date",
         format(parsed_date, "%Y-%m-%d"),
-        format(datetime, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
+        paste0(format(datetime, "%Y-%m-%dT%H:%M:%S", tz = "UTC"), "+03:00")
       ),
       note_race_plumage = case_when(
         !is.na(race_form_raw) &
@@ -23,6 +184,8 @@ build_clean_output <- function(data) {
         TRUE ~ coalesce(note_raw, note_race_plumage)
       ),
       retrap_issue_note = case_when(
+        retrap_without_prior_event ~
+          "retrap source only: raw code '2' but no earlier event exists in the curated data",
         retrap_code_inconsistent & retrap ~ paste0(
           "retrap inconsistency: earlier event on ",
           prior_ringing_date,
@@ -36,6 +199,16 @@ build_clean_output <- function(data) {
           "' but no earlier event exists"
         ),
         TRUE ~ NA_character_
+      ),
+      ring_reuse_note = if_else(
+        ring_number_reused,
+        paste0(
+          "ring number reused: ",
+          ring_assignment_basis,
+          " starts ",
+          ring_assignment_id
+        ),
+        NA_character_
       ),
       species_issue_note = if_else(
         ring_species_conflict,
@@ -64,6 +237,11 @@ build_clean_output <- function(data) {
         TRUE ~ coalesce(species_issue_note, retrap_issue_note)
       ),
       issue_note = case_when(
+        !is.na(issue_note) & !is.na(ring_reuse_note) ~
+          paste(issue_note, ring_reuse_note, sep = "|"),
+        TRUE ~ coalesce(issue_note, ring_reuse_note)
+      ),
+      issue_note = case_when(
         !is.na(issue_note) & !is.na(age_issue_note) ~
           paste(issue_note, age_issue_note, sep = "|"),
         TRUE ~ coalesce(issue_note, age_issue_note)
@@ -75,6 +253,8 @@ build_clean_output <- function(data) {
       ringing_date = format(ringing_date, "%Y-%m-%d"),
       datetime,
       ringNumber,
+      ring_assignment_id,
+      ringer_name,
       afring_number = if_else(ring_species_conflict, "0", afring_number),
       age,
       sex,
@@ -95,8 +275,12 @@ process_ring_records <- function(
   data,
   species_lookup,
   measurement_ranges,
+  ringer_lookup,
   issues_output_path = NA_character_,
   file_audit_output_path = NA_character_,
+  ringer_lookup_audit_output_path = NA_character_,
+  ringer_unmatched_output_path = NA_character_,
+  ring_history_audit_output_path = NA_character_,
   issues_markdown_output_path = NA_character_,
   file_specs = NULL,
   raw_dir = NULL
@@ -112,7 +296,9 @@ process_ring_records <- function(
   moult_results <- build_moult_output(working_raw, working_merged, same_day_groups)
   issues <- build_issues(working_raw, working_merged, same_day_groups) |>
     bind_rows(moult_results$issues)
+  ringer_audit <- build_ringer_audit(working_raw, ringer_lookup)
   file_audit <- build_file_audit(working_raw, working_merged, same_day_groups) |>
+    left_join(ringer_audit, by = c("source_file", "source_sheet")) |>
     left_join(moult_results$audit, by = c("source_file", "source_sheet")) |>
     mutate(
       n_rows_with_moult_data = coalesce(n_rows_with_moult_data, 0L),
@@ -128,6 +314,9 @@ process_ring_records <- function(
       n_rows_missing_datetime,
       n_rows_missing_time,
       ratio_time_6am,
+      n_rows_with_ringer_value,
+      n_rows_with_ringer_name,
+      pct_ringer_mapped,
       n_same_day_retrap_groups,
       n_rows_outside_keep_year,
       n_rows_missing_species,
@@ -144,7 +333,13 @@ process_ring_records <- function(
       n_rows_decoded_moult,
       n_rows_invalid_moult
     )
-  clean <- build_clean_output(working_merged)
+  clean <- build_clean_output(working_merged, ringer_lookup)
+  ringer_lookup_audit <- build_ringer_lookup_audit(
+    working_raw,
+    ringer_lookup
+  )
+  ringer_unmatched <- build_ringer_unmatched(ringer_lookup_audit)
+  ring_history_audit <- build_ring_history_audit(working_merged)
 
   if (nrow(issues) > 0) {
     cli_alert_warning("Found {nrow(issues)} issues")
@@ -174,7 +369,36 @@ process_ring_records <- function(
     )
   }
 
-  list(ring_events = clean, ring_event_moult = moult_results$moult)
+  if (!is.na(ringer_unmatched_output_path)) {
+    write_csv(ringer_unmatched, ringer_unmatched_output_path, na = "")
+    cli_alert_info(
+      "Wrote {nrow(ringer_unmatched)} unmatched ringer values to {ringer_unmatched_output_path}"
+    )
+  }
+
+  if (!is.na(ringer_lookup_audit_output_path)) {
+    write_csv(
+      ringer_lookup_audit,
+      ringer_lookup_audit_output_path,
+      na = ""
+    )
+    cli_alert_info(
+      "Wrote {nrow(ringer_lookup_audit)} ringer lookup audit rows to {ringer_lookup_audit_output_path}"
+    )
+  }
+
+  if (!is.na(ring_history_audit_output_path)) {
+    write_csv(ring_history_audit, ring_history_audit_output_path, na = "")
+    cli_alert_info(
+      "Wrote {nrow(ring_history_audit)} repeated-ring audit rows to {ring_history_audit_output_path}"
+    )
+  }
+
+  list(
+    ring_events = clean,
+    moult = moult_results$moult,
+    ring_history_audit = ring_history_audit
+  )
 }
 
 build_subspecies_lookup <- function(processed_data, subspecies_lookup) {

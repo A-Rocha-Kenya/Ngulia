@@ -10,6 +10,20 @@ standardize_retrap_code <- function(x) {
     str_to_upper()
 }
 
+standardize_ringer_code <- function(x) {
+  x_clean <- blank_to_na(x) |>
+    str_to_upper() |>
+    str_remove("[[:punct:]]+$")
+
+  if_else(str_detect(x_clean, "^[0-9]{3}$"), x_clean, NA_character_)
+}
+
+standardize_ringer_initial <- function(x) {
+  blank_to_na(x) |>
+    str_to_upper() |>
+    str_remove_all("[^A-Z0-9]+")
+}
+
 is_restorable_same_day_ignore <- function(x) {
   clean_key(x) %in% c(
     "values differ kept first row arbitrarily",
@@ -652,28 +666,57 @@ add_retrap_history_flags <- function(data, same_day_groups) {
       source_file,
       source_sheet,
       source_row,
-      retrap_code_raw
+      retrap_code_raw,
+      ring_history_action
     ) |>
-    arrange(ringNumber, ringing_date, datetime, source_file, source_sheet, source_row)
-
-  has_prior_ring_history <- duplicated(retrap_candidates$ringNumber)
-  prior_ringing_date <- dplyr::lag(retrap_candidates$ringing_date)
-  prior_ringing_date[!has_prior_ring_history] <- as.Date(NA)
-
-  retrap_candidates <- retrap_candidates |>
+    arrange(ringNumber, ringing_date, datetime, source_file, source_sheet, source_row) |>
     mutate(
-      prior_ringing_date = prior_ringing_date,
-      has_prior_ring_history = has_prior_ring_history,
       retrap_code_clean = standardize_retrap_code(retrap_code_raw),
       retrap_code_is_retrap = coalesce(retrap_code_clean == "2", FALSE),
-      retrap = has_prior_ring_history,
-      retrap_code_inconsistent = !is.na(retrap_code_clean) &
-        retrap_code_is_retrap != retrap
+      retrap_code_is_new = case_when(
+        ring_history_action == "new_assignment" ~ TRUE,
+        ring_history_action == "same_assignment" ~ FALSE,
+        TRUE ~ !is.na(retrap_code_clean) &
+          !retrap_code_clean %in% c("2", "X")
+      ),
+      ring_assignment_basis = case_when(
+        !is.na(ring_history_action) ~ paste0("review:", ring_history_action),
+        retrap_code_is_new ~ paste0("raw_code:", retrap_code_clean),
+        TRUE ~ "ring_history"
+      )
     ) |>
+    group_by(ringNumber) |>
+    mutate(
+      has_prior_ring_number_history = row_number() > 1L,
+      ring_number_reused = retrap_code_is_new & has_prior_ring_number_history,
+      ring_assignment_number = cumsum(row_number() == 1L | retrap_code_is_new),
+      ring_assignment_id = paste0(
+        ringNumber,
+        "__A",
+        str_pad(ring_assignment_number, width = 2L, pad = "0")
+      )
+    ) |>
+    ungroup() |>
+    group_by(ring_assignment_id) |>
+    mutate(
+      prior_ringing_date = lag(ringing_date),
+      has_prior_ring_history = row_number() > 1L,
+      retrap_without_prior_event = retrap_code_is_retrap &
+        !has_prior_ring_history,
+      retrap = has_prior_ring_history | retrap_code_is_retrap,
+      retrap_code_inconsistent = retrap_code_is_new & retrap
+    ) |>
+    ungroup() |>
     select(
       row_id,
+      ring_assignment_id,
+      ring_assignment_number,
+      ring_assignment_basis,
       prior_ringing_date,
       has_prior_ring_history,
+      has_prior_ring_number_history,
+      ring_number_reused,
+      retrap_without_prior_event,
       retrap,
       retrap_code_clean,
       retrap_code_inconsistent
@@ -692,6 +735,15 @@ add_retrap_history_flags <- function(data, same_day_groups) {
     left_join(retrap_candidates, by = "row_id") |>
     mutate(
       has_prior_ring_history = coalesce(has_prior_ring_history, FALSE),
+      has_prior_ring_number_history = coalesce(
+        has_prior_ring_number_history,
+        FALSE
+      ),
+      ring_number_reused = coalesce(ring_number_reused, FALSE),
+      retrap_without_prior_event = coalesce(
+        retrap_without_prior_event,
+        FALSE
+      ),
       retrap = coalesce(retrap, FALSE),
       retrap_code_inconsistent = coalesce(retrap_code_inconsistent, FALSE)
     )
@@ -699,9 +751,14 @@ add_retrap_history_flags <- function(data, same_day_groups) {
 
 add_ring_species_conflict_flags <- function(data) {
   conflict_rings <- data |>
-    filter(keep_year, clean_required, !is.na(ringNumber), !is.na(afring_number)) |>
-    distinct(ringNumber, afring_number) |>
-    group_by(ringNumber) |>
+    filter(
+      keep_year,
+      clean_required,
+      !is.na(ring_assignment_id),
+      !is.na(afring_number)
+    ) |>
+    distinct(ring_assignment_id, afring_number) |>
+    group_by(ring_assignment_id) |>
     summarise(
       ring_species_values = paste(sort(unique(afring_number)), collapse = "|"),
       ring_species_n = n(),
@@ -709,13 +766,13 @@ add_ring_species_conflict_flags <- function(data) {
     ) |>
     filter(ring_species_n > 1) |>
     transmute(
-      ringNumber,
+      ring_assignment_id,
       ring_species_conflict = TRUE,
       ring_species_values
     )
 
   data |>
-    left_join(conflict_rings, by = "ringNumber") |>
+    left_join(conflict_rings, by = "ring_assignment_id") |>
     mutate(ring_species_conflict = coalesce(ring_species_conflict, FALSE))
 }
 
